@@ -1,0 +1,21 @@
+# application.yml
+
+server:
+  port: 8080 # web服务端口号
+  servlet:
+    multipart:
+      enabled: true # 启用文件上传
+      location: # 上传文件临时保存位置
+      max-file-size: 50MB # 单个文件上传最大大小限制
+      max-request-size: 100MB # 单次请求主体最大大小限制
+  mvc:
+    format:
+      date: yyyy-MM-dd # 日期格式
+      date-time: yyyy-MM-dd HH:mm:ss # 日期时间格式
+      time: HH:mm:ss # 时间格式
+    servlet:
+      path: / # servlet路径
+      static-path-pattern: # 匹配静态资源路径
+    view:
+      prefix: # view前缀
+      suffix: # view后缀，如：.jsp
