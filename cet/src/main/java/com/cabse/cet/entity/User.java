@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Table(name = "user")
 @Entity
-public class User{
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
@@ -58,4 +58,13 @@ public class User{
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", userName='" + userName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }
