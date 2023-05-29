@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
         if (userDao.findByUserName(user.getUserName()) != null){
             return null;
         }else{
+            user.setState(1);
             User newUser = userDao.save(user);
             if(newUser != null){
                 newUser.setPassWord("");
