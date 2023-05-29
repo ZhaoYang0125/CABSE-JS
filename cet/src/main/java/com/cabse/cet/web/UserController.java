@@ -25,7 +25,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public Result<User> loginController(@RequestParam String userName, @RequestParam String passWord){
         User user = userService.loginService(userName, passWord);
         if (user != null && user.getState() != -1){
