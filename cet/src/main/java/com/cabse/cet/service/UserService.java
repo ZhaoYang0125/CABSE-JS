@@ -11,10 +11,6 @@ import com.cabse.cet.entity.User;
  * @Version 1.0.0
  */
 public interface UserService {
-<<<<<<< HEAD
-    User loginService(String userName, String passWord);
-=======
     User loginService(String username, String password);
->>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
     User registService(User user);
 }

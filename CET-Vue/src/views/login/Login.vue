@@ -11,13 +11,8 @@
                     label-width="70px"
                     class="login-from"
             >
-<<<<<<< HEAD
-                <el-form-item label="用户名" prop="uname">
-                    <el-input v-model="ruleForm.uname"></el-input>
-=======
                 <el-form-item label="用户名" prop="username">
                     <el-input v-model="ruleForm.username"></el-input>
->>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                     <el-input
@@ -48,16 +43,6 @@
         data() {
             return {
                 ruleForm: {
-<<<<<<< HEAD
-                    uname: "",
-                    password: "",
-                },
-                rules: {
-                    userName: [
-                        { required: true, message: "用户名不能为空！", trigger: "blur" },
-                    ],
-                    passWord: [
-=======
                     username: "",
                     password: "",
                 },
@@ -66,7 +51,6 @@
                         { required: true, message: "用户名不能为空！", trigger: "blur" },
                     ],
                     password: [
->>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
                         { required: true, message: "密码不能为空！", trigger: "blur" },
                     ],
                 },
@@ -90,13 +74,8 @@
                                 "Content-Type": "application/json",
                             },
                             params: {                             // 请求参数
-<<<<<<< HEAD
-                                userName: _this.ruleForm.uname,
-                                passWord: _this.ruleForm.password,
-=======
                                 username: _this.ruleForm.username,
                                 password: _this.ruleForm.password,
->>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
                             },
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                             if (res.data.code === "0") {  // 当响应的编码为 0 时，说明登录成功
@@ -144,8 +123,4 @@
     .login-from {
         margin: auto auto;
     }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
