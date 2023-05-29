@@ -26,8 +26,13 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/user/login")
+<<<<<<< HEAD
     public Result<User> loginController(@RequestParam String userName, @RequestParam String passWord){
         User user = userService.loginService(userName, passWord);
+=======
+    public Result<User> loginController(@RequestParam String username, @RequestParam String password){
+        User user = userService.loginService(username, password);
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
         if (user != null && user.getState() != -1){
             return Result.success(user, "Login success!");
         }else if(user != null && user.getState() == -1){
@@ -40,6 +45,10 @@ public class UserController {
     @PostMapping("/register")
     public Result<User> registController(@RequestBody User newUser){
         User user = userService.registService(newUser);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
         if(user!=null){
             return Result.success(user,"Sign up success!");
         }else{

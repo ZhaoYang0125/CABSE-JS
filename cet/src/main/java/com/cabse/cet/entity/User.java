@@ -1,7 +1,11 @@
 package com.cabse.cet.entity;
 
 import javax.persistence.*;
+<<<<<<< HEAD
 import java.io.Serializable;
+=======
+
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
 
 /**
  * @ClassName: User
@@ -14,11 +18,16 @@ import java.io.Serializable;
 
 @Table(name = "user")
 @Entity
+<<<<<<< HEAD
 public class User implements Serializable {
+=======
+public class User{
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
 
+<<<<<<< HEAD
     private String userName;
 
     private String passWord;
@@ -26,6 +35,14 @@ public class User implements Serializable {
     private Integer state;
 
 
+=======
+    private String username;
+
+    private String password;
+
+    private Integer state;
+
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
     public Integer getUid() {
         return uid;
     }
@@ -34,6 +51,7 @@ public class User implements Serializable {
         this.uid = uid;
     }
 
+<<<<<<< HEAD
     public String getUserName() {
         return userName;
     }
@@ -48,6 +66,22 @@ public class User implements Serializable {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+=======
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
     }
 
     public Integer getState() {
@@ -57,6 +91,7 @@ public class User implements Serializable {
     public void setState(Integer state) {
         this.state = state;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -67,4 +102,6 @@ public class User implements Serializable {
                 ", state=" + state +
                 '}';
     }
+=======
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
 }

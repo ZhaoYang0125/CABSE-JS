@@ -22,23 +22,38 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
+<<<<<<< HEAD
     public User loginService(String userName, String passWord) {
         User user = userDao.findByUserNameAndPassWord(userName, passWord);
         if (user != null) {
             user.setPassWord("");
+=======
+    public User loginService(String username, String password) {
+        User user = userDao.findByUsernameAndPassword(username, password);
+        if (user != null) {
+            user.setPassword("");
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
         }
         return user;
     }
 
     @Override
     public User registService(User user) {
+<<<<<<< HEAD
         if (userDao.findByUserName(user.getUserName()) != null){
+=======
+        if (userDao.findByUsername(user.getUsername()) != null){
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
             return null;
         }else{
             user.setState(1);
             User newUser = userDao.save(user);
             if(newUser != null){
+<<<<<<< HEAD
                 newUser.setPassWord("");
+=======
+                newUser.setPassword("");
+>>>>>>> 12b034c2812629d7e01993e4b12de100c48a99fd
             }
             return newUser;
         }
