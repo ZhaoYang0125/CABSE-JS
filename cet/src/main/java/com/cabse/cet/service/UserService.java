@@ -11,6 +11,6 @@ import com.cabse.cet.entity.User;
  * @Version 1.0.0
  */
 public interface UserService {
-    User loginService(String userName, String passWord);
+    User loginService(String username, String password);
     User registService(User user);
 }
