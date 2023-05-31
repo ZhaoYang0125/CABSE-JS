@@ -9,6 +9,7 @@ package com.cabse.cet;
  * @Version 1.0.0
  */
 
+import com.cabse.cet.utils.Paper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +25,9 @@ public class CetApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(CetApplication.class, args);
+        //SpringApplication.run(CetApplication.class, args);
+        Paper.testSer();
+        Paper.testDeser();
     }
 
 }
