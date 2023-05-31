@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "studentprofiles")
-public class studentprofile {
+public class Studentprofile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
@@ -42,8 +42,8 @@ public class studentprofile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof studentprofile)) return false;
-        studentprofile that = (studentprofile) o;
+        if (!(o instanceof Studentprofile)) return false;
+        Studentprofile that = (Studentprofile) o;
         return Objects.equals(getUid(), that.getUid()) &&
                 Objects.equals(getSid(), that.getSid()) &&
                 getGender() == that.getGender();

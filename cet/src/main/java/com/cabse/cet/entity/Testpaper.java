@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "testpapers")
-public class testpaper {
+public class Testpaper {
     @Id     // 主键
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // 自动增长
     private Integer paperid;
@@ -32,8 +32,8 @@ public class testpaper {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof testpaper)) return false;
-        testpaper testpaper = (testpaper) o;
+        if (!(o instanceof Testpaper)) return false;
+        Testpaper testpaper = (Testpaper) o;
         return Objects.equals(getPaperid(), testpaper.getPaperid()) &&
                 Objects.equals(getUrl(), testpaper.getUrl());
     }
