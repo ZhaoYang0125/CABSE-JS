@@ -39,7 +39,10 @@
 </template>
 
 <script>
+    import {EventBus} from "../../eventbus/event-bus";
+
     export default {
+        name: "Login",
         data() {
             return {
                 ruleForm: {
@@ -106,6 +109,7 @@
                     }
                 });
             },
+
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
