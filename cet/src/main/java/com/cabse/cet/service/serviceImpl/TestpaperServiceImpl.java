@@ -3,32 +3,30 @@ package com.cabse.cet.service.serviceImpl;
 import com.cabse.cet.dao.TestpaperDao;
 import com.cabse.cet.entity.Testpaper;
 import com.cabse.cet.service.TestpaperService;
-import com.cabse.cet.utils.Paper;
-import com.cabse.cet.utils.PaperInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
+/**
+ * @ClassName: TestpaperServiceImpl
+ * @PackageName:com.cabse.cet.service.serviceImpl
+ * @Description: TODO
+ * @Author cd
+ * @Date 2023/6/2 20:00
+ * @Version 1.0.0
+ */
 
 @Service
 public class TestpaperServiceImpl implements TestpaperService {
     @Resource
     private TestpaperDao testpaperDao;
 
-    @Override
-    public PaperInfo testService(Integer row) {
-        String url = testpaperDao.findByRow(row);
-        if (url != null) {
-            Paper paper = Paper.get(url);
-            PaperInfo info = new PaperInfo();
-            info.getInfoFromPaper(paper);
-            return info;
-        }
-        return null;
-    }
 
     @Override
-    public Integer countService() {
-        return testpaperDao.paperCount();
+    public Testpaper saveService(Testpaper tp) {
+        Testpaper newPaper = testpaperDao.save(tp);
+        return newPaper;
     }
 
 }

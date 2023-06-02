@@ -35,6 +35,11 @@
                 </router-link>
             </div>
         </el-card>
+        <div>
+            <router-link to="/questionInput">
+                <el-button @click="qInput()" type="primary" icon="el-icon-edit" circle>录入试题</el-button>
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -108,7 +113,7 @@
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
-            },
+            }
         },
     };
 </script>
