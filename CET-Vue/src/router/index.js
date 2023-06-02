@@ -7,6 +7,7 @@ import Login from '../views/login/Login'
 import Register from '../views/register/Register'
 import Home from '../views/home/Home'
 import { Message } from "element-ui";
+import Test from "../views/test/Test";
 
 // 创建并暴露一个路由器
 const router = new VueRouter({
@@ -27,6 +28,10 @@ const router = new VueRouter({
         {
             path: '/home',     // 路径
             component: Home    // 跳转到的组件
+        },
+        {
+            path: '/test',     // 路径
+            component: Test    // 跳转到的组件
         }
     ]
 })

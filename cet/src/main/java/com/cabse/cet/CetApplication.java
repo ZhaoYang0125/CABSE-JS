@@ -25,7 +25,7 @@ public class CetApplication {
 
     public static void main(String[] args) {
 
-        //SpringApplication.run(CetApplication.class, args);
+        SpringApplication.run(CetApplication.class, args);
         Paper.testSer();
         Paper.testDeser();
     }

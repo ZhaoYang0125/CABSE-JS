@@ -3,7 +3,6 @@ package com.cabse.cet.utils;
 import java.io.*;
 import java.util.Arrays;
 
-
 class Reading implements Serializable{
     String sectionA;
     String choicesOfSectionA[]; // 15
