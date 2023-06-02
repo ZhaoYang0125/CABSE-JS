@@ -3,17 +3,20 @@ package com.cabse.cet.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
+
+@Table(name = "studentprofiles", uniqueConstraints = {@UniqueConstraint(columnNames="sid")})
 @Entity
-@Table(name = "studentprofiles")
 public class Studentprofile {
+
+    //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
+
     private Integer sid;
     // @Column(length = 20)
     private String sname;
-    public enum Sex{ 男, 女};
-    private Sex gender; //  实际存储值为索引，0为男，1为女
+//    public enum Sex{ 男, 女};
+    private String gender; //  实际存储值为索引，0为男，1为女
     private Integer age;
     private String school;
 
@@ -31,6 +34,14 @@ public class Studentprofile {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getSchool() {
@@ -55,14 +66,6 @@ public class Studentprofile {
 
     public void setSid(Integer sid) {
         this.sid = sid;
-    }
-
-    public Sex getGender() {
-        return gender;
-    }
-
-    public void setGender(Sex gender) {
-        this.gender = gender;
     }
 
     @Override

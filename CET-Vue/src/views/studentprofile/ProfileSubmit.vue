@@ -48,17 +48,15 @@
 </template>
 
 <script>
-    import {EventBus} from 'src/eventbus/event-bus.js' // 引入事件中心
     export default {
         name: "ProfileSubmit",
         data() {
             return {
                 ruleForm: {
-                    uid : "1", // TODO: “1”用来临时测试，从登陆后主页（未做）自动获得登录账号的uid和sid
-                    sid : "1",
+                    // sid : null,
                     sname : "",
                     gender: "",
-                    age : "",
+                    age : null,
                     school : "",
                 },
                 rules: {
@@ -75,11 +73,15 @@
                         { required: true, message: "学校不能为空！", trigger: "blur" },
                     ],
                 },
+                user: {
+                    username: "",
+                    uid: null,
+                },
                 loading: false, // 是否显示加载动画
             };
         },
 
-        methods:{
+        methods: {
             submitForm(formName) {
                 // 验证表单中的账号密码是否有效，因为在上面rules中定义为了必填 required: true
                 this.$refs[formName].validate((valid) => {
@@ -95,22 +97,28 @@
                             headers: {                            // 请求头
                                 "Content-Type": "application/json",
                             },
-                            params: {                             // 请求参数
-                                uid : _this.ruleForm.uid,
-                                sid : _this.ruleForm.sid,
-                                sname : _this.ruleForm.sname,
+                            data: {                             // 请求参数
+                                uid: _this.user.uid,
+                                // sid: _this.ruleForm.sid,
+                                sname: _this.ruleForm.sname,
                                 gender: _this.ruleForm.gender,
-                                age : _this.ruleForm.age,
-                                school : _this.ruleForm.school,
+                                age: _this.ruleForm.age,
+                                school: _this.ruleForm.school
                             },
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                             if (res.data.code === "0") {  // 当响应的编码为 0 时，说明成功
-                                // 将用户信息存储到sessionStorage中
-                                sessionStorage.setItem("studentProfileInfo", JSON.stringify(res.data.data));
-                                // 向Show通信发送信息
-                                this.profileSubmitToShow(res);
                                 // 跳转页面到首页
-                                this.$router.push('/showprofile');
+                                this.$router.push({
+                                    path: '/showprofile',
+                                    query: {
+                                        uid: this.user.uid,
+                                        sid: res.data.data.sid,
+                                        sname: res.data.data.sname,
+                                        gender: res.data.data.gender,
+                                        age: res.data.data.age,
+                                        school: res.data.data.school
+                                    }
+                                });
                                 // 显示后端响应的成功信息
                                 this.$message({
                                     message: res.data.msg,
@@ -127,6 +135,7 @@
                             _this.loading = false;
                             console.log(res);
                         });
+
                     } else {  // 如果有一个没填，就直接提示必填，不向后端请求
                         console.log("error submit!!");
                         this.loading = false;
@@ -139,21 +148,17 @@
                 this.$refs[formName].resetFields();
             },
 
-            profileSubmitToShow(res){
-                EventBus.$emit('profileSubmitToShow', {
-                    uid : res.uid,
-                    sid : res.sid,
-                    sname : res.sname,
-                    gender: res.gender,
-                    age : res.age,
-                    school : res.school,
-                })
+            goBack() {
+                this.$router.go(-1);
             },
 
-            informationFromStudentPage(){
-                // TODO:
+        },
+
+        mounted() {
+            if (sessionStorage.getItem('userInfo')) {
+                this.user = JSON.parse(sessionStorage.getItem('userInfo'));
             }
-        }
+        },
     }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-card class="box-card">
-            <h2>登录</h2>
+            <h2>教师登录</h2>
             <el-form
                     :model="ruleForm"
                     status-icon
@@ -30,26 +30,19 @@
                 >登录</el-button
                 >
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
-                <router-link to="/register">
+                <router-link to="/register-teacher">
                     <el-button style="margin-left: 10px">注册</el-button>
                 </router-link>
+                <el-button @click="goBack">返回</el-button>
             </div>
         </el-card>
-        <div>
-            <router-link to="/login-teacher">
-                <el-button style="margin-left: 10px">教师登录</el-button>
-            </router-link>
-            <router-link to="/login-admin">
-                <el-button style="margin-left: 10px">管理员登录</el-button>
-            </router-link>
-        </div>
     </div>
 </template>
 
 <script>
 
     export default {
-        name: "Login",
+        name: "TeacherLogin",
         data() {
             return {
                 ruleForm: {
@@ -78,7 +71,7 @@
                         let _this = this;
                         // 使用 axios 将登录信息发送到后端
                         this.axios({
-                            url: "/api/user/login",               // 请求地址
+                            url: "/api/teacher/login",               // 请求地址
                             method: "post",                       // 请求方法
                             headers: {                            // 请求头
                                 "Content-Type": "application/json",
@@ -92,7 +85,7 @@
                                 // 将用户信息存储到sessionStorage中
                                 sessionStorage.setItem("userInfo", JSON.stringify(res.data.data));
                                 // 跳转页面到首页
-                                this.$router.push('/home');
+                                this.$router.push('/TODO:');
                                 // 显示后端响应的成功信息
                                 this.$message({
                                     message: res.data.msg,
@@ -119,6 +112,10 @@
 
             resetForm(formName) {
                 this.$refs[formName].resetFields();
+            },
+
+            goBack() {
+                this.$router.go(-1);
             },
         },
     };

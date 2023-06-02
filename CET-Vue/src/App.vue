@@ -10,11 +10,7 @@
   import Login from "./views/login/Login.vue"
   export default {
     name: 'App',
-    components: {
-      Show,
-      ProfileSubmit,
-      Login,
-    }
+    components: {}
   }
 </script>
 

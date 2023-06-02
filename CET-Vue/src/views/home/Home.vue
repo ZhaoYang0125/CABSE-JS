@@ -1,13 +1,22 @@
 <template>
-    <div>
-        <h2>欢迎{{ user.username }}！您的 uid 为{{ user.uid }}</h2>
-        <el-button @click="logout"> 登出 </el-button>
-<!--        <el-button @click="toRescue">-->
-<!--            window.open跳转到外部链接测试-->
-<!--        </el-button>-->
-<!--        <router-link to = "www.baidu.com">www.baidu.com</router-link>-->
+    <div class="btnGroup">
+        <div>
+            <h2>欢迎{{ user.username }}！您的 uid 为{{ user.uid }}</h2>
+            <el-button @click="logout"> 登出 </el-button>
+        </div>
+        <div>
+            <el-button @click="toProfileSubmit"> 完善个人信息 </el-button>
+        </div>
+        <div>
+            <el-button @click="toEnroll"> 六级报名 </el-button>
+        </div>
+        <div>
+            <el-button @click="toPay"> 缴费 </el-button>
+        </div>
+        <div>
+            <el-button @click="toExamination"> 在线考试 </el-button>
+        </div>
     </div>
-
 
 </template>
 
@@ -18,7 +27,6 @@
                 user: {
                     username: "",
                     uid: null,
-                    // url: 'https://www.baid.com/',
                 },
             };
         },
@@ -29,15 +37,27 @@
                 // 跳转页面到登录页
                 this.$router.push('/login');
             },
-            // toRescue() {
-            //     window.open('https://www.baidu.com',"_blank");
-            //     // window.location.href = this.url;
-            //     // window.location.reload();
-            // },
+
+            toProfileSubmit(){
+                // 跳转页面到登录页
+                this.$router.push('/studentprofile');
+            },
+
+            toEnroll(){
+                // TODO:
+            },
+
+            toPay(){
+                // TODO:
+            },
+
+            toExamination() {
+                // TODO:
+            },
+
         },
         mounted() {
             if (sessionStorage.getItem('userInfo')) {
-                // 将用户信息存储到sessionStorage中
                 this.user = JSON.parse(sessionStorage.getItem('userInfo'));
             }
         },
