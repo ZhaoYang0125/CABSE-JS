@@ -1,5 +1,7 @@
 package com.cabse.cet.service;
 
-public interface TestpaperService {
+import com.cabse.cet.entity.Testpaper;
 
+public interface TestpaperService {
+    Testpaper saveService(Testpaper tp);
 }
