@@ -44,7 +44,47 @@
             },
 
             toEnroll(){
-                // TODO:
+                let _this = this;
+                // 使用axios将信息发送到后端
+                this.axios({
+                    url: "/api/studentprofile/findprofile",               // 请求地址
+                    method: "post",                       // 请求方法
+                    headers: {                            // 请求头
+                        "Content-Type": "application/json",
+                    },
+                    params: {                             // 请求参数
+                        uid: _this.user.uid,
+                    },
+                }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
+                    if (res.data.code === "0") {  // 当响应的编码为 0 时，说明成功
+                        // 跳转页面到首页
+                        this.$router.push({
+                            path: '/enroll',
+                            query: {
+                                uid: res.data.data.uid,
+                                sid: res.data.data.sid,
+                                sname: res.data.data.sname,
+                                gender: res.data.data.gender,
+                                age: res.data.data.age,
+                                school: res.data.data.school
+                            }
+                        });
+                        // 显示后端响应的成功信息
+                        this.$message({
+                            message: res.data.msg,
+                            type: "success",
+                        });
+                    } else {  // 当响应的编码不为 0 时，说明失败
+                        // 显示后端响应的失败信息
+                        this.$message({
+                            message: res.data.msg,
+                            type: "warning",
+                        });
+                    }
+                    // 不管响应成功还是失败，收到后端响应的消息后就不再让登录按钮显示加载动画了
+                    _this.loading = false;
+                    console.log(res);
+                });
             },
 
             toPay(){
