@@ -27,14 +27,16 @@
                         type="primary"
                         @click="submitForm('ruleForm')"
                         v-loading="loading"
-                >登录</el-button
-                >
+                >登录</el-button>
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
                 <router-link to="/register">
                     <el-button style="margin-left: 10px">注册</el-button>
                 </router-link>
             </div>
         </el-card>
+        <router-link to="/home">
+            <el-button style="margin-left: 10px">教师阅卷</el-button>
+        </router-link>
     </div>
 </template>
 
@@ -82,7 +84,7 @@
                                 // 将用户信息存储到sessionStorage中
                                 sessionStorage.setItem("userInfo", JSON.stringify(res.data.data));
                                 // 跳转页面到首页
-                                this.$router.push('/home');
+                                this.$router.push('/grading');
                                 // 显示后端响应的成功信息
                                 this.$message({
                                     message: res.data.msg,
