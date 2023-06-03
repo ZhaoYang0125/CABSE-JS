@@ -12,6 +12,6 @@ import com.cabse.cet.entity.User;
  * @Version 1.0.0
  */
 public interface TeacherService {
-    Teacher loginService(String username, String password);
-    Teacher registService(Teacher teacher);
+    Teacher loginService(String username, Integer jobnumber, String password);
+//    Teacher registService(Teacher teacher);
 }

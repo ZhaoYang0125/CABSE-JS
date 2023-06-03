@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeacherDao extends JpaRepository<Teacher, Integer>{
     Teacher findByUsername(String username);
-    Teacher findByUsernameAndPassword(String username, String password);
+    Teacher findByUsernameAndJobnumberAndPassword(String username, Integer jobnumber, String password);
 
     /* 自定义查询 */
 //    @Query("select u from user u where username like CONCAT('%', ?1, '%') or uid like ?1") // ?1: 表示第一个参数, CONCAT字符串拼接

@@ -22,25 +22,25 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherDao teacherDao;
 
     @Override
-    public Teacher loginService(String username, String password) {
-        Teacher teacher = teacherDao.findByUsernameAndPassword(username, password);
+    public Teacher loginService(String username, Integer jobnumber, String password) {
+        Teacher teacher = teacherDao.findByUsernameAndJobnumberAndPassword(username, jobnumber, password);
         if (teacher != null) {
             teacher.setPassword("");
         }
         return teacher;
     }
 
-    @Override
-    public Teacher registService(Teacher teacher) {
-        if (teacherDao.findByUsername(teacher.getUsername()) != null){
-            return null;
-        }else{
-            teacher.setState(1);
-            Teacher newTeacher = teacherDao.save(teacher);
-            if(newTeacher != null){
-                newTeacher.setPassword("");
-            }
-            return newTeacher;
-        }
-    }
+//    @Override
+//    public Teacher registService(Teacher teacher) {
+//        if (teacherDao.findByUsername(teacher.getUsername()) != null){
+//            return null;
+//        }else{
+//            teacher.setState(1);
+//            Teacher newTeacher = teacherDao.save(teacher);
+//            if(newTeacher != null){
+//                newTeacher.setPassword("");
+//            }
+//            return newTeacher;
+//        }
+//    }
 }

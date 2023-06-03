@@ -21,6 +21,13 @@
                             autocomplete="off"
                     ></el-input>
                 </el-form-item>
+                <el-form-item label="token" prop="token">
+                    <el-input
+                            type="password"
+                            v-model="ruleForm.token"
+                            autocomplete="off"
+                    ></el-input>
+                </el-form-item>
             </el-form>
             <div class="btnGroup">
                 <el-button
@@ -30,9 +37,9 @@
                 >登录</el-button
                 >
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
-                <router-link to="/register-admin">
-                    <el-button style="margin-left: 10px">注册</el-button>
-                </router-link>
+<!--                <router-link to="/register-admin">-->
+<!--                    <el-button style="margin-left: 10px">注册</el-button>-->
+<!--                </router-link>-->
                 <el-button @click="goBack">返回</el-button>
             </div>
         </el-card>
@@ -48,6 +55,7 @@
                 ruleForm: {
                     username: "",
                     password: "",
+                    token: ""
                 },
                 rules: {
                     username: [
@@ -55,6 +63,9 @@
                     ],
                     password: [
                         { required: true, message: "密码不能为空！", trigger: "blur" },
+                    ],
+                    token: [
+                        { required: true, message: "token不能为空！", trigger: "blur" },
                     ],
                 },
                 loading: false, // 是否显示加载动画
@@ -79,6 +90,7 @@
                             params: {                             // 请求参数
                                 username: _this.ruleForm.username,
                                 password: _this.ruleForm.password,
+                                token: _this.ruleForm.token,
                             },
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                             if (res.data.code === "0") {  // 当响应的编码为 0 时，说明登录成功

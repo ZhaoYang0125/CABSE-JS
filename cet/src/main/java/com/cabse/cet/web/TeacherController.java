@@ -24,8 +24,8 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @PostMapping("/login")
-    public Result<Teacher> loginController(@RequestParam String username, @RequestParam String password){
-        Teacher teacher = teacherService.loginService(username, password);
+    public Result<Teacher> loginController(@RequestParam String username, @RequestParam Integer jobnumber, @RequestParam String password){
+        Teacher teacher = teacherService.loginService(username, jobnumber, password);
         if (teacher != null && teacher.getState() != -1){
             return Result.success(teacher, "Login success!");
         }else if(teacher != null && teacher.getState() == -1){
@@ -35,14 +35,14 @@ public class TeacherController {
         }
     }
 
-    @PostMapping("/register")
-    public Result<Teacher> registController(@RequestBody Teacher newTeacher){
-        Teacher user = teacherService.registService(newTeacher);
-
-        if(user!=null){
-            return Result.success(user,"Sign up success!");
-        }else{
-            return Result.error("101","Fail. User has existed!");
-        }
-    }
+//    @PostMapping("/register")
+//    public Result<Teacher> registController(@RequestBody Teacher newTeacher){
+//        Teacher user = teacherService.registService(newTeacher);
+//
+//        if(user!=null){
+//            return Result.success(user,"Sign up success!");
+//        }else{
+//            return Result.error("101","Fail. User has existed!");
+//        }
+//    }
 }

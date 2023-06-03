@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminDao extends JpaRepository<Admin, Integer>{
     Admin findByUsername(String username);
-    Admin findByUsernameAndPassword(String username, String password);
+    Admin findByUsernameAndPasswordAndToken(String username, String password, String token);
 
     /* 自定义查询 */
 //    @Query("select u from user u where username like CONCAT('%', ?1, '%') or uid like ?1") // ?1: 表示第一个参数, CONCAT字符串拼接

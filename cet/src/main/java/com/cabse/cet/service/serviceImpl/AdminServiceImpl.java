@@ -25,25 +25,25 @@ public class AdminServiceImpl implements AdminService {
     private AdminDao adminDao;
 
     @Override
-    public Admin loginService(String username, String password) {
-        Admin admin = adminDao.findByUsernameAndPassword(username, password);
+    public Admin loginService(String username, String password, String token) {
+        Admin admin = adminDao.findByUsernameAndPasswordAndToken(username, password, token);
         if (admin != null) {
             admin.setPassword("");
         }
         return admin;
     }
 
-    @Override
-    public Admin registService(Admin admin) {
-        if (adminDao.findByUsername(admin.getUsername()) != null){
-            return null;
-        }else{
-            admin.setState(1);
-            Admin newAdmin = adminDao.save(admin);
-            if(newAdmin != null){
-                newAdmin.setPassword("");
-            }
-            return newAdmin;
-        }
-    }
+//    @Override
+//    public Admin registService(Admin admin) {
+//        if (adminDao.findByUsername(admin.getUsername()) != null){
+//            return null;
+//        }else{
+//            admin.setState(1);
+//            Admin newAdmin = adminDao.save(admin);
+//            if(newAdmin != null){
+//                newAdmin.setPassword("");
+//            }
+//            return newAdmin;
+//        }
+//    }
 }

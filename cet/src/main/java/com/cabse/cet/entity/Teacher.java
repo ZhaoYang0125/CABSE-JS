@@ -25,12 +25,22 @@ public class Teacher {
 
     private Integer state;
 
-    public Integer getUid() {
+    private Integer jobnumber;
+
+    public Integer getTid() {
         return tid;
     }
 
-    public void setUid(Integer uid) {
-        this.tid = uid;
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
+    public Integer getJobnumber() {
+        return jobnumber;
+    }
+
+    public void setJobnumber(Integer jobnumber) {
+        this.jobnumber = jobnumber;
     }
 
     public String getUsername() {

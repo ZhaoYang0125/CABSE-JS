@@ -25,12 +25,22 @@ public class Admin {
 
     private Integer state;
 
-    public Integer getUid() {
+    private String token;
+
+    public Integer getAid() {
         return aid;
     }
 
-    public void setUid(Integer uid) {
-        this.aid = uid;
+    public void setAid(Integer aid) {
+        this.aid = aid;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUsername() {

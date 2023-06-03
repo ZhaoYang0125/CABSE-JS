@@ -12,6 +12,6 @@ import com.cabse.cet.entity.Teacher;
  * @Version 1.0.0
  */
 public interface AdminService {
-    Admin loginService(String username, String password);
-    Admin registService(Admin admin);
+    Admin loginService(String username, String password, String token);
+//    Admin registService(Admin admin);
 }

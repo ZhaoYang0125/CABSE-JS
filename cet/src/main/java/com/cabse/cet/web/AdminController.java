@@ -25,8 +25,8 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("/login")
-    public Result<Admin> loginController(@RequestParam String username, @RequestParam String password){
-        Admin admin = adminService.loginService(username, password);
+    public Result<Admin> loginController(@RequestParam String username, @RequestParam String password, @RequestParam String token){
+        Admin admin = adminService.loginService(username, password, token);
         if (admin != null && admin.getState() != -1){
             return Result.success(admin, "Login success!");
         }else if(admin != null && admin.getState() == -1){
@@ -36,14 +36,14 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/register")
-    public Result<Admin> registController(@RequestBody Admin newAdmin){
-        Admin admin = adminService.registService(newAdmin);
-
-        if(admin!=null){
-            return Result.success(admin,"Sign up success!");
-        }else{
-            return Result.error("101","Fail. User has existed!");
-        }
-    }
+//    @PostMapping("/register")
+//    public Result<Admin> registController(@RequestBody Admin newAdmin){
+//        Admin admin = adminService.registService(newAdmin);
+//
+//        if(admin!=null){
+//            return Result.success(admin,"Sign up success!");
+//        }else{
+//            return Result.error("101","Fail. User has existed!");
+//        }
+//    }
 }

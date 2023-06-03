@@ -14,6 +14,9 @@
                 <el-form-item label="用户名" prop="username">
                     <el-input v-model="ruleForm.username"></el-input>
                 </el-form-item>
+                <el-form-item label="工号" prop="jobnumber">
+                    <el-input v-model="ruleForm.jobnumber"></el-input>
+                </el-form-item>
                 <el-form-item label="密码" prop="password">
                     <el-input
                             type="password"
@@ -30,9 +33,9 @@
                 >登录</el-button
                 >
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
-                <router-link to="/register-teacher">
-                    <el-button style="margin-left: 10px">注册</el-button>
-                </router-link>
+<!--                <router-link to="/register-teacher">-->
+<!--                    <el-button style="margin-left: 10px">注册</el-button>-->
+<!--                </router-link>-->
                 <el-button @click="goBack">返回</el-button>
             </div>
         </el-card>
@@ -47,11 +50,15 @@
             return {
                 ruleForm: {
                     username: "",
+                    jobnumber: null,
                     password: "",
                 },
                 rules: {
                     username: [
                         { required: true, message: "用户名不能为空！", trigger: "blur" },
+                    ],
+                    jobnumber: [
+                        { required: true, message: "工号不能为空！", trigger: "blur" },
                     ],
                     password: [
                         { required: true, message: "密码不能为空！", trigger: "blur" },
@@ -78,6 +85,7 @@
                             },
                             params: {                             // 请求参数
                                 username: _this.ruleForm.username,
+                                jobnumber: _this.ruleForm.jobnumber,
                                 password: _this.ruleForm.password,
                             },
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
