@@ -10,4 +10,14 @@ public interface TestpaperDao extends JpaRepository<Testpaper, Integer> {
 //    Testpaper findByPaperid(Integer paperid);
 //    @Query(value = "INSERT into testpapers(pid, url) values(?1)")
 //    public void mySave(String url);
+    Testpaper findByPaperid(Integer paperid);
+
+    @Query(value = "select url from testpapers limit ?1, 1", nativeQuery = true)
+    String findByRow(Integer row);
+
+    @Query(value = "select paperid from testpapers limit ?1, 1", nativeQuery = true)
+    Integer paperidFindByRow(Integer row);
+
+    @Query("select count(paperid) from Testpaper")
+    Integer paperCount();
 }

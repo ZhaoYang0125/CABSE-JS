@@ -8,6 +8,7 @@ import Register from '../views/register/Register'
 import Home from '../views/home/Home'
 import { Message } from "element-ui";
 import QuestionInput from "../views/paper/QuestionInput";
+import Test from "../views/test/Test"
 
 // 创建并暴露一个路由器
 const router = new VueRouter({
@@ -32,6 +33,10 @@ const router = new VueRouter({
         {
             path: '/questionInput',     // 路径
             component: QuestionInput    // 跳转到的组件
+        },
+        {
+            path: '/test',     // 路径
+            component: Test    // 跳转到的组件
         }
     ]
 })

@@ -13,7 +13,7 @@ public class Paper implements Serializable {
     String sectionB;
     String statementsOfSectionB[]; // 10
     String paragraphsOfSectionB[]; // 10
-    String PassagesOfSectionC[]; // 2
+    String passagesOfSectionC[]; // 2
     String questionsOfSectionC[]; // 10
     String choicesOfSectionC[]; // 40
 
@@ -29,7 +29,7 @@ public class Paper implements Serializable {
         this.sectionB = sectionB;
         this.statementsOfSectionB = statementsOfSectionB;
         this.paragraphsOfSectionB = paragraphsOfSectionB;
-        PassagesOfSectionC = passagesOfSectionC;
+        this.passagesOfSectionC = passagesOfSectionC;
         this.questionsOfSectionC = questionsOfSectionC;
         this.choicesOfSectionC = choicesOfSectionC;
         this.translation = translation;
@@ -92,11 +92,11 @@ public class Paper implements Serializable {
     }
 
     public String[] getPassagesOfSectionC() {
-        return PassagesOfSectionC;
+        return passagesOfSectionC;
     }
 
     public void setPassagesOfSectionC(String[] passagesOfSectionC) {
-        PassagesOfSectionC = passagesOfSectionC;
+        this.passagesOfSectionC = passagesOfSectionC;
     }
 
     public String[] getQuestionsOfSectionC() {
@@ -133,7 +133,7 @@ public class Paper implements Serializable {
                 ", sectionB='" + sectionB + '\'' +
                 ", paragraphsOfSectionB=" + Arrays.toString(paragraphsOfSectionB) +
                 ", statementsOfSectionB=" + Arrays.toString(statementsOfSectionB) +
-                ", PassagesOfSectionC=" + Arrays.toString(PassagesOfSectionC) +
+                ", passagesOfSectionC=" + Arrays.toString(passagesOfSectionC) +
                 ", questionsOfSectionC=" + Arrays.toString(questionsOfSectionC) +
                 ", choicesOfSectionC=" + Arrays.toString(choicesOfSectionC) +
                 ", translation='" + translation + '\'' +
