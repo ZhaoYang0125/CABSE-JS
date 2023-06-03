@@ -86,7 +86,7 @@
                         });
                     }
                     // 不管响应成功还是失败，收到后端响应的消息后就不再让登录按钮显示加载动画了
-                    _this.loading = false;
+                    this.loading = false;
                     console.log(res);
                 });
 
@@ -97,12 +97,14 @@
                 this.$router.go(-1);
             },
 
-            mounted() {
-                if (sessionStorage.getItem('userInfo')) {
-                    this.user = JSON.parse(sessionStorage.getItem('userInfo'));
-                }
-            },
-        }
+
+        },
+
+        mounted() {
+            if (sessionStorage.getItem('userInfo')) {
+                this.user = JSON.parse(sessionStorage.getItem('userInfo'));
+            }
+        },
     }
 </script>
 
