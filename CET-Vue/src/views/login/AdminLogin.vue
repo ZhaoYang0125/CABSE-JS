@@ -60,9 +60,11 @@
                 rules: {
                     username: [
                         { required: true, message: "用户名不能为空！", trigger: "blur" },
+                        { pattern: /^[a-zA-Z0-9]+$/, message: "请仅输入数字或英文！", trigger: "change"}
                     ],
                     password: [
                         { required: true, message: "密码不能为空！", trigger: "blur" },
+                        { pattern:/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){6,20}$/, message: "密码输入非法！", trigger: "change"}
                     ],
                     token: [
                         { required: true, message: "token不能为空！", trigger: "blur" },
