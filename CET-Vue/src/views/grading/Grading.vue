@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <h2>欢迎{{ user.username }}！您的 uid 为{{ user.uid }}</h2>
+            <h2>欢迎{{ user.username }}！您的 uid 为{{ user.jobnumber }}</h2>
             <el-button @click="logout"> 登出 </el-button>
         </div>
         <h4 style="text-align: center">欢迎来到评卷系统</h4>
@@ -71,7 +71,12 @@
                     paperid:0,
                     sid:0
                 },
-                displayAnswer:false
+                displayAnswer:false,
+                user:{
+                    username: "",
+                    jobnumber: null,
+
+                }
             };
         },
         methods: {

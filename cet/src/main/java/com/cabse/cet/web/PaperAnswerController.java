@@ -24,6 +24,12 @@ public class PaperAnswerController {
     ) {
         char[] l = new char[listening.length];
         char[] r = new char[reading.length];
+        for (int i=0; i<listening.length; i++) {
+            l[i] = listening[i].charAt(0);
+        }
+        for (int i=0; i<reading.length; i++) {
+            r[i] = reading[i].charAt(0);
+        }
         Answer a = new Answer(writing, l, r, translation);
         String url = Answer.save(a, "paperAns.ser");
         Paperanswer pa = new Paperanswer();

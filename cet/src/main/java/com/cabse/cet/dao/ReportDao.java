@@ -11,6 +11,7 @@ package com.cabse.cet.dao;
 import com.cabse.cet.entity.Report;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDateTime;
@@ -25,4 +26,7 @@ public interface ReportDao /*extends JpaRepository<Report, Integer>*/ {
 
     @Update("update reports r set r.writing=#{writing} where r.paperid=#{paperid} and r.sid=#{sid}")
     public int updateWriting( Integer paperid, Integer sid, Float writing);
+
+    @Select("select * from reports where paperid=#{paperid} and sid=#{sid}")
+    public Report findByPaperidAndSid(Integer paperid, Integer sid);
 }

@@ -45,4 +45,13 @@ public class ReportServiceImpl implements ReportService {
         else
             return false;
     }
+
+    @Override
+    public Report searchService(Integer paperid, Integer sid) {
+        Report report = reportDao.findByPaperidAndSid(paperid, sid);
+        if (report != null) {
+            return report;
+        }
+        return null;
+    }
 }
