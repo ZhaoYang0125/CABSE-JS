@@ -92,7 +92,7 @@ public class Answer implements Serializable {
     }
 
     //保存答案到文件中
-    public static void save(Answer a,String name) {
+    public static String save(Answer a,String name) {
         try {
             String path = "./tmp/" + name;
             FileOutputStream fileOut =
@@ -101,11 +101,11 @@ public class Answer implements Serializable {
             out.writeObject(a);
             out.close();
             fileOut.close();
-            return;
+            return path;
         }catch (IOException i)
         {
             i.printStackTrace();
-            return;
+            return null;
         }
     }
 

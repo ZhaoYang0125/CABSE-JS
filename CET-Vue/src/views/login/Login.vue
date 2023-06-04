@@ -1,49 +1,59 @@
 <template>
-    <div>
-        <el-card class="box-card">
-            <h2>登录</h2>
-            <el-form
-                    :model="ruleForm"
-                    status-icon
-                    :rules="rules"
-                    ref="ruleForm"
-                    label-position="left"
-                    label-width="70px"
-                    class="login-from"
-            >
-                <el-form-item label="用户名" prop="username">
-                    <el-input v-model="ruleForm.username"></el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input
-                            type="password"
-                            v-model="ruleForm.password"
-                            autocomplete="off"
-                    ></el-input>
-                </el-form-item>
-            </el-form>
-            <div class="btnGroup">
-                <el-button
-                        type="primary"
-                        @click="submitForm('ruleForm')"
-                        v-loading="loading"
-                >登录</el-button
-                >
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
-                <router-link to="/register">
-                    <el-button style="margin-left: 10px">注册</el-button>
-                </router-link>
-            </div>
-        </el-card>
-        <div>
-            <router-link to="/login-teacher">
-                <el-button style="margin-left: 10px">教师登录</el-button>
-            </router-link>
-            <router-link to="/login-admin">
-                <el-button style="margin-left: 10px">管理员登录</el-button>
-            </router-link>
-        </div>
-    </div>
+    <el-container>
+        <el-header>
+            <el-row>
+                <el-col :span="8">
+                    <el-image :src="imageURL"></el-image>
+                </el-col>
+                <el-col :span="8" :offset="8">
+                    <el-button @click="dialogVisible = true">登录</el-button>
+                </el-col>
+            </el-row>
+        </el-header>
+        <el-main>
+            <el-carousel :interval="4000" type="card" height="200px">
+                <el-carousel-item v-for="item in 6" :key="item">
+                    <h3 class="medium">{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
+            <el-dialog :visible.sync="dialogVisible">
+                <el-card class="box-card">
+                    <h2>登录</h2>
+                    <el-form
+                            :model="ruleForm"
+                            status-icon
+                            :rules="rules"
+                            ref="ruleForm"
+                            label-position="left"
+                            label-width="70px"
+                            class="login-from"
+                    >
+                        <el-form-item label="用户名" prop="username">
+                            <el-input v-model="ruleForm.username"></el-input>
+                        </el-form-item>
+                        <el-form-item label="密码" prop="password">
+                            <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <div class="btnGroup">
+                        <el-button type="primary" @click="submitForm('ruleForm')" v-loading="loading">登录</el-button>
+                        <el-button @click="resetForm('ruleForm')">重置</el-button>
+                        <router-link to="/register">
+                            <el-button style="margin-left: 10px">注册</el-button>
+                        </router-link>
+                    </div>
+                </el-card>
+                <div>
+                    <router-link to="/login-teacher">
+                        <el-button style="margin-left: 10px">教师登录</el-button>
+                    </router-link>
+                    <router-link to="/login-admin">
+                        <el-button style="margin-left: 10px">管理员登录</el-button>
+                    </router-link>
+                </div>
+            </el-dialog>
+        </el-main>
+    </el-container>
 </template>
 
 <script>
@@ -65,6 +75,8 @@
                     ],
                 },
                 loading: false, // 是否显示加载动画
+                imageURL:'https://cet.neea.edu.cn/res/Home/node/161230188.jpg',
+                dialogVisible: false,
             };
         },
         methods: {
@@ -133,5 +145,23 @@
     /* 设置登录面板中的表单居中 */
     .login-from {
         margin: auto auto;
+    }
+    .el-header{
+        background-color: darksalmon;
+    }
+    .el-carousel__item h3 {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 200px;
+        margin: 0;
+    }
+
+    .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n+1) {
+        background-color: #d3dce6;
     }
 </style>
