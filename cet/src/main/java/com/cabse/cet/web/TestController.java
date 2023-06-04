@@ -1,11 +1,9 @@
 package com.cabse.cet.web;
 
+import com.cabse.cet.entity.Report;
 import com.cabse.cet.entity.Studentanswer;
 import com.cabse.cet.entity.Testpaper;
-import com.cabse.cet.service.PaperanswerService;
-import com.cabse.cet.service.StudentanswerService;
-import com.cabse.cet.service.StudentprofileService;
-import com.cabse.cet.service.TestpaperService;
+import com.cabse.cet.service.*;
 import com.cabse.cet.utils.Answer;
 import com.cabse.cet.utils.Paper;
 
@@ -33,6 +31,9 @@ public class TestController {
 
     @Autowired
     private StudentanswerService studentanswerService;
+
+    @Autowired
+    private ReportService reportService;
 
     private static Integer paperid;
 
@@ -87,11 +88,53 @@ public class TestController {
         System.out.println(paperid);
         sa.setPaperid(paperid);
         System.out.println(studentprofileService.sidService(uid));
-        sa.setSid(studentprofileService.sidService(uid));
+        Integer sid = studentprofileService.sidService(uid);
+        sa.setSid(sid);
         Studentanswer newAnswer = studentanswerService.saveService(sa);
         String paperAnswerUrl = paperanswerService.searchAnswerService(paperid).getUrl();
         Answer paperAnswer = Answer.get(paperAnswerUrl);
 
+        //听力阅卷
+        float grade1 = 0.0f;
+        for (int i=0; i<25; i++)
+        {
+            if (a.getListenning()[i] == paperAnswer.getListenning()[i]) {
+                if (i < 15) {
+                    grade1 += 7.1;
+                }
+                else {
+                    grade1 += 14.2;
+                }
+            }
+        }
+        Float listenningGrade = new Float(grade1);
+        System.out.println(listenningGrade);
+
+        //阅读阅卷
+        float grade2 = 0.0f;
+        for (int i=0; i<30; i++) {
+            if (a.getReading()[i] == paperAnswer.getReading()[i]) {
+                if (i < 10) {
+                    grade2 += 3.55;
+                }
+                else if (i < 20){
+                    grade2 += 7.1;
+                }
+                else {
+                    grade2 += 14.2;
+                }
+            }
+        }
+        Float readingGrade = new Float(grade2);
+        System.out.println(readingGrade);
+
+        Report report = new Report();
+        report.setListening(grade1);
+        report.setComprehension(grade2);
+        report.setSid(sid);
+        report.setPaperid(paperid);
+        report.setTime(submitTime);
+        reportService.saveService(report);
         if(newAnswer!=null){
             System.out.println(newAnswer);
             return Result.success(a, "Success submit paper!");

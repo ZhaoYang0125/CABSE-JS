@@ -23,13 +23,13 @@ public class ReportController {
 
     @PostMapping("writing")
     public boolean updateTranslationController(@RequestParam Integer paperid, @RequestParam Integer sid,
-                                               @RequestParam Integer score){
+                                               @RequestParam Float score){
         return reportService.updateTranslationService(paperid, sid, score);
     }
 
     @PostMapping("translation")
     public boolean updateWritingController(@RequestParam Integer paperid, @RequestParam Integer sid,
-                                           @RequestParam Integer score){
+                                           @RequestParam Float score){
         return reportService.updateWritingService(paperid, sid, score);
     }
 }

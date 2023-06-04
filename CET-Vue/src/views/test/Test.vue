@@ -218,7 +218,15 @@
                     withCredentials: true,
                     data: formData
                 }).then((response) => {
-                    console.log(response);
+                    if (response.data.code === "0"){
+                        console.log(response);
+                        alert("试卷提交成功");
+                        this.$router.push('/home');
+                    }
+                    else {
+                        alert("试卷提交失败");
+                    }
+
                 });
             }
         }

@@ -9,6 +9,7 @@ package com.cabse.cet;
  * @Version 1.0.0
  */
 
+import com.cabse.cet.utils.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,13 +20,19 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.IOException;
+
 
 // 排除安全组件，否则会拦截跨域访问
 @SpringBootApplication( exclude = { SecurityAutoConfiguration.class } , scanBasePackages={"com.cabse.cet.web", "com.cabse.cet.service"})
 public class CetApplication {
 
     public static void main(String[] args) {
-        
+        /* try {
+            Answer.testSerAns();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
         SpringApplication.run(CetApplication.class, args);
     }
 

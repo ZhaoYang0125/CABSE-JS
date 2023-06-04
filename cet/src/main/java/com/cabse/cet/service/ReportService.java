@@ -8,7 +8,10 @@ package com.cabse.cet.service;
  * Description:学生成绩报告服务层
  */
 
+import com.cabse.cet.entity.Report;
+
 public interface ReportService {
-    boolean updateTranslationService(Integer paperid,Integer sid,Integer score);
-    boolean updateWritingService(Integer paperid,Integer sid,Integer score);
+    boolean updateTranslationService(Integer paperid,Integer sid,Float score);
+    boolean updateWritingService(Integer paperid,Integer sid,Float score);
+    boolean saveService(Report report);
 }

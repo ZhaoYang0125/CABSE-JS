@@ -9,6 +9,7 @@ package com.cabse.cet.service.serviceImpl;
  * Description:学生成绩报告服务层函数实现
  */
 import com.cabse.cet.dao.ReportDao;
+import com.cabse.cet.entity.Report;
 import com.cabse.cet.service.ReportService;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class ReportServiceImpl implements ReportService {
 
     //更新翻译题的分数
     @Override
-    public boolean updateTranslationService(Integer paperid, Integer sid, Integer score) {
+    public boolean updateTranslationService(Integer paperid, Integer sid, Float score) {
         if(reportDao.updateTranslation(paperid,sid,score)!=0)
             return true;
         else
@@ -30,8 +31,16 @@ public class ReportServiceImpl implements ReportService {
 
     //更新作文分数
     @Override
-    public boolean updateWritingService(Integer paperid, Integer sid, Integer score) {
+    public boolean updateWritingService(Integer paperid, Integer sid, Float score) {
         if(reportDao.updateWriting(paperid, sid, score)!=0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public boolean saveService(Report report) {
+        if(reportDao.save(report.getSid(), report.getPaperid(), report.getListening(), report.getComprehension(), report.getTime())!=0)
             return true;
         else
             return false;
