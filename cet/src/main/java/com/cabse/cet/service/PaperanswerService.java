@@ -4,4 +4,5 @@ import com.cabse.cet.entity.Paperanswer;
 
 public interface PaperanswerService {
     Paperanswer searchAnswerService(Integer paperid);
+    Paperanswer saveAnswerService(Paperanswer a);
 }
