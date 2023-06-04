@@ -1,4 +1,12 @@
 package com.cabse.cet.dao;
+/*
+ * Created with IntelliJ IDEA.
+ * ClassName: ReportDao
+ * User: 张朝阳
+ * Date: 2023/6/3
+ * Time: 12:25
+ * Description:学生成绩报告接口层
+ */
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;

@@ -21,6 +21,7 @@ import java.io.IOException;
 public class StudentanswerController {
     @Resource StudentanswerService studentanswerService;
 
+    //根据paperid和sid查找学生作答情况
     @PostMapping("grading")
     public Answer searchAnswerController(@RequestParam Integer paperid, @RequestParam Integer sid) throws IOException, ClassNotFoundException {
         Studentanswer studentanswer=studentanswerService.searchAnswerService(paperid,sid);

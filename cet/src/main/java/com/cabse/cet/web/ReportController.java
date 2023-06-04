@@ -5,7 +5,7 @@ package com.cabse.cet.web;
  * User: 张朝阳
  * Date: 2023/6/3
  * Time: 13:05
- * Description:
+ * Description:学生成绩报告控制类
  */
 
 import com.cabse.cet.service.ReportService;
