@@ -22,6 +22,13 @@ public class Answer implements Serializable {
         this.translation = "考生未作答";
     }
 
+    public Answer(String writing, char[] listenning, char[] reading, String translation) {
+        this.writing = writing;
+        this.listenning = listenning;
+        this.reading = reading;
+        this.translation = translation;
+    }
+
     public String getWriting() {
         return writing;
     }
@@ -65,24 +72,41 @@ public class Answer implements Serializable {
     }
 
     //从文件中获取答案
-    public static Answer get(String path) throws IOException, ClassNotFoundException {
-        Answer a=null;
-        FileInputStream fileIn = new FileInputStream(path);
-        ObjectInputStream in = new ObjectInputStream(fileIn);
-        a = (Answer) in.readObject();
-        in.close();
-        fileIn.close();
-        return a;
+    public static Answer get(String path){
+        try {
+            Answer a=null;
+            FileInputStream fileIn = new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            a = (Answer) in.readObject();
+            in.close();
+            fileIn.close();
+            return a;
+        }catch (IOException i)
+        {
+            i.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     //保存答案到文件中
-    public static void save(Answer a,String name) throws IOException {
-        FileOutputStream fileOut =
-                new FileOutputStream("./tmp/" + name);
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(a);
-        out.close();
-        fileOut.close();
+    public static void save(Answer a,String name) {
+        try {
+            String path = "./tmp/" + name;
+            FileOutputStream fileOut =
+                    new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(a);
+            out.close();
+            fileOut.close();
+            return;
+        }catch (IOException i)
+        {
+            i.printStackTrace();
+            return;
+        }
     }
 
     public static void testSerAns() throws IOException {

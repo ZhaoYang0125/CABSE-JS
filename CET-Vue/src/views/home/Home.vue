@@ -92,7 +92,7 @@
             },
 
             toExamination() {
-                // TODO:
+                this.$router.push('/test');
             },
 
         },

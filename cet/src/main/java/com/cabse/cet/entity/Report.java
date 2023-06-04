@@ -5,18 +5,50 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "reprots")
+@Table(name = "reports")
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reportid;
     private Integer sid;
     private Integer paperid;
-    private Integer listening;
-    private Integer comprehension;
-    private Integer writing;
-    private Integer translation;
+    private Float listening;
+    private Float comprehension;
+    private Float writing;
+    private Float translation;
     private LocalDateTime time;
+
+    public Float getListening() {
+        return listening;
+    }
+
+    public void setListening(Float listening) {
+        this.listening = listening;
+    }
+
+    public Float getComprehension() {
+        return comprehension;
+    }
+
+    public void setComprehension(Float comprehension) {
+        this.comprehension = comprehension;
+    }
+
+    public Float getWriting() {
+        return writing;
+    }
+
+    public void setWriting(Float writing) {
+        this.writing = writing;
+    }
+
+    public Float getTranslation() {
+        return translation;
+    }
+
+    public void setTranslation(Float translation) {
+        this.translation = translation;
+    }
 
     public Integer getReportid() {
         return reportid;
@@ -42,37 +74,7 @@ public class Report {
         this.paperid = paperid;
     }
 
-    public Integer getListening() {
-        return listening;
-    }
 
-    public void setListening(Integer listening) {
-        this.listening = listening;
-    }
-
-    public Integer getComprehension() {
-        return comprehension;
-    }
-
-    public void setComprehension(Integer comprehension) {
-        this.comprehension = comprehension;
-    }
-
-    public Integer getWriting() {
-        return writing;
-    }
-
-    public void setWriting(Integer writing) {
-        this.writing = writing;
-    }
-
-    public Integer getTranslation() {
-        return translation;
-    }
-
-    public void setTranslation(Integer translation) {
-        this.translation = translation;
-    }
 
     public LocalDateTime getTime() {
         return time;

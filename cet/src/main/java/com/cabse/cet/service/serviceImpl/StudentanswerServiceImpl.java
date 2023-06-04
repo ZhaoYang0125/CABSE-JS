@@ -21,6 +21,12 @@ public class StudentanswerServiceImpl implements StudentanswerService{
     private StudentanswerDao studentanswerDao;
 
     @Override
+    public Studentanswer saveService(Studentanswer sa){
+        Studentanswer newAnswer = studentanswerDao.save(sa);
+        return newAnswer;
+    }
+
+    @Override
     public Studentanswer searchAnswerService(Integer paperid, Integer sid) {
         Studentanswer studentanswer=studentanswerDao.findByPaperidAndSid(paperid,sid);
         return studentanswer;

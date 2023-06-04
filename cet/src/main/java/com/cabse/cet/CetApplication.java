@@ -25,7 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CetApplication {
 
     public static void main(String[] args) {
-
+        
         SpringApplication.run(CetApplication.class, args);
     }
 

@@ -36,5 +36,11 @@ public class StudentprofileServiceImpl implements StudentprofileService {
         return studentprofileDao.findByUid(uid);
     }
 
+    @Override
+    public Integer sidService(Integer uid) {
+        Integer sid = (studentprofileDao.findByUid(uid)).getSid();
+        return sid;
+    }
+
 
 }
