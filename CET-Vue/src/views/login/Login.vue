@@ -11,11 +11,6 @@
             </el-row>
         </el-header>
         <el-main>
-            <el-carousel :interval="4000" type="card" height="200px">
-                <el-carousel-item v-for="item in 6" :key="item">
-                    <h3 class="medium">{{ item }}</h3>
-                </el-carousel-item>
-            </el-carousel>
             <el-dialog :visible.sync="dialogVisible">
                 <el-card class="box-card">
                     <h2>登录</h2>
@@ -29,10 +24,10 @@
                             class="login-from"
                     >
                         <el-form-item label="用户名" prop="username">
-                            <el-input v-model="ruleForm.username"></el-input>
+                            <el-input v-model="ruleForm.username" ></el-input>
                         </el-form-item>
                         <el-form-item label="密码" prop="password">
-                            <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+                            <el-input type="password" v-model="ruleForm.password"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-form>
                     <div class="btnGroup">
@@ -42,16 +37,23 @@
                             <el-button style="margin-left: 10px">注册</el-button>
                         </router-link>
                     </div>
+                    <div>
+                        <router-link to="/login-teacher">
+                            <el-button style="margin-left: 10px">教师登录</el-button>
+                        </router-link>
+                        <router-link to="/login-admin">
+                            <el-button style="margin-left: 10px">管理员登录</el-button>
+                        </router-link>
+                    </div>
                 </el-card>
-                <div>
-                    <router-link to="/login-teacher">
-                        <el-button style="margin-left: 10px">教师登录</el-button>
-                    </router-link>
-                    <router-link to="/login-admin">
-                        <el-button style="margin-left: 10px">管理员登录</el-button>
-                    </router-link>
-                </div>
+
+
             </el-dialog>
+            <el-carousel :interval="4000" type="card" height="200px">
+                <el-carousel-item v-for="item in 6" :key="item">
+                    <h3 class="medium">{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
         </el-main>
     </el-container>
 </template>
@@ -69,9 +71,11 @@
                 rules: {
                     username: [
                         { required: true, message: "用户名不能为空！", trigger: "blur" },
+                        { pattern: /^[a-zA-Z0-9]+$/, message: "请仅输入数字或英文！", trigger: "change"}
                     ],
                     password: [
                         { required: true, message: "密码不能为空！", trigger: "blur" },
+                        { pattern:/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){6,20}$/, message: "密码输入非法！", trigger: "change"}
                     ],
                 },
                 loading: false, // 是否显示加载动画
@@ -132,6 +136,14 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
+
+            validForbid() {
+                this.$message({
+                    message: "输入非法字符！",
+                    type: "warning",
+                });
+            }
+
         },
     };
 </script>

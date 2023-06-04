@@ -172,7 +172,7 @@
                         </el-row>
                         <h4>Section C</h4>
                         <el-row>
-                            <el-col v-for="j in 9" :span="4">
+                            <el-col v-for="j in 10" :span="4">
                                 <el-form-item>
                                     <el-input v-model="ansForm.listening[15 + (j-1)]"></el-input>
                                 </el-form-item>

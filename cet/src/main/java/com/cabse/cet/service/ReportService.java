@@ -14,4 +14,5 @@ public interface ReportService {
     boolean updateTranslationService(Integer paperid,Integer sid,Float score);
     boolean updateWritingService(Integer paperid,Integer sid,Float score);
     boolean saveService(Report report);
+    Report searchService(Integer paperid, Integer sid);
 }

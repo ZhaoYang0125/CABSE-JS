@@ -18,6 +18,7 @@ import QuestionInput from "../views/paper/QuestionInput";
 import Grading from "../views/grading/Grading";
 import Test from "../views/test/Test";
 import AdminHome from "../views/home/AdminHome";
+import Grade from "../views/grade/Grade";
 
 // 创建并暴露一个路由器
 const router = new VueRouter({
@@ -74,6 +75,10 @@ const router = new VueRouter({
         {
             path: '/adminHome',
             component: AdminHome
+        },
+        {
+            path: '/grade',     // 路径
+            component: Grade    // 跳转到的组件
         },
 ]
 })

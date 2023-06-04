@@ -16,6 +16,9 @@
         <div>
             <el-button @click="toExamination"> 在线考试 </el-button>
         </div>
+        <div>
+            <el-button @click="toGrade"> 查询成绩 </el-button>
+        </div>
     </div>
 
 </template>
@@ -93,6 +96,11 @@
 
             toExamination() {
                 this.$router.push('/test');
+            },
+
+            toGrade() {
+                // TODO:
+                this.$router.push('/grade');
             },
 
         },

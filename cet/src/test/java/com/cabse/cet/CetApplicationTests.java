@@ -24,25 +24,25 @@ class CetApplicationTests {
 
     @Test
     void contextLoads() {
-        Teacher teacher1 = new Teacher("xiaohong", "111111", 1, 1020000);
+        Teacher teacher1 = new Teacher("xiaohong", "111111abc", 1, 1020000);
         teacherRegistService(teacher1);
-        Teacher teacher2 = new Teacher("zhanglian", "222222", 1, 1020330);
+        Teacher teacher2 = new Teacher("zhanglian", "222222abc", 1, 1020330);
         teacherRegistService(teacher2);
-        Teacher teacher3 = new Teacher("lanhong", "333333", 1, 10200400);
+        Teacher teacher3 = new Teacher("lanhong", "333333abc", 1, 10200400);
         teacherRegistService(teacher3);
 
-        Admin admin1 = new Admin("admin1", "111111", 1, "admin-SKdsdafawed");
+        Admin admin1 = new Admin("admin1", "111111abc", 1, "admin-SKdsdafawed");
         adminRegistService(admin1);
-        Admin admin2 = new Admin("admin2", "222222", 1, "admin-Lkdasviaew");
+        Admin admin2 = new Admin("admin2", "222222abc", 1, "admin-Lkdasviaew");
         adminRegistService(admin2);
-        Admin admin3 = new Admin("admin3", "333333", 1, "admin-asdfbLDDISd");
+        Admin admin3 = new Admin("admin3", "333333abc", 1, "admin-asdfbLDDISd");
         adminRegistService(admin3);
 
-        User user1 = new User("xiaohong", "111111", 1);
+        User user1 = new User("xiaohong", "111111abc", 1);
         userRegistService(user1);
-        User user2 = new User("xiaoming", "222222", 1);
+        User user2 = new User("xiaoming", "222222abc", 1);
         userRegistService(user2);
-        User user3 = new User("lanlan", "333333", 1);
+        User user3 = new User("lanlan", "333333abc", 1);
         userRegistService(user3);
     }
 
