@@ -163,5 +163,13 @@
 </script>
 
 <style scoped>
-
+    /* 设置登录面板居中，宽度为400px */
+    .box-card {
+        margin: auto auto;
+        width: 800px;
+    }
+    /* 设置登录面板中的表单居中 */
+    .login-from {
+        margin: auto auto;
+    }
 </style>

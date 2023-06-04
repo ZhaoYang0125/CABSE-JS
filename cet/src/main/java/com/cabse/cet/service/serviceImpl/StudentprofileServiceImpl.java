@@ -1,8 +1,5 @@
 package com.cabse.cet.service.serviceImpl;
 
-<<<<<<< HEAD
-public class StudentprofileServiceImpl {
-=======
 import com.cabse.cet.dao.StudentprofileDao;
 import com.cabse.cet.entity.Studentprofile;
 import com.cabse.cet.service.StudentprofileService;
@@ -40,5 +37,4 @@ public class StudentprofileServiceImpl implements StudentprofileService {
     }
 
 
->>>>>>> lsy
 }

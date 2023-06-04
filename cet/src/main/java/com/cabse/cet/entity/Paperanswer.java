@@ -39,13 +39,8 @@ public class Paperanswer {
 
     @Override
     public boolean equals(Object o) {
-<<<<<<< HEAD
-        if (this == o) return true;
-        if (!(o instanceof Paperanswer)) return false;
-=======
         if (this == o) {return true;}
         if (!(o instanceof Paperanswer)) {return false;}
->>>>>>> lsy
         Paperanswer that = (Paperanswer) o;
         return Objects.equals(getAnswerid(), that.getAnswerid()) &&
                 Objects.equals(getPaperid(), that.getPaperid()) &&

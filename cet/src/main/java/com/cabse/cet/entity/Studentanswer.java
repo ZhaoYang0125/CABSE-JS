@@ -61,13 +61,8 @@ public class Studentanswer {
 
     @Override
     public boolean equals(Object o) {
-<<<<<<< HEAD
-        if (this == o) return true;
-        if (!(o instanceof Studentanswer)) return false;
-=======
         if (this == o) {return true;}
         if (!(o instanceof Studentanswer)) {return false;}
->>>>>>> lsy
         Studentanswer that = (Studentanswer) o;
         return Objects.equals(getAnswerid(), that.getAnswerid()) &&
                 Objects.equals(getPaperid(), that.getPaperid()) &&
