@@ -6,6 +6,7 @@ import com.cabse.cet.entity.Admin;
 import com.cabse.cet.entity.User;
 import com.cabse.cet.service.AdminService;
 import com.cabse.cet.service.UserService;
+import com.cabse.cet.utils.Security;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,11 +27,18 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin loginService(String username, String password, String token) {
-        Admin admin = adminDao.findByUsernameAndPasswordAndToken(username, password, token);
-        if (admin != null) {
+//        Admin admin = adminDao.findByUsernameAndPasswordAndToken(username, password, token);
+//        if (admin != null) {
+//            admin.setPassword("");
+//        }
+//        return admin;
+        Admin admin = adminDao.findByUsername(username);
+        if (admin != null && Security.matchesPassword(password, admin.getPassword())) {
             admin.setPassword("");
+            return admin;
+        }else{
+            return null;
         }
-        return admin;
     }
 
 //    @Override

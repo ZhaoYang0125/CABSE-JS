@@ -66,4 +66,13 @@ public class User{
     public void setState(Integer state) {
         this.state = state;
     }
+
+    public User(String username, String password, Integer state) {
+        this.username = username;
+        this.password = password;
+        this.state = state;
+    }
+
+    public User() {
+    }
 }

@@ -66,4 +66,14 @@ public class Admin {
     public void setState(Integer state) {
         this.state = state;
     }
+
+    public Admin(String username, String password, Integer state, String token) {
+        this.username = username;
+        this.password = password;
+        this.state = state;
+        this.token = token;
+    }
+
+    public Admin() {
+    }
 }

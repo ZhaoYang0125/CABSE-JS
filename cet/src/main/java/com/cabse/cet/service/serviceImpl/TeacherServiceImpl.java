@@ -3,6 +3,7 @@ package com.cabse.cet.service.serviceImpl;
 import com.cabse.cet.dao.TeacherDao;
 import com.cabse.cet.entity.Teacher;
 import com.cabse.cet.service.TeacherService;
+import com.cabse.cet.utils.Security;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,11 +24,13 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher loginService(String username, Integer jobnumber, String password) {
-        Teacher teacher = teacherDao.findByUsernameAndJobnumberAndPassword(username, jobnumber, password);
-        if (teacher != null) {
+        Teacher teacher = teacherDao.findByUsername(username);
+        if (teacher != null && Security.matchesPassword(password, teacher.getPassword())) {
             teacher.setPassword("");
+            return teacher;
+        }else{
+            return null;
         }
-        return teacher;
     }
 
 //    @Override

@@ -66,4 +66,14 @@ public class Teacher {
     public void setState(Integer state) {
         this.state = state;
     }
+
+    public Teacher(String username, String password, Integer state, Integer jobnumber) {
+        this.username = username;
+        this.password = password;
+        this.state = state;
+        this.jobnumber = jobnumber;
+    }
+
+    public Teacher() {
+    }
 }
