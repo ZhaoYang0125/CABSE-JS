@@ -15,6 +15,7 @@ import AdminLogin from "../views/login/AdminLogin";
 // import AdminRegister from "../views/register/AdminRegister";
 import Enroll from "../views/enroll/Enroll";
 import QuestionInput from "../views/paper/QuestionInput";
+import Grading from "../views/grading/Grading";
 
 // 创建并暴露一个路由器
 const router = new VueRouter({
@@ -59,7 +60,11 @@ const router = new VueRouter({
         {
             path: '/questionInput',
             component: QuestionInput
-        }
+        },
+        {
+            path: '/grading',     // 路径
+            component: Grading    // 跳转到的组件
+        },
 ]
 })
 

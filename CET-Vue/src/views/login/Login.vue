@@ -42,9 +42,6 @@
             <router-link to="/login-admin">
                 <el-button style="margin-left: 10px">管理员登录</el-button>
             </router-link>
-            <router-link to="/questionInput">
-                <el-button style="margin-left: 10px">录入试题</el-button>
-            </router-link>
         </div>
     </div>
 </template>
