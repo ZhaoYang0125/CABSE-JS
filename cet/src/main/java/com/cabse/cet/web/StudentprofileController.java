@@ -7,6 +7,10 @@ import com.cabse.cet.utils.Result;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: StudentprofileController
@@ -45,4 +49,15 @@ public class StudentprofileController {
         }
     }
 
+    @GetMapping("/getDataList")
+    public Result<List<Studentprofile>> getDataList() {
+        List<Studentprofile> list = studentprofileService.getList() ;
+        return  Result.success(list);
+    }
+
+    @PostMapping("/delete")
+    public Result<Studentprofile> delete(@RequestParam Integer uid){
+        studentprofileService.deleteService(uid);
+        return Result.success();
+    }
 }

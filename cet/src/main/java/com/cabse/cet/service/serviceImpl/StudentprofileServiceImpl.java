@@ -6,6 +6,8 @@ import com.cabse.cet.service.StudentprofileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.cabse.cet.utils.IDGeneration.getGeneratedID;
 
 @Service
@@ -42,5 +44,14 @@ public class StudentprofileServiceImpl implements StudentprofileService {
         return sid;
     }
 
+    @Override
+    public List<Studentprofile> getList(){
+        return studentprofileDao.findAll();
+    }
+
+    @Override
+    public void deleteService(Integer uid){
+        studentprofileDao.deleteByUid(uid);
+    }
 
 }

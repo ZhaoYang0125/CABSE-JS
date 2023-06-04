@@ -97,7 +97,7 @@
                                 // 将用户信息存储到sessionStorage中
                                 sessionStorage.setItem("userInfo", JSON.stringify(res.data.data));
                                 // 跳转页面到首页
-                                this.$router.push('/questionInput');
+                                this.$router.push('/adminHome');
                                 // 显示后端响应的成功信息
                                 this.$message({
                                     message: res.data.msg,
