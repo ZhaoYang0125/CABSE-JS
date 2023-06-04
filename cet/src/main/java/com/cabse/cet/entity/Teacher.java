@@ -12,12 +12,12 @@ import javax.persistence.*;
  * @Version 1.0.0
  */
 
-@Table(name = "user")
+@Table(name = "teacher")
 @Entity
-public class User{
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer uid;
+    private Integer tid;
 
     private String username;
 
@@ -25,22 +25,22 @@ public class User{
 
     private Integer state;
 
-//    private String type;
-//
-//    public String getType() {
-//        return type;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
+    private Integer jobnumber;
 
-    public Integer getUid() {
-        return uid;
+    public Integer getTid() {
+        return tid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
+    public Integer getJobnumber() {
+        return jobnumber;
+    }
+
+    public void setJobnumber(Integer jobnumber) {
+        this.jobnumber = jobnumber;
     }
 
     public String getUsername() {
@@ -67,12 +67,13 @@ public class User{
         this.state = state;
     }
 
-    public User(String username, String password, Integer state) {
+    public Teacher(String username, String password, Integer state, Integer jobnumber) {
         this.username = username;
         this.password = password;
         this.state = state;
+        this.jobnumber = jobnumber;
     }
 
-    public User() {
+    public Teacher() {
     }
 }

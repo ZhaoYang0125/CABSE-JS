@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-card class="box-card">
-            <h2>登录</h2>
+            <h2>管理员登录</h2>
             <el-form
                     :model="ruleForm"
                     status-icon
@@ -21,6 +21,13 @@
                             autocomplete="off"
                     ></el-input>
                 </el-form-item>
+                <el-form-item label="token" prop="token">
+                    <el-input
+                            type="password"
+                            v-model="ruleForm.token"
+                            autocomplete="off"
+                    ></el-input>
+                </el-form-item>
             </el-form>
             <div class="btnGroup">
                 <el-button
@@ -30,31 +37,25 @@
                 >登录</el-button
                 >
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
-                <router-link to="/register">
-                    <el-button style="margin-left: 10px">注册</el-button>
-                </router-link>
+<!--                <router-link to="/register-admin">-->
+<!--                    <el-button style="margin-left: 10px">注册</el-button>-->
+<!--                </router-link>-->
+                <el-button @click="goBack">返回</el-button>
             </div>
         </el-card>
-        <div>
-            <router-link to="/login-teacher">
-                <el-button style="margin-left: 10px">教师登录</el-button>
-            </router-link>
-            <router-link to="/login-admin">
-                <el-button style="margin-left: 10px">管理员登录</el-button>
-            </router-link>
-        </div>
     </div>
 </template>
 
 <script>
 
     export default {
-        name: "Login",
+        name: "AdminLogin",
         data() {
             return {
                 ruleForm: {
                     username: "",
                     password: "",
+                    token: ""
                 },
                 rules: {
                     username: [
@@ -62,6 +63,9 @@
                     ],
                     password: [
                         { required: true, message: "密码不能为空！", trigger: "blur" },
+                    ],
+                    token: [
+                        { required: true, message: "token不能为空！", trigger: "blur" },
                     ],
                 },
                 loading: false, // 是否显示加载动画
@@ -78,7 +82,7 @@
                         let _this = this;
                         // 使用 axios 将登录信息发送到后端
                         this.axios({
-                            url: "/api/user/login",               // 请求地址
+                            url: "/api/admin/login",               // 请求地址
                             method: "post",                       // 请求方法
                             headers: {                            // 请求头
                                 "Content-Type": "application/json",
@@ -86,13 +90,14 @@
                             params: {                             // 请求参数
                                 username: _this.ruleForm.username,
                                 password: _this.ruleForm.password,
+                                token: _this.ruleForm.token,
                             },
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                             if (res.data.code === "0") {  // 当响应的编码为 0 时，说明登录成功
                                 // 将用户信息存储到sessionStorage中
                                 sessionStorage.setItem("userInfo", JSON.stringify(res.data.data));
                                 // 跳转页面到首页
-                                this.$router.push('/home');
+                                this.$router.push('/TODO:');
                                 // 显示后端响应的成功信息
                                 this.$message({
                                     message: res.data.msg,
@@ -119,6 +124,10 @@
 
             resetForm(formName) {
                 this.$refs[formName].resetFields();
+            },
+
+            goBack() {
+                this.$router.go(-1);
             },
         },
     };

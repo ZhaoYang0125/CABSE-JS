@@ -4,8 +4,13 @@ import com.cabse.cet.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+<<<<<<< HEAD
+=======
+import org.springframework.data.jpa.repository.Modifying;
+>>>>>>> lsy
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @ClassName: UserDao
@@ -24,7 +29,14 @@ public interface UserDao extends JpaRepository<User, Integer>{
     /* 自定义查询 */
 //    @Query("select u from user u where username like CONCAT('%', ?1, '%') or uid like ?1") // ?1: 表示第一个参数, CONCAT字符串拼接
 //    public Page<User> findByKeyword(String keyword, Pageable pageable);
+<<<<<<< HEAD
 //
 //    @Query("update User u set u.password = ?2 where u.uid = ?1")    //  ?2: 表示第二个参数, ?1: 表示第一个参数
 //    public void modifyPassword(Integer uid, String pwd);
+=======
+    @Transactional
+    @Modifying
+    @Query("update User u set u.state = ?2 where u.uid = ?1")    //  ?2: 表示第二个参数, ?1: 表示第一个参数
+    public void modifyState(Integer uid, Integer state);
+>>>>>>> lsy
 }

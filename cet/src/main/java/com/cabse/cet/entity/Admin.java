@@ -12,12 +12,12 @@ import javax.persistence.*;
  * @Version 1.0.0
  */
 
-@Table(name = "user")
+@Table(name = "admin")
 @Entity
-public class User{
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer uid;
+    private Integer aid;
 
     private String username;
 
@@ -25,22 +25,22 @@ public class User{
 
     private Integer state;
 
-//    private String type;
-//
-//    public String getType() {
-//        return type;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
+    private String token;
 
-    public Integer getUid() {
-        return uid;
+    public Integer getAid() {
+        return aid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setAid(Integer aid) {
+        this.aid = aid;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUsername() {
@@ -67,12 +67,13 @@ public class User{
         this.state = state;
     }
 
-    public User(String username, String password, Integer state) {
+    public Admin(String username, String password, Integer state, String token) {
         this.username = username;
         this.password = password;
         this.state = state;
+        this.token = token;
     }
 
-    public User() {
+    public Admin() {
     }
 }

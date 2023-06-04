@@ -3,7 +3,10 @@ package com.cabse.cet.service.serviceImpl;
 import com.cabse.cet.dao.UserDao;
 import com.cabse.cet.entity.User;
 import com.cabse.cet.service.UserService;
+import com.cabse.cet.utils.Security;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.annotation.Resource;
 
@@ -16,6 +19,7 @@ import javax.annotation.Resource;
  * @Version 1.0.0
  */
 
+
 @Service
 public class UserServiceImpl implements UserService {
     @Resource
@@ -23,11 +27,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loginService(String username, String password) {
-        User user = userDao.findByUsernameAndPassword(username, password);
-        if (user != null) {
+        User user = userDao.findByUsername(username);
+        if (user != null && Security.matchesPassword(password, user.getPassword())) {
             user.setPassword("");
+            return user;
+        }else{
+            return null;
         }
-        return user;
     }
 
     @Override
@@ -36,6 +42,8 @@ public class UserServiceImpl implements UserService {
             return null;
         }else{
             user.setState(1);
+            String encode = Security.encodePassword(user.getPassword());
+            user.setPassword(encode);
             User newUser = userDao.save(user);
             if(newUser != null){
                 newUser.setPassword("");

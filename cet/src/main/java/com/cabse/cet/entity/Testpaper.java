@@ -31,8 +31,13 @@ public class Testpaper {
 
     @Override
     public boolean equals(Object o) {
+<<<<<<< HEAD
         if (this == o) return true;
         if (!(o instanceof Testpaper)) return false;
+=======
+        if (this == o) {return true;}
+        if (!(o instanceof Testpaper)) {return false;}
+>>>>>>> lsy
         Testpaper testpaper = (Testpaper) o;
         return Objects.equals(getPaperid(), testpaper.getPaperid()) &&
                 Objects.equals(getUrl(), testpaper.getUrl());

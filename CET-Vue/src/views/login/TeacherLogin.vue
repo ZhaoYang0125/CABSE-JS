@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-card class="box-card">
-            <h2>登录</h2>
+            <h2>教师登录</h2>
             <el-form
                     :model="ruleForm"
                     status-icon
@@ -13,6 +13,9 @@
             >
                 <el-form-item label="用户名" prop="username">
                     <el-input v-model="ruleForm.username"></el-input>
+                </el-form-item>
+                <el-form-item label="工号" prop="jobnumber">
+                    <el-input v-model="ruleForm.jobnumber"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                     <el-input
@@ -30,35 +33,32 @@
                 >登录</el-button
                 >
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
-                <router-link to="/register">
-                    <el-button style="margin-left: 10px">注册</el-button>
-                </router-link>
+<!--                <router-link to="/register-teacher">-->
+<!--                    <el-button style="margin-left: 10px">注册</el-button>-->
+<!--                </router-link>-->
+                <el-button @click="goBack">返回</el-button>
             </div>
         </el-card>
-        <div>
-            <router-link to="/login-teacher">
-                <el-button style="margin-left: 10px">教师登录</el-button>
-            </router-link>
-            <router-link to="/login-admin">
-                <el-button style="margin-left: 10px">管理员登录</el-button>
-            </router-link>
-        </div>
     </div>
 </template>
 
 <script>
 
     export default {
-        name: "Login",
+        name: "TeacherLogin",
         data() {
             return {
                 ruleForm: {
                     username: "",
+                    jobnumber: null,
                     password: "",
                 },
                 rules: {
                     username: [
                         { required: true, message: "用户名不能为空！", trigger: "blur" },
+                    ],
+                    jobnumber: [
+                        { required: true, message: "工号不能为空！", trigger: "blur" },
                     ],
                     password: [
                         { required: true, message: "密码不能为空！", trigger: "blur" },
@@ -78,13 +78,14 @@
                         let _this = this;
                         // 使用 axios 将登录信息发送到后端
                         this.axios({
-                            url: "/api/user/login",               // 请求地址
+                            url: "/api/teacher/login",               // 请求地址
                             method: "post",                       // 请求方法
                             headers: {                            // 请求头
                                 "Content-Type": "application/json",
                             },
                             params: {                             // 请求参数
                                 username: _this.ruleForm.username,
+                                jobnumber: _this.ruleForm.jobnumber,
                                 password: _this.ruleForm.password,
                             },
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
@@ -92,7 +93,7 @@
                                 // 将用户信息存储到sessionStorage中
                                 sessionStorage.setItem("userInfo", JSON.stringify(res.data.data));
                                 // 跳转页面到首页
-                                this.$router.push('/home');
+                                this.$router.push('/TODO:');
                                 // 显示后端响应的成功信息
                                 this.$message({
                                     message: res.data.msg,
@@ -119,6 +120,10 @@
 
             resetForm(formName) {
                 this.$refs[formName].resetFields();
+            },
+
+            goBack() {
+                this.$router.go(-1);
             },
         },
     };

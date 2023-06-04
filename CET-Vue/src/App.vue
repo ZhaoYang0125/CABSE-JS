@@ -5,10 +5,12 @@
 </template>
 
 <script>
+  import Show from "./views/showprofile/Show.vue"
+  import ProfileSubmit from "./views/studentprofile/ProfileSubmit.vue"
+  import Login from "./views/login/Login.vue"
   export default {
     name: 'App',
-    components: {
-    }
+    components: {}
   }
 </script>
 
