@@ -23,9 +23,9 @@ public class GradeController {
     ) {
         Integer sid = studentprofileService.sidService(uid);
         Report report = reportService.searchService(paperid, sid);
-        System.out.println(report.getListening());
-        System.out.println(report.getTranslation());
-        if (report.getTranslation() != null && report.getWriting() != null) {
+//        System.out.println(report.getListening());
+//        System.out.println(report.getTranslation());
+        if (report != null && report.getTranslation() != null && report.getWriting() != null) {
             return Result.success(report, "Success get grade!");
         }
         else {

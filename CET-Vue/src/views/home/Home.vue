@@ -99,7 +99,6 @@
             },
 
             toGrade() {
-                // TODO:
                 this.$router.push('/grade');
             },
 

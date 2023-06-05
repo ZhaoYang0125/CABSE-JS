@@ -20,15 +20,20 @@ public class StudentprofileServiceImpl implements StudentprofileService {
         Studentprofile retStudentprofile = studentprofileDao.findByUid(studentprofile.getUid());
         Studentprofile newprofile = null;
         if (retStudentprofile == null){
-            studentprofile.setSid(getGeneratedID());
+//            studentprofile.setSid(getGeneratedID());
+            if (studentprofileDao.findBySid(studentprofile.getSid()) != null){
+                return null;
+            }
             newprofile = studentprofileDao.save(studentprofile);
         }else{
+//            System.out.println("here");
             studentprofileDao.modifyProfile(studentprofile.getUid(),
                                             studentprofile.getSname(),
                                             studentprofile.getGender(),
                                             studentprofile.getAge(),
                                             studentprofile.getSchool());
             newprofile = studentprofileDao.findByUid(studentprofile.getUid());
+//            System.out.println("sname" + newprofile.getSname());
         }
         return newprofile;
     }

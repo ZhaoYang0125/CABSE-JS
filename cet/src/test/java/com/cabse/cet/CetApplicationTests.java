@@ -31,7 +31,7 @@ class CetApplicationTests {
         Teacher teacher3 = new Teacher("lanhong", "333333abc", 1, 10200400);
         teacherRegistService(teacher3);
 
-        Admin admin1 = new Admin("admin1", "111111abc", 1, "admin-SKdsdafawed");
+        Admin admin1 = new Admin("admin1", "111111abc", 1, "admin-abc");
         adminRegistService(admin1);
         Admin admin2 = new Admin("admin2", "222222abc", 1, "admin-Lkdasviaew");
         adminRegistService(admin2);

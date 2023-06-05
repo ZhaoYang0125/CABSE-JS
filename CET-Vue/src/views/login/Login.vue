@@ -1,17 +1,19 @@
 <template>
-    <el-container>
-        <el-header>
-            <el-row>
-                <el-col :span="8">
-                    <el-image :src="imageURL"></el-image>
-                </el-col>
-                <el-col :span="8" :offset="8">
-                    <el-button @click="dialogVisible = true">登录</el-button>
-                </el-col>
-            </el-row>
-        </el-header>
-        <el-main>
-            <el-dialog :visible.sync="dialogVisible">
+<!--    <el-container>-->
+<!--        <el-header>-->
+<!--            <el-row>-->
+<!--                <el-col :span="8">-->
+<!--                    <el-image :src="imageURL"></el-image>-->
+<!--                </el-col>-->
+<!--                <el-col :span="8" :offset="8">-->
+<!--                    <el-button @click="dialogVisible = true">登录</el-button>-->
+<!--                </el-col>-->
+<!--            </el-row>-->
+<!--        </el-header>-->
+<!--        <el-main>-->
+<!--            <el-dialog :visible.sync="dialogVisible">-->
+    <div>
+        <h1>六级考试报名系统</h1>
                 <el-card class="box-card">
                     <h2>登录</h2>
                     <el-form
@@ -46,16 +48,16 @@
                         </router-link>
                     </div>
                 </el-card>
+    </div>
 
-
-            </el-dialog>
-            <el-carousel :interval="4000" type="card" height="200px">
-                <el-carousel-item v-for="item in 6" :key="item">
-                    <h3 class="medium">{{ item }}</h3>
-                </el-carousel-item>
-            </el-carousel>
-        </el-main>
-    </el-container>
+<!--            </el-dialog>-->
+<!--            <el-carousel :interval="4000" type="card" height="200px">-->
+<!--                <el-carousel-item v-for="item in 6" :key="item">-->
+<!--                    <h3 class="medium">{{ item }}</h3>-->
+<!--                </el-carousel-item>-->
+<!--            </el-carousel>-->
+<!--        </el-main>-->
+<!--    </el-container>-->
 </template>
 
 <script>
@@ -161,19 +163,5 @@
     .el-header{
         background-color: darksalmon;
     }
-    .el-carousel__item h3 {
-        color: #475669;
-        font-size: 14px;
-        opacity: 0.75;
-        line-height: 200px;
-        margin: 0;
-    }
 
-    .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-    }
-
-    .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
-    }
 </style>

@@ -102,6 +102,7 @@
                                 sid: _this.findForm.sid,
                             },
                         }).then((a)=> {
+                            console.log(a);
                             if(typeof (a.data)=="undefined" || a.data.length==0){
                                 alert("找不到学生"+_this.findForm.sid+"在试卷"+_this.findForm.paperid+"的作答情况");
                             }
@@ -118,7 +119,7 @@
                 this.displayAnswer=true;
             },
             findLastAnswer(){//上一页
-                this.findForm.sid-=1;
+                this.findForm.sid--;
                 // this.findStudentAnswer('findForm');
                 this.axios({
                     url: "/api/teacher/grading",               // 请求地址
@@ -138,7 +139,7 @@
                 })
             },
             findNextAnswer(){//下一页
-                this.findForm.sid+=1;
+                this.findForm.sid++;
                 // this.findStudentAnswer('findForm');
                 this.axios({
                     url: "/api/teacher/grading",               // 请求地址
@@ -151,6 +152,7 @@
                         sid: this.findForm.sid,
                     },
                 }).then((a)=> {
+                    console.log(a);
                     if(typeof (a.data)=="undefined" || a.data.length==0){
                         alert("找不到学生"+this.findForm.sid+"在试卷"+this.findForm.paperid+"的作答情况");
                         this.findForm.sid-=1;

@@ -29,7 +29,7 @@ public class StudentanswerController {
             return null;
         }
 //        System.out.println(studentanswer);
-        System.out.println(studentanswer.getUrl());
+//        System.out.println(studentanswer.getUrl());
         Answer answer=Answer.get(studentanswer.getUrl());
 //        System.out.println(answer);
         return answer;

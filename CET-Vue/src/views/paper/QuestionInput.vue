@@ -143,7 +143,7 @@
 
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">录入</el-button>
-                        <el-button>取消</el-button>
+                        <el-button type="primary" @click="goBack"> 取消</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -221,7 +221,7 @@
                     </div>
 
                     <el-button type="primary" @click="onSubmitAns">录入答案</el-button>
-                    <el-button>取消</el-button>
+                    <el-button type="primary" @click="goBack"> 取消</el-button>
                 </el-form>
 
             </el-main>
@@ -363,6 +363,10 @@
                     data: formData
                 }).then((response) => {
                     console.log(response);
+                    this.$message({
+                        message: "录入试题成功！",
+                        type: "success",
+                    });
                 });
             },
             onSubmitAns() {
@@ -381,8 +385,16 @@
                     data: formData
                 }).then((response) => {
                     console.log(response);
+                    this.$message({
+                        message: "录入答案成功！",
+                        type: "success",
+                    });
                 });
-            }
+            },
+
+            goBack() {
+                this.$router.go(-1);
+            },
         }
     }
 </script>
