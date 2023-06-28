@@ -17,6 +17,7 @@
 
     <properties>
         <java.version>8</java.version>
+<!--        <hibernate.version>5.4.33.Final</hibernate.version>-->
     </properties>
 
     <dependencies>
@@ -81,6 +82,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
 
     </dependencies>
 

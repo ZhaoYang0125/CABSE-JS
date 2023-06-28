@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface StudentprofileService {
     Studentprofile saveStudentprofile(Studentprofile studentprofile);
+    Studentprofile modifyStudentprofile(Studentprofile studentprofile);
     Studentprofile findStudentprofile(Integer uid);
-    Integer sidService(Integer uid);
+    Integer examidService(Integer uid);
     List<Studentprofile> getList();
     void deleteService(Integer uid);
 }

@@ -3,6 +3,7 @@ package com.cabse.cet.web;
 import com.cabse.cet.entity.Paperanswer;
 import com.cabse.cet.service.PaperanswerService;
 import com.cabse.cet.utils.Answer;
+import com.cabse.cet.utils.CurrentDate;
 import com.cabse.cet.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,7 @@ public class PaperAnswerController {
         String url = Answer.save(a, "paperAns.ser");
         Paperanswer pa = new Paperanswer();
         pa.setUrl(url);
-        pa.setPaperid(1);
+        pa.setPaperid(Integer.parseInt(CurrentDate.getTestDate()));
         Paperanswer npa = paperanswerService.saveAnswerService(pa);
         if(npa!=null){
             System.out.println(npa);

@@ -4,7 +4,7 @@
         <el-container>
             <el-main>
                 <el-row>
-                    <el-input v-model="paperid" placeholder="请输入要查询的考试号" style="width:400px; text-align: center"></el-input><el-button type="primary" @click="onSearch">查询</el-button>
+                    <el-input v-model="paperid" placeholder="请输入要查询的考试年月" style="width:400px; text-align: center"></el-input><el-button type="primary" @click="onSearch">查询</el-button>
                 </el-row>
                 <el-card v-if="grade.get" class="box-card">
                     <span v-if="grade.pass">合格</span>

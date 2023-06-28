@@ -36,6 +36,28 @@
                     ></el-input>
                 </el-form-item>
 
+                <el-form-item label="学历" prop="degree">
+                    <el-input
+                            v-model="ruleForm.degree"
+                            autocomplete="off"
+                    ></el-input>
+                </el-form-item>
+
+                <el-form-item label="专业" prop="majerity">
+                    <el-input
+                            v-model="ruleForm.majerity"
+                            autocomplete="off"
+                    ></el-input>
+                </el-form-item>
+
+                <el-form-item label="入学年份" prop="enrollmentyear">
+                    <el-input
+                            v-model="ruleForm.enrollmentyear"
+                            autocomplete="off"
+                    ></el-input>
+                </el-form-item>
+
+
             </el-form>
 
             <div class="btnGroup">
@@ -53,11 +75,14 @@
         data() {
             return {
                 ruleForm: {
-                    // sid : null,
+                    examid : null,
                     sname : "",
                     gender: "",
                     age : null,
                     school : "",
+                    majerity : "",
+                    enrollmentyear : "",
+                    degree : "",
                 },
                 rules: {
                     sname: [
@@ -71,6 +96,15 @@
                     ],
                     school: [
                         { required: true, message: "学校不能为空！", trigger: "blur" },
+                    ],
+                    majerity: [
+                        { required: true, message: "专业不能为空！", trigger: "blur" },
+                    ],
+                    enrollmentyear: [
+                        { required: true, message: "入学年份不能为空！", trigger: "blur" },
+                    ],
+                    degree: [
+                        { required: true, message: "学历不能为空！", trigger: "blur" },
                     ],
                 },
                 user: {
@@ -99,11 +133,14 @@
                             },
                             data: {                             // 请求参数
                                 uid: _this.user.uid,
-                                // sid: _this.ruleForm.sid,
+                                examid: _this.ruleForm.examid,
                                 sname: _this.ruleForm.sname,
                                 gender: _this.ruleForm.gender,
                                 age: _this.ruleForm.age,
-                                school: _this.ruleForm.school
+                                school: _this.ruleForm.school,
+                                majerity : _this.ruleForm.majerity,
+                                enrollmentyear : _this.ruleForm.enrollmentyear,
+                                degree : _this.ruleForm.degree,
                             },
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                             if (res.data.code === "0") {  // 当响应的编码为 0 时，说明成功
@@ -112,11 +149,14 @@
                                     path: '/showprofile',
                                     query: {
                                         uid: this.user.uid,
-                                        sid: res.data.data.sid,
+                                        examid: res.data.data.examid,
                                         sname: res.data.data.sname,
                                         gender: res.data.data.gender,
                                         age: res.data.data.age,
-                                        school: res.data.data.school
+                                        school: res.data.data.school,
+                                        majerity: res.data.data.majerity,
+                                        enrollmentyear: res.data.data.enrollmentyear,
+                                        degree: res.data.data.degree,
                                     }
                                 });
                                 // 显示后端响应的成功信息

@@ -4,6 +4,7 @@ import com.cabse.cet.dao.PaperanswerDao;
 import com.cabse.cet.entity.Paperanswer;
 import com.cabse.cet.service.PaperanswerService;
 import com.cabse.cet.utils.Answer;
+import com.cabse.cet.utils.CurrentDate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,7 +22,12 @@ public class PaperanswerServieImpl implements PaperanswerService {
 
     @Override
     public Paperanswer saveAnswerService(Paperanswer a) {
-        Paperanswer newPaperans = paperanswerDao.save(a);
-        return newPaperans;
+        Paperanswer paperanswer = paperanswerDao.findByPaperid(Integer.parseInt(CurrentDate.getTestDate()));
+        if (paperanswer != null){
+            return null;
+        }else{
+            Paperanswer newPaperans = paperanswerDao.save(a);
+            return newPaperans;
+        }
     }
 }

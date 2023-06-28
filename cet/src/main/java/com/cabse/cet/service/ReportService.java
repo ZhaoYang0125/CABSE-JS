@@ -11,8 +11,8 @@ package com.cabse.cet.service;
 import com.cabse.cet.entity.Report;
 
 public interface ReportService {
-    boolean updateTranslationService(Integer paperid,Integer sid,Float score);
-    boolean updateWritingService(Integer paperid,Integer sid,Float score);
+    boolean updateTranslationService(Integer paperid,Integer examid,Float score);
+    boolean updateWritingService(Integer paperid,Integer examid,Float score);
     boolean saveService(Report report);
-    Report searchService(Integer paperid, Integer sid);
+    Report searchService(Integer paperid, Integer examid);
 }

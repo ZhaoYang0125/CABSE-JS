@@ -10,7 +10,25 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reportid;
-    private Integer sid;
+//    @ManyToOne(
+//            targetEntity = Studentprofile.class,
+//            cascade = CascadeType.ALL
+//    )
+//    @JoinColumn(
+//            name = "examid",
+//            referencedColumnName = "examid"
+//    )
+//    @Column(name = "examid")
+    private Integer examid;
+//    @ManyToOne(
+//            targetEntity = Testpaper.class,
+//            cascade = CascadeType.ALL
+//    )
+//    @JoinColumn(
+//            name = "paperid",
+//            referencedColumnName = "paperid"
+//    )
+//    @Column(name = "paperid")
     private Integer paperid;
     private Float listening;
     private Float comprehension;
@@ -58,12 +76,12 @@ public class Report {
         this.reportid = reportid;
     }
 
-    public Integer getSid() {
-        return sid;
+    public Integer getExamid() {
+        return examid;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setExamid(Integer examid) {
+        this.examid = examid;
     }
 
     public Integer getPaperid() {
@@ -90,7 +108,7 @@ public class Report {
         if (o == null || getClass() != o.getClass()) return false;
         Report report = (Report) o;
         return Objects.equals(reportid, report.reportid) &&
-                Objects.equals(sid, report.sid) &&
+                Objects.equals(examid, report.examid) &&
                 Objects.equals(paperid, report.paperid) &&
                 Objects.equals(listening, report.listening) &&
                 Objects.equals(comprehension, report.comprehension) &&
@@ -101,6 +119,6 @@ public class Report {
 
     @Override
     public int hashCode() {
-        return Objects.hash(reportid, sid, paperid, listening, comprehension, writing, translation, time);
+        return Objects.hash(reportid, examid, paperid, listening, comprehension, writing, translation, time);
     }
 }

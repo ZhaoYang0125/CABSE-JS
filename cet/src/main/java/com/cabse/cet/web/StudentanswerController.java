@@ -8,23 +8,28 @@ package com.cabse.cet.web;
  * Description:学生答案控制层
  */
 
+import com.cabse.cet.dao.StudentanswerDao;
 import com.cabse.cet.entity.Studentanswer;
 import com.cabse.cet.service.StudentanswerService;
 import com.cabse.cet.utils.Answer;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.io.Console;
 import java.io.IOException;
 
 @RestController
 @RequestMapping("teacher")
 public class StudentanswerController {
     @Resource StudentanswerService studentanswerService;
+    @Resource
+    private StudentanswerDao studentanswerDao;
 
     //根据paperid和sid查找学生作答情况
     @PostMapping("grading")
-    public Answer searchAnswerController(@RequestParam Integer paperid, @RequestParam Integer sid) throws IOException, ClassNotFoundException {
-        Studentanswer studentanswer=studentanswerService.searchAnswerService(paperid,sid);
+    public Answer searchAnswerController(@RequestParam Integer paperid, @RequestParam Integer examid) throws IOException, ClassNotFoundException {
+        Studentanswer studentanswer=studentanswerService.searchAnswerService(paperid, examid);
         if(studentanswer==null){
             return null;
         }

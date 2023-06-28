@@ -9,24 +9,38 @@ package com.cabse.cet.dao;
  */
 
 import com.cabse.cet.entity.Report;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper
 public interface ReportDao /*extends JpaRepository<Report, Integer>*/ {
-    @Insert("insert into reports (sid, paperid, listening, comprehension, time)values (#{sid},#{paperid},#{listening},#{comprehension},#{time})")
-    public int save(Integer sid, Integer paperid, Float listening, Float comprehension, LocalDateTime time);
+    @Insert("insert into reports (examid, paperid, listening, comprehension, time)values (#{examid},#{paperid},#{listening},#{comprehension},#{time})")
+    public int save(Integer examid, Integer paperid, Float listening, Float comprehension, LocalDateTime time);
 
-    @Update("update reports r set r.translation=#{translation} where r.paperid=#{paperid} and r.sid=#{sid}")
-    public int updateTranslation(Integer paperid, Integer sid, Float translation);
+    @Update("update reports r set r.translation=#{translation} where r.paperid=#{paperid} and r.examid=#{examid}")
+    public int updateTranslation(Integer paperid, Integer examid, Float translation);
 
-    @Update("update reports r set r.writing=#{writing} where r.paperid=#{paperid} and r.sid=#{sid}")
-    public int updateWriting( Integer paperid, Integer sid, Float writing);
+    @Update("update reports r set r.writing=#{writing} where r.paperid=#{paperid} and r.examid=#{examid}")
+    public int updateWriting( Integer paperid, Integer examid, Float writing);
 
-    @Select("select * from reports where paperid=#{paperid} and sid=#{sid}")
-    public Report findByPaperidAndSid(Integer paperid, Integer sid);
+    @Select("select * from reports where paperid=#{paperid} and examid=#{examid}")
+    public Report findByPaperidAndExamid(Integer paperid, Integer examid);
+
+    @Select("select * from reports where examid=#{examid}")
+    public List<Report> findByExamid(Integer examid);
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Update("update reports r set r.examid =#{examid} where r.reportid =#{reportid}")
+    public void modifyExamid(Integer reportid, Integer Examid);
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Delete("delete from reports where examid=#{examid}")
+    void deleteByExamid(Integer examid);
 }

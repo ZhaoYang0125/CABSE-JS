@@ -5,7 +5,7 @@
         </div>
         <div>
             <div>账号id: {{uid}}</div>
-            <div>学生id: {{sid}}</div>
+            <div>学生id: {{examid}}</div>
             <div>学生姓名: {{sname}}</div>
             <div>性别: {{gender}}</div>
             <div>年龄: {{age}}</div>
@@ -24,7 +24,7 @@
         created(){
             this.infomation = "核实信息"
             this.uid = this.$route.query.uid;
-            this.sid = this.$route.query.sid;
+            this.examid = this.$route.query.examid;
             this.sname = this.$route.query.sname;
             this.gender = this.$route.query.gender;
             this.age = this.$route.query.age;
@@ -35,7 +35,7 @@
         data() {
             return {
                 uid: "",
-                sid: "",
+                examid: "",
                 sname: "",
                 gender: "",
                 age: "",
@@ -68,7 +68,7 @@
                     if (res.data.code === "0") {  // 当响应的编码为 0 时，说明成功
                         this.infomation = "报名成功，以下为考生信息"
                         this.uid = res.data.data.uid;
-                        this.sid = res.data.data.sid;
+                        this.examid = res.data.data.examid;
                         this.sname = res.data.data.sname;
                         this.gender = res.data.data.gender;
                         this.age = res.data.data.age;

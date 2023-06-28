@@ -1,11 +1,19 @@
 package com.cabse.cet.service.serviceImpl;
 
+import com.cabse.cet.dao.ReportDao;
+import com.cabse.cet.dao.StudentanswerDao;
 import com.cabse.cet.dao.StudentprofileDao;
+import com.cabse.cet.dao.UserDao;
+import com.cabse.cet.entity.Report;
+import com.cabse.cet.entity.Studentanswer;
 import com.cabse.cet.entity.Studentprofile;
+import com.cabse.cet.entity.User;
 import com.cabse.cet.service.StudentprofileService;
+import com.cabse.cet.utils.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 import static com.cabse.cet.utils.IDGeneration.getGeneratedID;
@@ -14,27 +22,61 @@ import static com.cabse.cet.utils.IDGeneration.getGeneratedID;
 public class StudentprofileServiceImpl implements StudentprofileService {
     @Autowired
     private StudentprofileDao studentprofileDao;
+    @Resource
+    private UserDao userDao;
+    @Resource
+    private ReportDao reportDao;
+    @Resource
+    private StudentanswerDao studentanswerDao;
 
     @Override
     public Studentprofile saveStudentprofile(Studentprofile studentprofile){
-        Studentprofile retStudentprofile = studentprofileDao.findByUid(studentprofile.getUid());
-        Studentprofile newprofile = null;
-        if (retStudentprofile == null){
-//            studentprofile.setSid(getGeneratedID());
-            if (studentprofileDao.findBySid(studentprofile.getSid()) != null){
+//        if (studentprofile.getSname() == null || studentprofile.getExamid() == null) return null;
+
+        Studentprofile newprofile;
+        Studentprofile sp = studentprofileDao.findByUid(studentprofile.getUid());
+        if (sp!=null){
+            studentprofile.setExamid(sp.getExamid());
+            newprofile = modifyStudentprofile(studentprofile);
+            return newprofile;
+        }else{
+            String pwd = Security.encodePassword(studentprofile.getExamid().toString());
+            User newUser = new User(studentprofile.getSname(), pwd, 1);
+            newUser = userDao.save(newUser);
+            if (newUser == null){
                 return null;
             }
+            studentprofile.setUid(newUser.getUid());
             newprofile = studentprofileDao.save(studentprofile);
-        }else{
-//            System.out.println("here");
-            studentprofileDao.modifyProfile(studentprofile.getUid(),
-                                            studentprofile.getSname(),
-                                            studentprofile.getGender(),
-                                            studentprofile.getAge(),
-                                            studentprofile.getSchool());
-            newprofile = studentprofileDao.findByUid(studentprofile.getUid());
-//            System.out.println("sname" + newprofile.getSname());
+            return newprofile;
         }
+    }
+
+    @Override
+    public Studentprofile modifyStudentprofile(Studentprofile studentprofile) {
+        List<Report> reports = reportDao.findByExamid(studentprofile.getExamid());
+        for (int i = 0; i < reports.size(); i++) {
+            reportDao.modifyExamid(reports.get(i).getReportid(), reports.get(i).getExamid());
+        }
+
+        List<Studentanswer> studentanswers = studentanswerDao.findByExamid(studentprofile.getExamid());
+        for (int i = 0; i < studentanswers.size(); i++) {
+            reportDao.modifyExamid(studentanswers.get(i).getAnswerid(), studentanswers.get(i).getExamid());
+        }
+
+        studentprofileDao.modifyProfile(studentprofile.getUid(),
+                studentprofile.getSname(),
+                studentprofile.getGender(),
+                studentprofile.getAge(),
+                studentprofile.getSchool(),
+                studentprofile.getMajerity(),
+                studentprofile.getEnrollmentyear(),
+                studentprofile.getDegree(),
+                studentprofile.getExamid()
+        );
+        Studentprofile newprofile = studentprofileDao.findByUid(studentprofile.getUid());
+
+
         return newprofile;
     }
 
@@ -44,9 +86,9 @@ public class StudentprofileServiceImpl implements StudentprofileService {
     }
 
     @Override
-    public Integer sidService(Integer uid) {
-        Integer sid = (studentprofileDao.findByUid(uid)).getSid();
-        return sid;
+    public Integer examidService(Integer uid) {
+        Integer examid = (studentprofileDao.findByUid(uid)).getExamid();
+        return examid;
     }
 
     @Override
@@ -56,7 +98,13 @@ public class StudentprofileServiceImpl implements StudentprofileService {
 
     @Override
     public void deleteService(Integer uid){
+        Studentprofile studentprofile = studentprofileDao.findByUid(uid);
+        reportDao.deleteByExamid(studentprofile.getExamid());
+        studentanswerDao.deleteByExamid(studentprofile.getExamid());
+
         studentprofileDao.deleteByUid(uid);
+
+
     }
 
 }

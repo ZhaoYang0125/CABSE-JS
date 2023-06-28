@@ -1,10 +1,11 @@
 package com.cabse.cet.web;
 
+import com.cabse.cet.dao.TestpaperDao;
 import com.cabse.cet.entity.Report;
 import com.cabse.cet.entity.Studentanswer;
-import com.cabse.cet.entity.Testpaper;
 import com.cabse.cet.service.*;
 import com.cabse.cet.utils.Answer;
+import com.cabse.cet.utils.CurrentDate;
 import com.cabse.cet.utils.Paper;
 
 import com.cabse.cet.utils.Result;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -35,19 +35,26 @@ public class TestController {
     @Autowired
     private ReportService reportService;
 
+    @Resource
+    private TestpaperDao testpaperDao;
+
     private static Integer paperid;
 
     @PostMapping("/paper")
     public Result<Paper> paperController() {
-        Integer count = testpaperService.countService();
-        Random rand = new Random();
-        Integer row = rand.nextInt(count);
-        System.out.println(row.toString());
-        Paper paper = testpaperService.testService(row);
-        paperid = testpaperService.paperidService(row);
-        System.out.println(paperid);
-        System.out.println(paper.toString());
-        return Result.success(paper, "Success load paper!");
+        paperid = Integer.parseInt(CurrentDate.getTestDate());
+        Paper paper = testpaperService.testService(paperid);
+//        Integer count = testpaperService.countService();
+//        Random rand = new Random();
+//        Integer row = rand.nextInt(count);
+
+//        Paper paper = testpaperService.testService(row);
+//        paperid = testpaperService.paperidService(row);
+        if (paper != null){
+            return Result.success(paper, "Success load paper!");
+        }else {
+            return Result.error("106", "No paper!");
+        }
     }
 
     @PostMapping("/submit")
@@ -85,11 +92,11 @@ public class TestController {
         Studentanswer sa = new Studentanswer();
         sa.setUrl(url);
         sa.setTime(submitTime);
-        System.out.println(paperid);
+//        System.out.println(paperid);
         sa.setPaperid(paperid);
-        System.out.println(studentprofileService.sidService(uid));
-        Integer sid = studentprofileService.sidService(uid);
-        sa.setSid(sid);
+//        System.out.println(studentprofileService.examidService(uid));
+        Integer examid = studentprofileService.examidService(uid);
+        sa.setExamid(examid);
         Studentanswer newAnswer = studentanswerService.saveService(sa);
         String paperAnswerUrl = paperanswerService.searchAnswerService(paperid).getUrl();
         Answer paperAnswer = Answer.get(paperAnswerUrl);
@@ -131,7 +138,7 @@ public class TestController {
         Report report = new Report();
         report.setListening(grade1);
         report.setComprehension(grade2);
-        report.setSid(sid);
+        report.setExamid(examid);
         report.setPaperid(paperid);
         report.setTime(submitTime);
         reportService.saveService(report);

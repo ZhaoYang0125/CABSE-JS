@@ -7,8 +7,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "testpapers")
 public class Testpaper {
-    @Id     // 主键
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // 自动增长
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)     // 自动增长
+    @Id // 主键
     private Integer paperid;
     @Column(length = 50)    // 长度
     private String url;

@@ -12,8 +12,8 @@
                 </el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="findForm.sid" style="width: 480px; margin-top: 15px">
-                    <template slot="prepend">请输入要批改的学生ID</template>
+                <el-input v-model="findForm.examid" style="width: 480px; margin-top: 15px">
+                    <template slot="prepend">请输入要批改的学生考号</template>
                 </el-input>
             </el-form-item>
         </el-form>
@@ -49,8 +49,8 @@
                 </tr>
                 </tbody>
             </table>
-            <el-button @click="findLastAnswer">上一页</el-button>
-            <el-button @click="findNextAnswer">下一页</el-button>
+<!--            <el-button @click="findLastAnswer">上一页</el-button>-->
+<!--            <el-button @click="findNextAnswer">下一页</el-button>-->
         </div>
     </div>
 </template>
@@ -69,7 +69,7 @@
                 },
                 findForm:{
                     paperid:0,
-                    sid:0
+                    examid:0
                 },
                 displayAnswer:false,
                 user: {
@@ -99,12 +99,12 @@
                             },
                             params: {                             // 请求参数
                                 paperid: _this.findForm.paperid,
-                                sid: _this.findForm.sid,
+                                examid: _this.findForm.examid,
                             },
                         }).then((a)=> {
                             console.log(a);
                             if(typeof (a.data)=="undefined" || a.data.length==0){
-                                alert("找不到学生"+_this.findForm.sid+"在试卷"+_this.findForm.paperid+"的作答情况");
+                                alert("找不到学生"+_this.findForm.examid+"在试卷"+_this.findForm.paperid+"的作答情况");
                             }
                             else{
                                 console.log(a);
@@ -119,7 +119,7 @@
                 this.displayAnswer=true;
             },
             findLastAnswer(){//上一页
-                this.findForm.sid--;
+                this.findForm.examid--;
                 // this.findStudentAnswer('findForm');
                 this.axios({
                     url: "/api/teacher/grading",               // 请求地址
@@ -129,17 +129,17 @@
                     },
                     params: {                             // 请求参数
                         paperid: this.findForm.paperid,
-                        sid: this.findForm.sid,
+                        examid: this.findForm.examid,
                     },
                 }).then((a)=> {
                     if(typeof (a.data)=="undefined" || a.data.length==0){
-                        alert("找不到学生"+this.findForm.sid+"在试卷"+this.findForm.paperid+"的作答情况");
-                        this.findForm.sid+=1;
+                        alert("找不到学生"+this.findForm.examid+"在试卷"+this.findForm.paperid+"的作答情况");
+                        // this.findForm.examid+=1;
                     }
                 })
             },
             findNextAnswer(){//下一页
-                this.findForm.sid++;
+                this.findForm.examid++;
                 // this.findStudentAnswer('findForm');
                 this.axios({
                     url: "/api/teacher/grading",               // 请求地址
@@ -149,13 +149,14 @@
                     },
                     params: {                             // 请求参数
                         paperid: this.findForm.paperid,
-                        sid: this.findForm.sid,
+                        examid: this.findForm.examid,
                     },
                 }).then((a)=> {
                     console.log(a);
                     if(typeof (a.data)=="undefined" || a.data.length==0){
-                        alert("找不到学生"+this.findForm.sid+"在试卷"+this.findForm.paperid+"的作答情况");
-                        this.findForm.sid-=1;
+                        alert("找不到学生"+this.findForm.examid+"在试卷"+this.findForm.paperid+"的作答情况");
+                        // alert("找不到该学生在试卷"+this.findForm.paperid+"的作答情况");
+                        // this.findForm.examid-=1;
                     }
                 })
             },
@@ -169,7 +170,7 @@
                             },
                             params: {                             // 请求参数
                                 paperid: _this.findForm.paperid,
-                                sid: _this.findForm.sid,
+                                examid: _this.findForm.examid,
                                 score:_this.writing.score
                             },
                         }).then((a)=>{
@@ -187,7 +188,7 @@
                     },
                     params: {                             // 请求参数
                         paperid: this.findForm.paperid,
-                        sid: this.findForm.sid,
+                        examid: this.findForm.examid,
                         score:this.translation.score
                     },
                 }).then((a)=>{

@@ -22,8 +22,8 @@ public class ReportServiceImpl implements ReportService {
 
     //更新翻译题的分数
     @Override
-    public boolean updateTranslationService(Integer paperid, Integer sid, Float score) {
-        if(reportDao.updateTranslation(paperid,sid,score)!=0)
+    public boolean updateTranslationService(Integer paperid, Integer examid, Float score) {
+        if(reportDao.updateTranslation(paperid,examid,score)!=0)
             return true;
         else
             return false;
@@ -31,8 +31,8 @@ public class ReportServiceImpl implements ReportService {
 
     //更新作文分数
     @Override
-    public boolean updateWritingService(Integer paperid, Integer sid, Float score) {
-        if(reportDao.updateWriting(paperid, sid, score)!=0)
+    public boolean updateWritingService(Integer paperid, Integer examid, Float score) {
+        if(reportDao.updateWriting(paperid, examid, score)!=0)
             return true;
         else
             return false;
@@ -40,15 +40,15 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public boolean saveService(Report report) {
-        if(reportDao.save(report.getSid(), report.getPaperid(), report.getListening(), report.getComprehension(), report.getTime())!=0)
+        if(reportDao.save(report.getExamid(), report.getPaperid(), report.getListening(), report.getComprehension(), report.getTime())!=0)
             return true;
         else
             return false;
     }
 
     @Override
-    public Report searchService(Integer paperid, Integer sid) {
-        Report report = reportDao.findByPaperidAndSid(paperid, sid);
+    public Report searchService(Integer paperid, Integer examid) {
+        Report report = reportDao.findByPaperidAndExamid(paperid, examid);
         if (report != null) {
             return report;
         }

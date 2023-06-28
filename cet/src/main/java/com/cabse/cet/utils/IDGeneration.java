@@ -19,10 +19,10 @@ public class IDGeneration {
     }
     public static Integer getGeneratedID(){
         String orderSeq = Math.abs(UUID.randomUUID().toString().hashCode()) + "";
-        while (orderSeq.length() < 6) {
+        while (orderSeq.length() < 4) {
             orderSeq = orderSeq + (int) (Math.random() * 10);
         }
-        String id = getSysYear() + orderSeq.substring(0, 6);
+        String id = getSysYear() + orderSeq.substring(0, 4);
         return Integer.parseInt(id);
     }
 

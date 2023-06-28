@@ -22,14 +22,14 @@ public class ReportController {
     @Resource ReportService reportService;
 
     @PostMapping("writing")
-    public boolean updateTranslationController(@RequestParam Integer paperid, @RequestParam Integer sid,
+    public boolean updateTranslationController(@RequestParam Integer paperid, @RequestParam Integer examid,
                                                @RequestParam Float score){
-        return reportService.updateTranslationService(paperid, sid, score);
+        return reportService.updateTranslationService(paperid, examid, score);
     }
 
     @PostMapping("translation")
-    public boolean updateWritingController(@RequestParam Integer paperid, @RequestParam Integer sid,
+    public boolean updateWritingController(@RequestParam Integer paperid, @RequestParam Integer examid,
                                            @RequestParam Float score){
-        return reportService.updateWritingService(paperid, sid, score);
+        return reportService.updateWritingService(paperid, examid, score);
     }
 }

@@ -1,6 +1,8 @@
 package com.cabse.cet.service.serviceImpl;
 
+import com.cabse.cet.dao.StudentprofileDao;
 import com.cabse.cet.dao.UserDao;
+import com.cabse.cet.entity.Studentprofile;
 import com.cabse.cet.entity.User;
 import com.cabse.cet.service.UserService;
 import com.cabse.cet.utils.Security;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.annotation.Resource;
+
+import static com.cabse.cet.utils.IDGeneration.getGeneratedID;
 
 /**
  * @ClassName: UserServiceImpl
@@ -24,6 +28,8 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
+    @Resource
+    private StudentprofileDao studentprofileDao;
 
     @Override
     public User loginService(String username, String password) {
@@ -46,8 +52,17 @@ public class UserServiceImpl implements UserService {
             user.setPassword(encode);
             User newUser = userDao.save(user);
             if(newUser != null){
+                Studentprofile studentprofile = new Studentprofile();
+                studentprofile.setUid(newUser.getUid());
+                studentprofile.setExamid(getGeneratedID());
+                Studentprofile newStudentprofile = studentprofileDao.save(studentprofile);
+                if(newStudentprofile == null){
+                    userDao.delete(newUser);
+                    return null;
+                }
                 newUser.setPassword("");
             }
+
             return newUser;
         }
     }

@@ -27,8 +27,8 @@ public class StudentanswerServiceImpl implements StudentanswerService{
     }
 
     @Override
-    public Studentanswer searchAnswerService(Integer paperid, Integer sid) {
-        Studentanswer studentanswer=studentanswerDao.findByPaperidAndSid(paperid,sid);
+    public Studentanswer searchAnswerService(Integer paperid, Integer examid) {
+        Studentanswer studentanswer=studentanswerDao.findByPaperidAndExamid(paperid,examid);
         return studentanswer;
     }
 }

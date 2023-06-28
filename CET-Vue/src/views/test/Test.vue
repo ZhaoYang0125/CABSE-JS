@@ -1,6 +1,7 @@
 <template>
     <el-container>
         <el-header>Head: CET6 六级试题</el-header>
+        <h1 align="center">考试剩余时间 {{hour}}:{{minute}}:{{second}}</h1>
         <el-container>
             <el-aside width="200px">Aside</el-aside>
 
@@ -119,6 +120,12 @@
     export default {
         data() {
             return {
+                timer : null,
+                hours: 0,
+                minutes: 0,
+                seconds: 5,
+
+                flag: false,
                 user: {
                     username: "",
                     uid: null,
@@ -163,6 +170,10 @@
             }
         },
 
+        mounted() {
+            this.add();
+        },
+
         created(){
             this.init();
         },
@@ -176,7 +187,9 @@
                     url: "/api/test/paper",               // 请求地址
                     method: "post",                       // 请求方法
                 }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
-                    if (res.data != null) {
+                    if (res.data.data != null) {
+                        this.flag = true;
+
                         this.paper.writing = res.data.data.writing;
                         console.log(this.paper.writing);
                         this.paper.listeningChoices = res.data.data.listeningChoices;
@@ -192,44 +205,121 @@
                         this.paper.questionsOfSectionC = res.data.data.questionsOfSectionC;
                         this.paper.choicesOfSectionC = res.data.data.choicesOfSectionC;
                         this.paper.translation = res.data.data.translation;
+                    }else{
+                        this.$message({
+                            message: res.data.msg,
+                            type: "warning",
+                        });
+                        this.flag = false;
                     }
                     console.log(this.paper.writing);
                 });
                 console.log(this.paper.writing);
             },
             onSubmit() {
-                if (sessionStorage.getItem('userInfo')) {
-                    // 将用户信息存储到sessionStorage中
-                    this.user = JSON.parse(sessionStorage.getItem('userInfo'));
-                }
-                let formData = new FormData();
-                for (let key in this.answer) {
-                    formData.append(key, this.answer[key]);
-                    console.log(formData.get(key));
-                }
-                formData.append('uid', this.user['uid']);
-                console.log(formData.get('uid'));
-                this.axios({
-                    method: "post",
-                    url: "api/test/submit",
-                    headers:{
-                        "Content-Type": "multipart/form-data"
-                    },
-                    withCredentials: true,
-                    data: formData
-                }).then((response) => {
-                    if (response.data.code === "0"){
-                        console.log(response);
-                        alert("试卷提交成功");
-                        this.$router.push('/home');
+                if (this.flag == true){
+                    if (sessionStorage.getItem('userInfo')) {
+                        // 将用户信息存储到sessionStorage中
+                        this.user = JSON.parse(sessionStorage.getItem('userInfo'));
                     }
-                    else {
-                        alert("试卷提交失败");
+                    let formData = new FormData();
+                    for (let key in this.answer) {
+                        formData.append(key, this.answer[key]);
+                        console.log(formData.get(key));
                     }
+                    formData.append('uid', this.user['uid']);
+                    console.log(formData.get('uid'));
+                    this.axios({
+                        method: "post",
+                        url: "api/test/submit",
+                        headers:{
+                            "Content-Type": "multipart/form-data"
+                        },
+                        withCredentials: true,
+                        data: formData
+                    }).then((response) => {
+                        if (response.data.code === "0"){
+                            console.log(response);
+                            alert("试卷提交成功");
+                            this.$router.push('/home');
+                        }
+                        else {
+                            alert("试卷提交失败");
+                        }
 
-                });
+                    });
+                }
+            },
+
+            // 数值小于10时显示位数
+            num(n) {
+                return n < 10 ? '0' + n : '' + n
+            },
+            // 倒计时函数
+            add() {
+                this.timer = window.setInterval( ()=> {
+                    if (this.hours !== 0 && this.minutes === 0 && this.seconds === 0) {
+                        this.hours -= 1;
+                        this.minutes = 59;
+                        this.seconds = 59;
+                    } else if (this.hours === 0 && this.minutes !== 0 && this.seconds ===
+                        0) {
+                        this.minutes -= 1;
+                        this.seconds = 59;
+                    } else if (this.hours === 0 && this.minutes === 0 && this.seconds ===
+                        0) {
+                        this.seconds = 0;
+                        window.clearInterval(this.timer);
+                        this.onSubmit();
+                    } else if (this.hours !== 0 && this.minutes !== 0 && this.seconds ===
+                        0) {
+                        this.minutes -= 1;
+                        this.seconds = 59;
+                    } else {
+                        this.seconds -= 1;
+                    }
+                }, 1000)
+            },
+
+        },
+
+        watch: {
+            // 监听数值变化
+            second: {
+                handler(newVal) {
+                    this.num(newVal)
+                }
+            },
+            minute: {
+                handler(newVal) {
+                    this.num(newVal)
+                }
+            },
+            hour: {
+                handler(newVal) {
+                    this.num(newVal)
+                }
+            }
+        },
+        computed: {
+            // 初始化数据
+            second() {
+                return this.num(this.seconds)
+            },
+            minute() {
+                return this.num(this.minutes)
+            },
+            hour() {
+                return this.num(this.hours)
+            }
+        },
+
+        destroyed(){
+            if(this.timer) { //如果定时器在运行则关闭
+                window.clearInterval(this.timer);
             }
         }
+
     }
 </script>
 

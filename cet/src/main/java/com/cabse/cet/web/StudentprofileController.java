@@ -39,6 +39,17 @@ public class StudentprofileController {
         }
     }
 
+    @PostMapping("/modifyprofile")
+    public Result<Studentprofile> modifyProfileController(@RequestBody Studentprofile studentprofile){
+        Studentprofile newStudentProfile = studentprofileService.modifyStudentprofile(studentprofile);
+
+        if (newStudentProfile != null){
+            return Result.success(newStudentProfile, "student profile submit successfully!");
+        }else{
+            return Result.error("103", "Fail. illegal profile!");
+        }
+    }
+
     @PostMapping("/findprofile")
     public Result<Studentprofile> findProfileController(@RequestParam Integer uid){
         Studentprofile resStudentprofile = studentprofileService.findStudentprofile(uid);

@@ -4,17 +4,19 @@
             <el-row>
                 <el-col>
                     <router-link to="/questionInput">
-                        <el-button type="danger">试卷录入</el-button>
+                            <el-button type="danger">试卷录入</el-button>
+                            <br></br>
+                            <el-button type="primary" @click="logout">登 出</el-button>
                     </router-link>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col>
-<!--                    <router-link to="/questionInput">-->
-                    <el-button type="info" @click="$message('敬请期待');">教师信息管理</el-button>
-<!--                    </router-link>-->
-                </el-col>
-            </el-row>
+<!--            <el-row>-->
+<!--                <el-col>-->
+<!--&lt;!&ndash;                    <router-link to="/questionInput">&ndash;&gt;-->
+<!--                    <el-button type="info" @click="$message('敬请期待');">教师信息管理</el-button>-->
+<!--&lt;!&ndash;                    </router-link>&ndash;&gt;-->
+<!--                </el-col>-->
+<!--            </el-row>-->
         </el-aside>
         <el-container>
             <el-header>
@@ -26,7 +28,7 @@
                         <el-table-column prop="uid" label="账号"></el-table-column>
                         <el-table-column prop="sname" label="姓名"></el-table-column>
                         <el-table-column prop="school" label="学校"></el-table-column>
-                        <el-table-column prop="sid" label="学号"></el-table-column>
+                        <el-table-column prop="examid" label="准考证号"></el-table-column>
                         <el-table-column prop="gender" label="性别"></el-table-column>
                         <el-table-column prop="age" label="年龄"></el-table-column>
                         <el-table-column label="操作">
@@ -51,8 +53,17 @@
                         <el-form-item label="学校" :label-width="formLabelWidth">
                             <el-input v-model="form.school" autocomplete="off"></el-input>
                         </el-form-item>
-                        <el-form-item label="学号" :label-width="formLabelWidth">
-                            <el-input v-model="form.sid" autocomplete="off"></el-input>
+                        <el-form-item label="专业" :label-width="formLabelWidth">
+                            <el-input v-model="form.majerity" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="入学年份" :label-width="formLabelWidth">
+                            <el-input v-model="form.enrollmentyear" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="学历" :label-width="formLabelWidth">
+                            <el-input v-model="form.degree" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="准考证号" :label-width="formLabelWidth">
+                            <el-input v-model="form.examid" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="性别" :label-width="formLabelWidth">
                             <el-select v-model="form.gender" placeholder="请选择性别">
@@ -98,13 +109,17 @@
                 dialogFormVisible: false,
                 form: {
                     uid: '',
-                    sid: '',
+                    examid: '',
                     sname: '',
                     school: '',
+                    majerity : "",
+                    enrollmentyear : "",
+                    degree : "",
                     gender: '',
                     age: '',
                 },
                 formLabelWidth: '120px',
+                isEdit: false,
 
                 rules: {
                     sname: [
@@ -119,12 +134,21 @@
                     school: [
                         {required: true, message: "学校不能为空！", trigger: "blur"},
                     ],
-                    sid: [
-                        {required: true, message: "学号不能为空！", trigger: "blur"},
+                    majerity: [
+                        { required: true, message: "专业不能为空！", trigger: "blur" },
                     ],
-                    uid: [
-                        {required: true, message: "账号不能为空！", trigger: "blur"},
+                    enrollmentyear: [
+                        { required: true, message: "入学年份不能为空！", trigger: "blur" },
                     ],
+                    degree: [
+                        { required: true, message: "学历不能为空！", trigger: "blur" },
+                    ],
+                    examid: [
+                        {required: true, message: "准考证号不能为空！", trigger: "blur"},
+                    ],
+                    // uid: [
+                    //     {required: true, message: "账号不能为空！", trigger: "blur"},
+                    // ],
                 }
             }
         },
@@ -151,14 +175,19 @@
                 })
             },
             handleEdit(index, row) {
-                let _this = this;
+                // let _this = this;
                 this.form.uid = row.uid;
-                this.form.sid = row.sid;
+                this.form.examid = row.examid;
                 this.form.sname = row.sname;
                 this.form.school = row.school;
+                this.form.majerity = row.majerity;
+                this.form.enrollmentyear = row.enrollmentyear;
+                this.form.degree = row.degree;
                 this.form.gender = row.gender;
                 this.form.age = row.age;
                 this.dialogFormVisible = true;
+                this.isEdit = true;
+
             },
             handleDelete(index, row) {
                 this.axios({
@@ -180,38 +209,85 @@
             submitForm(formName) {
                 let _this = this;
                 // 使用axios将信息发送到后端
-                this.axios({
-                    url: "/api/studentprofile/profile",               // 请求地址
-                    method: "post",                       // 请求方法
-                    headers: {                            // 请求头
-                        "Content-Type": "application/json",
-                    },
-                    data: {                             // 请求参数
-                        uid: _this.form.uid,
-                        sid: _this.form.sid,
-                        sname: _this.form.sname,
-                        gender: _this.form.gender,
-                        age: _this.form.age,
-                        school: _this.form.school
-                    },
-                }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
-                    if (res.data.code === "0") {
-                        // 显示后端响应的成功信息
-                        this.$message({
-                            message: res.data.msg,
-                            type: "success",
-                        });
-                        this.loadData()
-                        this.dialogFormVisible = false
-                    } else {  // 当响应的编码不为 0 时，说明失败
-                        // 显示后端响应的失败信息
-                        this.$message({
-                            message: res.data.msg,
-                            type: "warning",
-                        });
-                    }
-                    console.log(res);
-                });
+                if (_this.isEdit == false){
+                    this.axios({
+                        url: "/api/studentprofile/profile",               // 请求地址
+                        method: "post",                       // 请求方法
+                        headers: {                            // 请求头
+                            "Content-Type": "application/json",
+                        },
+                        data: {                             // 请求参数
+                            uid: _this.form.uid,
+                            examid: _this.form.examid,
+                            sname: _this.form.sname,
+                            gender: _this.form.gender,
+                            age: _this.form.age,
+                            school: _this.form.school,
+                            majerity : _this.form.majerity,
+                            enrollmentyear : _this.form.enrollmentyear,
+                            degree : _this.form.degree,
+                        },
+                    }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
+                        if (res.data.code === "0") {
+                            // 显示后端响应的成功信息
+                            this.$message({
+                                message: res.data.msg,
+                                type: "success",
+                            });
+                            this.loadData()
+                            this.dialogFormVisible = false
+                        } else {  // 当响应的编码不为 0 时，说明失败
+                            // 显示后端响应的失败信息
+                            this.$message({
+                                message: res.data.msg,
+                                type: "warning",
+                            });
+                        }
+                        console.log(res);
+                    });
+                }else{
+                    this.axios({
+                        url: "/api/studentprofile/modifyprofile",               // 请求地址
+                        method: "post",                       // 请求方法
+                        headers: {                            // 请求头
+                            "Content-Type": "application/json",
+                        },
+                        data: {                             // 请求参数
+                            uid: _this.form.uid,
+                            examid: _this.form.examid,
+                            sname: _this.form.sname,
+                            gender: _this.form.gender,
+                            age: _this.form.age,
+                            school: _this.form.school,
+                            majerity : _this.form.majerity,
+                            enrollmentyear : _this.form.enrollmentyear,
+                            degree : _this.form.degree,
+                        },
+                    }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
+                        if (res.data.code === "0") {
+                            // 显示后端响应的成功信息
+                            this.$message({
+                                message: res.data.msg,
+                                type: "success",
+                            });
+                            this.loadData()
+                            this.dialogFormVisible = false
+                        } else {  // 当响应的编码不为 0 时，说明失败
+                            // 显示后端响应的失败信息
+                            this.$message({
+                                message: res.data.msg,
+                                type: "warning",
+                            });
+                        }
+                        console.log(res);
+                    });
+                }
+                this.isEdit = false;
+            },
+
+
+            logout() {
+                sessionStorage.removeItem("userInfo");
             },
         }
     }

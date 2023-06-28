@@ -65,18 +65,18 @@
                             path: '/enroll',
                             query: {
                                 uid: res.data.data.uid,
-                                sid: res.data.data.sid,
+                                examid: res.data.data.examid,
                                 sname: res.data.data.sname,
                                 gender: res.data.data.gender,
                                 age: res.data.data.age,
                                 school: res.data.data.school
                             }
                         });
-                        // 显示后端响应的成功信息
-                        this.$message({
-                            message: res.data.msg,
-                            type: "success",
-                        });
+                        // // 显示后端响应的成功信息
+                        // this.$message({
+                        //     message: res.data.msg,
+                        //     type: "success",
+                        // });
                     } else {  // 当响应的编码不为 0 时，说明失败
                         // 显示后端响应的失败信息
                         this.$message({
@@ -91,7 +91,7 @@
             },
 
             toPay(){
-                // TODO:
+                this.$router.push('/pay');
             },
 
             toExamination() {

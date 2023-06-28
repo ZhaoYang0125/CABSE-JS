@@ -30,4 +30,7 @@ public interface UserDao extends JpaRepository<User, Integer>{
     @Modifying
     @Query("update User u set u.state = ?2 where u.uid = ?1")    //  ?2: 表示第二个参数, ?1: 表示第一个参数
     public void modifyState(Integer uid, Integer state);
+
+//    @Transactional
+//    void deleteByUid(Integer uid);
 }

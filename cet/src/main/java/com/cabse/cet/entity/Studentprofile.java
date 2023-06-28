@@ -4,21 +4,48 @@ import javax.persistence.*;
 import java.util.Objects;
 
 
-@Table(name = "studentprofiles", uniqueConstraints = {@UniqueConstraint(columnNames="sid")})
+@Table(name = "studentprofiles")
 @Entity
 public class Studentprofile {
 
-    //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
     private Integer uid;
-
-    private Integer sid;
+    @Id
+    private Integer examid;
     // @Column(length = 20)
     private String sname;
 //    public enum Sex{ 男, 女};
     private String gender; //  实际存储值为索引，0为男，1为女
     private Integer age;
     private String school;
+    private String majerity;
+
+    public String getMajerity() {
+        return majerity;
+    }
+
+    public void setMajerity(String majerity) {
+        this.majerity = majerity;
+    }
+
+    public String getEnrollmentyear() {
+        return enrollmentyear;
+    }
+
+    public void setEnrollmentyear(String enrollmentyear) {
+        this.enrollmentyear = enrollmentyear;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
+    private String enrollmentyear;
+    private String degree;
+
 
     public String getSname() {
         return sname;
@@ -60,26 +87,32 @@ public class Studentprofile {
         this.uid = uid;
     }
 
-    public Integer getSid() {
-        return sid;
+    public Integer getExamid() {
+        return examid;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setExamid(Integer examid) {
+        this.examid = examid;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {return true;}
-        if (!(o instanceof Studentprofile)) {return false;}
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Studentprofile that = (Studentprofile) o;
-        return Objects.equals(getUid(), that.getUid()) &&
-                Objects.equals(getSid(), that.getSid()) &&
-                getGender() == that.getGender();
+        return Objects.equals(uid, that.uid) &&
+                Objects.equals(examid, that.examid) &&
+                Objects.equals(sname, that.sname) &&
+                Objects.equals(gender, that.gender) &&
+                Objects.equals(age, that.age) &&
+                Objects.equals(school, that.school) &&
+                Objects.equals(majerity, that.majerity) &&
+                Objects.equals(enrollmentyear, that.enrollmentyear) &&
+                Objects.equals(degree, that.degree);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUid(), getSid(), getGender());
+        return Objects.hash(uid, examid, sname, gender, age, school, majerity, enrollmentyear, degree);
     }
 }

@@ -21,8 +21,8 @@ public class GradeController {
     public Result<Report> searchController(@RequestParam("paperid") Integer paperid,
                                            @RequestParam("uid") Integer uid
     ) {
-        Integer sid = studentprofileService.sidService(uid);
-        Report report = reportService.searchService(paperid, sid);
+        Integer examid = studentprofileService.examidService(uid);
+        Report report = reportService.searchService(paperid, examid);
 //        System.out.println(report.getListening());
 //        System.out.println(report.getTranslation());
         if (report != null && report.getTranslation() != null && report.getWriting() != null) {
