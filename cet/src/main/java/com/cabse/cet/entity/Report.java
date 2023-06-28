@@ -10,25 +10,7 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reportid;
-//    @ManyToOne(
-//            targetEntity = Studentprofile.class,
-//            cascade = CascadeType.ALL
-//    )
-//    @JoinColumn(
-//            name = "examid",
-//            referencedColumnName = "examid"
-//    )
-//    @Column(name = "examid")
     private Integer examid;
-//    @ManyToOne(
-//            targetEntity = Testpaper.class,
-//            cascade = CascadeType.ALL
-//    )
-//    @JoinColumn(
-//            name = "paperid",
-//            referencedColumnName = "paperid"
-//    )
-//    @Column(name = "paperid")
     private Integer paperid;
     private Float listening;
     private Float comprehension;

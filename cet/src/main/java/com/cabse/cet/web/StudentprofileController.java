@@ -35,7 +35,7 @@ public class StudentprofileController {
         if (newStudentProfile != null){
             return Result.success(newStudentProfile, "student profile submit successfully!");
         }else{
-         return Result.error("103", "Fail. illegal profile!");
+         return Result.error("103", "Fail. illegal profile or examid has exited!");
         }
     }
 
@@ -46,7 +46,7 @@ public class StudentprofileController {
         if (newStudentProfile != null){
             return Result.success(newStudentProfile, "student profile submit successfully!");
         }else{
-            return Result.error("103", "Fail. illegal profile!");
+            return Result.error("103", "Fail. Illegal profile or examid has exited!");
         }
     }
 

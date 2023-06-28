@@ -30,11 +30,11 @@ class CetApplicationTests {
 
     @Test
     void contextLoads() {
-        Teacher teacher1 = new Teacher("tt", "111111a", 1, 1000000);
+        Teacher teacher1 = new Teacher("t1", "111111a", 1, 1000000);
         teacherRegistService(teacher1);
-        Teacher teacher2 = new Teacher("zhanglian", "222222abc", 1, 1020330);
+        Teacher teacher2 = new Teacher("t2", "222222abc", 1, 1020330);
         teacherRegistService(teacher2);
-        Teacher teacher3 = new Teacher("lanhong", "333333abc", 1, 10200400);
+        Teacher teacher3 = new Teacher("t3", "333333abc", 1, 10200400);
         teacherRegistService(teacher3);
 
         Admin admin1 = new Admin("admin", "111111a", 1, "1a");
@@ -44,12 +44,14 @@ class CetApplicationTests {
         Admin admin3 = new Admin("admin3", "333333abc", 1, "admin-asdfbLDDISd");
         adminRegistService(admin3);
 
-        User user1 = new User("xx", "111111a", 1);
+        User user1 = new User("lan", "111111a", 1);
         userRegistService(user1);
-        User user2 = new User("xiaoming", "222222abc", 1);
+        User user2 = new User("ming", "222222abc", 1);
         userRegistService(user2);
-        User user3 = new User("lanlan", "333333abc", 1);
+        User user3 = new User("hei", "333333abc", 1);
         userRegistService(user3);
+        User user4 = new User("hong", "444444abc", 1);
+        userRegistService(user4);
     }
 
     public Teacher teacherRegistService(Teacher teacher) {

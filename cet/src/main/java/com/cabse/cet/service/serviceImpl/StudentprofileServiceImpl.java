@@ -40,6 +40,9 @@ public class StudentprofileServiceImpl implements StudentprofileService {
             newprofile = modifyStudentprofile(studentprofile);
             return newprofile;
         }else{
+            if (studentprofileDao.findByExamid(studentprofile.getExamid()) != null){
+                return null;
+            }
             String pwd = Security.encodePassword(studentprofile.getExamid().toString());
             User newUser = new User(studentprofile.getSname(), pwd, 1);
             newUser = userDao.save(newUser);
@@ -56,12 +59,12 @@ public class StudentprofileServiceImpl implements StudentprofileService {
     public Studentprofile modifyStudentprofile(Studentprofile studentprofile) {
         List<Report> reports = reportDao.findByExamid(studentprofile.getExamid());
         for (int i = 0; i < reports.size(); i++) {
-            reportDao.modifyExamid(reports.get(i).getReportid(), reports.get(i).getExamid());
+            reportDao.updateExamid(reports.get(i).getReportid(), reports.get(i).getExamid());
         }
 
         List<Studentanswer> studentanswers = studentanswerDao.findByExamid(studentprofile.getExamid());
         for (int i = 0; i < studentanswers.size(); i++) {
-            reportDao.modifyExamid(studentanswers.get(i).getAnswerid(), studentanswers.get(i).getExamid());
+            reportDao.updateExamid(studentanswers.get(i).getAnswerid(), studentanswers.get(i).getExamid());
         }
 
         studentprofileDao.modifyProfile(studentprofile.getUid(),

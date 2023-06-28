@@ -37,7 +37,7 @@ public interface ReportDao /*extends JpaRepository<Report, Integer>*/ {
     @Transactional
     @Modifying(clearAutomatically = true)
     @Update("update reports r set r.examid =#{examid} where r.reportid =#{reportid}")
-    public void modifyExamid(Integer reportid, Integer Examid);
+    public void updateExamid(Integer reportid, Integer examid);
 
     @Transactional
     @Modifying(clearAutomatically = true)
