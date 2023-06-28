@@ -10,6 +10,9 @@
             <div>性别: {{gender}}</div>
             <div>年龄: {{age}}</div>
             <div>学校: {{school}}</div>
+            <div>专业: {{majerity}}</div>
+            <div>入学年份: {{enrollmentyear}}</div>
+            <div>学历: {{degree}}</div>
             <div class="btnGroup">
                 <el-button type="primary" @click="submitEnroll"  v-loading="loading">报名提交</el-button>
                 <el-button @click="goBack">返回</el-button>
@@ -29,6 +32,9 @@
             this.gender = this.$route.query.gender;
             this.age = this.$route.query.age;
             this.school = this.$route.query.school;
+            this.majerity = this.$route.query.majerity;
+            this.enrollmentyear = this.$route.query.enrollmentyear;
+            this.degree = this.$route.query.degree;
             this.loading = false;
         },
 
@@ -40,6 +46,9 @@
                 gender: "",
                 age: "",
                 school: "",
+                majerity:"",
+                enrollmentyear:"",
+                degree:"",
 
                 loading: false,
                 infomation: "核实信息",
@@ -73,6 +82,9 @@
                         this.gender = res.data.data.gender;
                         this.age = res.data.data.age;
                         this.school = res.data.data.school;
+                        this.majerity = res.data.data.majerity;
+                        this.enrollmentyear = res.data.data.enrollmentyear;
+                        this.degree = res.data.data.degree;
                         // 显示后端响应的成功信息
                         this.$message({
                             message: res.data.msg,

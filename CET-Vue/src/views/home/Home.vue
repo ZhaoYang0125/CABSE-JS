@@ -30,6 +30,7 @@
                 user: {
                     username: "",
                     uid: null,
+                    state: null,
                 },
             };
         },
@@ -59,7 +60,7 @@
                         uid: _this.user.uid,
                     },
                 }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
-                    if (res.data.code === "0") {  // 当响应的编码为 0 时，说明成功
+                    if (res.data.code == "0") {  // 当响应的编码为 0 时，说明成功
                         // 跳转页面到首页
                         this.$router.push({
                             path: '/enroll',
@@ -69,7 +70,10 @@
                                 sname: res.data.data.sname,
                                 gender: res.data.data.gender,
                                 age: res.data.data.age,
-                                school: res.data.data.school
+                                school: res.data.data.school,
+                                majerity: res.data.data.majerity,
+                                enrollmentyear: res.data.data.enrollmentyear,
+                                degree: res.data.data.degree,
                             }
                         });
                         // // 显示后端响应的成功信息
@@ -95,7 +99,29 @@
             },
 
             toExamination() {
-                this.$router.push('/test');
+
+                this.axios({
+                    url: "/api/user/finduser",               // 请求地址
+                    method: "post",                       // 请求方法
+                    headers: {                            // 请求头
+                        "Content-Type": "application/json",
+                    },
+                    params: {                             // 请求参数
+                        uid: this.user.uid,
+                    },
+                }).then((res) => {
+                    if (res.data.code == "0"){
+                        if (res.data.data.state == 2){
+                            this.$router.push('/test');
+                        }else{
+                            this.$message({
+                                message: "没有报名！",
+                                type: "warning",
+                            });
+                        }
+                    }
+                });
+
             },
 
             toGrade() {

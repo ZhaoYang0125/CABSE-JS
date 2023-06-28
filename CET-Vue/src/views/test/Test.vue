@@ -121,9 +121,9 @@
         data() {
             return {
                 timer : null,
-                hours: 0,
-                minutes: 0,
-                seconds: 5,
+                hours: 2,
+                minutes: 30,
+                seconds: 0,
 
                 flag: false,
                 user: {

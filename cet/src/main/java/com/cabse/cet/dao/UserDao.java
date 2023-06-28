@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserDao extends JpaRepository<User, Integer>{
     User findByUsername(String username);
     User findByUsernameAndPassword(String username, String password);
+    User findByUid(Integer uid);
 
     /* 自定义查询 */
 //    @Query("select u from user u where username like CONCAT('%', ?1, '%') or uid like ?1") // ?1: 表示第一个参数, CONCAT字符串拼接

@@ -34,23 +34,24 @@
                     <td>{{writing.answer}}</td>
                     <td>106.5</td>
                     <td><el-input
-                            @blur="updateWritingScore(writing.score)"
-                                  v-model="writing.score"
-                                  style="width: 80px"></el-input></td>
+                            v-model="writing.score"
+                            style="width: 80px"></el-input></td>
+                    <!--                            @blur="updateWritingScore(writing.score)"-->
                 </tr>
                 <tr>
                     <td>翻译</td>
                     <td>{{translation.answer}}</td>
                     <td>106.5</td>
                     <td><el-input ref="translation"
-                            @blur="updateTranslationScore('translation')"
-                            v-model="translation.score"
-                            style="width: 80px"></el-input></td>
+                                  v-model="translation.score"
+                                  style="width: 80px"></el-input></td>
+                    <!--                            @blur="updateTranslationScore('translation')"-->
                 </tr>
                 </tbody>
             </table>
 <!--            <el-button @click="findLastAnswer">上一页</el-button>-->
 <!--            <el-button @click="findNextAnswer">下一页</el-button>-->
+            <el-button @click="submit">提交</el-button>
         </div>
     </div>
 </template>
@@ -105,6 +106,8 @@
                             console.log(a);
                             if(typeof (a.data)=="undefined" || a.data.length==0){
                                 alert("找不到学生"+_this.findForm.examid+"在试卷"+_this.findForm.paperid+"的作答情况");
+                                location.reload();
+                                // this.$router.go(0);
                             }
                             else{
                                 console.log(a);
@@ -197,6 +200,15 @@
                     }
                 })
             },
+            submit(){
+                this.updateWritingScore(this.writing.score);
+                this.updateTranslationScore(this.translation.score);
+                this.$message({
+                    message: "提交成功!",
+                    type: "success",
+                });
+                location.reload();
+            }
         },
         mounted() {
             if (sessionStorage.getItem('userInfo')) {

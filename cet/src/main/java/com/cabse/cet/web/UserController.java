@@ -1,5 +1,6 @@
 package com.cabse.cet.web;
 
+import com.cabse.cet.dao.UserDao;
 import com.cabse.cet.entity.User;
 import com.cabse.cet.service.UserService;
 import com.cabse.cet.utils.Result;
@@ -24,6 +25,8 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private UserDao userDao;
 
     @PostMapping("/login")
     public Result<User> loginController(@RequestParam String username, @RequestParam String password){
@@ -45,6 +48,16 @@ public class UserController {
             return Result.success(user,"Sign up success!");
         }else{
             return Result.error("101","Fail. User has existed!");
+        }
+    }
+
+    @PostMapping("/finduser")
+    public Result<User> findUser(@RequestParam Integer uid){
+        User user = userDao.findByUid(uid);
+        if(user!=null){
+            return Result.success(user,"success!");
+        }else{
+            return Result.error("101","Fail. User not existed!");
         }
     }
 
