@@ -25,15 +25,19 @@
             <el-main>
                 <div>
                     <el-table border :data="tableData" stripe style="width: 100%;margin-bottom: 20px">
-                        <el-table-column prop="uid" label="账号"></el-table-column>
-                        <el-table-column prop="sname" label="姓名"></el-table-column>
-                        <el-table-column prop="school" label="学校"></el-table-column>
-                        <el-table-column prop="examid" label="准考证号"></el-table-column>
-                        <el-table-column prop="gender" label="性别"></el-table-column>
-                        <el-table-column prop="age" label="年龄"></el-table-column>
+                        <el-table-column prop="uid" label="账号" align="center"></el-table-column>
+                        <el-table-column prop="sname" label="姓名" align="center"></el-table-column>
+                        <el-table-column prop="school" label="学校" align="center"></el-table-column>
+                        <el-table-column prop="majerity" label="专业" align="center"></el-table-column>
+                        <el-table-column prop="enrollmentyear" label="入学年份" align="center"></el-table-column>
+                        <el-table-column prop="degree" label="学历" align="center"></el-table-column>
+                        <el-table-column prop="examid" label="准考证号" align="center"></el-table-column>
+                        <el-table-column prop="gender" label="性别" align="center"></el-table-column>
+                        <el-table-column prop="age" label="年龄" align="center"></el-table-column>
                         <el-table-column label="操作">
                             <template slot-scope="scope">
                                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                                <br></br>
                                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                             </template>
                         </el-table-column>
