@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div >
             {{infomation}}：
         </div>
         <div>
@@ -13,9 +13,9 @@
             <div>专业: {{majerity}}</div>
             <div>入学年份: {{enrollmentyear}}</div>
             <div>学历: {{degree}}</div>
-            <div class="btnGroup">
+            <div class="btnGroup" style="margin-top: 30px; text-align: center">
                 <el-button type="primary" @click="submitEnroll"  v-loading="loading">报名提交</el-button>
-                <el-button @click="goBack">返回</el-button>
+                <el-button @click="goBack">返回前一页</el-button>
             </div>
         </div>
     </div>

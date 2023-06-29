@@ -63,7 +63,7 @@
             <div class="btnGroup">
                 <el-button type="primary" @click="submitForm('ruleForm')"  v-loading="loading">提交</el-button>
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
-                <el-button @click="goBack">返回</el-button>
+<!--                <el-button @click="goBack">返回</el-button>-->
             </div>
         </el-card>
     </div>
@@ -145,20 +145,20 @@
                         }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                             if (res.data.code === "0") {  // 当响应的编码为 0 时，说明成功
                                 // 跳转页面到首页
-                                this.$router.push({
-                                    path: '/showprofile',
-                                    query: {
-                                        uid: this.user.uid,
-                                        examid: res.data.data.examid,
-                                        sname: res.data.data.sname,
-                                        gender: res.data.data.gender,
-                                        age: res.data.data.age,
-                                        school: res.data.data.school,
-                                        majerity: res.data.data.majerity,
-                                        enrollmentyear: res.data.data.enrollmentyear,
-                                        degree: res.data.data.degree,
-                                    }
-                                });
+                                // this.$router.push({
+                                //     path: '/showprofile',
+                                //     query: {
+                                //         uid: this.user.uid,
+                                //         examid: res.data.data.examid,
+                                //         sname: res.data.data.sname,
+                                //         gender: res.data.data.gender,
+                                //         age: res.data.data.age,
+                                //         school: res.data.data.school,
+                                //         majerity: res.data.data.majerity,
+                                //         enrollmentyear: res.data.data.enrollmentyear,
+                                //         degree: res.data.data.degree,
+                                //     }
+                                // });
                                 // 显示后端响应的成功信息
                                 this.$message({
                                     message: res.data.msg,

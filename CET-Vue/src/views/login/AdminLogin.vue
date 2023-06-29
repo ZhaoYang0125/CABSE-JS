@@ -1,6 +1,26 @@
 <template>
-    <div>
-        <el-card class="box-card">
+    <div ref='vantaRef' style="height: 780px">
+        <el-row>
+            <el-col push="10" style="margin-top: 20px">
+                <el-button @click="drawer = true" type="primary">
+                    管理员登录
+                </el-button>
+            </el-col>
+        </el-row>
+        <el-row >
+            <h1 style="
+                height: 380px;
+                margin-left: 150px;
+                margin-top: 280px;
+                font-weight: 400;
+                font-size: 102px;
+                letter-spacing: -2px;
+                text-align: left;
+            "> CET6 </h1>
+        </el-row>
+        <el-drawer
+                :visible.sync="drawer"
+                size="42%">
             <h2>管理员登录</h2>
             <el-form
                     :model="ruleForm"
@@ -11,17 +31,17 @@
                     label-width="70px"
                     class="login-from"
             >
-                <el-form-item label="用户名" prop="username">
+                <el-form-item label="用户名" prop="username" style="width: 80%; margin: 20px auto auto;">
                     <el-input v-model="ruleForm.username"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="password">
+                <el-form-item label="密码" prop="password" style="width: 80%; margin: 20px auto auto;">
                     <el-input
                             type="password"
                             v-model="ruleForm.password"
                             autocomplete="off"
                     ></el-input>
                 </el-form-item>
-                <el-form-item label="token" prop="token">
+                <el-form-item label="token" prop="token" style="width: 80%; margin: 20px auto auto;">
                     <el-input
                             type="password"
                             v-model="ruleForm.token"
@@ -29,7 +49,7 @@
                     ></el-input>
                 </el-form-item>
             </el-form>
-            <div class="btnGroup">
+            <div class="btnGroup" style="width: 80%; margin: 50px auto auto; text-align: center">
                 <el-button
                         type="primary"
                         @click="submitForm('ruleForm')"
@@ -37,21 +57,20 @@
                 >登录</el-button
                 >
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
-<!--                <router-link to="/register-admin">-->
-<!--                    <el-button style="margin-left: 10px">注册</el-button>-->
-<!--                </router-link>-->
                 <el-button @click="goBack">返回</el-button>
             </div>
-        </el-card>
+        </el-drawer>
     </div>
 </template>
 
 <script>
-
+    import * as THREE from 'three'
+    import CLOUDS from 'vanta/src/vanta.halo'
     export default {
         name: "AdminLogin",
         data() {
             return {
+                drawer: true,
                 ruleForm: {
                     username: "",
                     password: "",
@@ -133,6 +152,17 @@
             },
 
         },
+        mounted() {
+            this.vantaEffect = CLOUDS({
+                el: this.$refs.vantaRef,
+                THREE: THREE
+            })
+        },
+        beforeDestroy() {
+            if (this.vantaEffect) {
+                this.vantaEffect.destroy()
+            }
+        }
     };
 </script>
 

@@ -1,13 +1,12 @@
 <template>
     <el-container>
-        <el-header>Head: CET6 六级试题</el-header>
-        <h1 align="center">考试剩余时间 {{hour}}:{{minute}}:{{second}}</h1>
-        <el-container>
-            <el-aside width="200px">Aside</el-aside>
+        <el-header>CET6 考试
 
-            <el-main>
-                Main
-                <el-form ref="answer" :model="answer" label-width="80px">
+            <h1 align="center">考试剩余时间 {{hour}}:{{minute}}:{{second}}</h1>
+        </el-header>
+        <el-main>
+            <el-card style="margin: 50px;" >
+                <el-form ref="answer" :model="answer" label-width="80px" style="margin: 40px;" >
                     <h3>Part I Writing (30 minutes)</h3>
                     <div>
                         <strong>Directions: </strong>
@@ -43,8 +42,8 @@
                         <p><strong>Directions: </strong>In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet 2 with a single line through the centre. You may not use any of the words in the bank more than once</p>
                         <span>{{ paper.sectionA }}</span>
                         <span v-for="i in 15">
-                            {{ String.fromCharCode((97 + i-1)+'').toUpperCase() }}.{{paper.choicesOfSectionA[i-1]}}
-                        </span>
+                        {{ String.fromCharCode((97 + i-1)+'').toUpperCase() }}.{{paper.choicesOfSectionA[i-1]}}
+                    </span>
                         <el-row v-for="i in 10">
                             <el-col :span="12">
                                 <el-form-item :label="i">
@@ -60,12 +59,12 @@
                         <span>{{ paper.sectionB }}</span>
                         <h4>paragraphs</h4>
                         <span v-for="i in 10">
-                            {{paper.paragraphsOfSectionB[i-1]}}
-                        </span>
+                        {{paper.paragraphsOfSectionB[i-1]}}
+                    </span>
                         <h4>statements</h4>
                         <span v-for="i in 10">
-                            {{paper.statementsOfSectionB[i-1]}}
-                        </span>
+                        {{paper.statementsOfSectionB[i-1]}}
+                    </span>
                         <el-row v-for="i in 10">
                             <el-col :span="12">
                                 <el-form-item :label="i">
@@ -111,8 +110,8 @@
                         <el-button type="primary" @click="onSubmit">提交</el-button>
                     </el-form-item>
                 </el-form>
-            </el-main>
-        </el-container>
+            </el-card>
+        </el-main>
     </el-container>
 </template>
 
