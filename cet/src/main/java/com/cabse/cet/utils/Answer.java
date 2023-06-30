@@ -12,14 +12,32 @@ import java.io.*;
 import java.util.Arrays;
 
 public class Answer implements Serializable {
+    private static final long serialVersionUID = 8069639368820181233L;
+    Integer examid;
     String writing;//写作
     char listenning[];//25 听力
     char reading[];//30 阅读
     String translation;//翻译
 
+    public Integer getExamid() {
+        return examid;
+    }
+
+    public void setExamid(Integer examid) {
+        this.examid = examid;
+    }
+
     public Answer() {
         this.writing = "考生未作答";
         this.translation = "考生未作答";
+    }
+
+    public Answer(Integer examid, String writing, char[] listenning, char[] reading, String translation) {
+        this.examid = examid;
+        this.writing = writing;
+        this.listenning = listenning;
+        this.reading = reading;
+        this.translation = translation;
     }
 
     public Answer(String writing, char[] listenning, char[] reading, String translation) {
@@ -28,6 +46,7 @@ public class Answer implements Serializable {
         this.reading = reading;
         this.translation = translation;
     }
+
 
     public String getWriting() {
         return writing;
@@ -64,7 +83,8 @@ public class Answer implements Serializable {
     @Override
     public String toString() {
         return "Answer{" +
-                "writing='" + writing + '\'' +
+                "examid=" + examid +
+                ", writing='" + writing + '\'' +
                 ", listenning=" + Arrays.toString(listenning) +
                 ", reading=" + Arrays.toString(reading) +
                 ", translation='" + translation + '\'' +

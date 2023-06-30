@@ -35,4 +35,6 @@ public interface StudentanswerDao extends JpaRepository<Studentanswer, Integer> 
     @Transactional
     void deleteByExamid(Integer examid);
 
+    @Select("select * from studentanswers where paperid=#{paperid}")
+    public List<Studentanswer> findByPaperid(Integer paperid);
 }

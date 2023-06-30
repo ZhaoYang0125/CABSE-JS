@@ -10,7 +10,10 @@ package com.cabse.cet.service;
 
 import com.cabse.cet.entity.Studentanswer;
 
+import java.util.List;
+
 public interface StudentanswerService {
     Studentanswer saveService(Studentanswer sa);
     Studentanswer searchAnswerService(Integer paperid,Integer examid);
+    List<Studentanswer> getAnswerList(Integer paperid);
 }

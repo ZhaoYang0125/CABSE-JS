@@ -14,6 +14,7 @@ import com.cabse.cet.service.StudentanswerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class StudentanswerServiceImpl implements StudentanswerService{
@@ -30,5 +31,10 @@ public class StudentanswerServiceImpl implements StudentanswerService{
     public Studentanswer searchAnswerService(Integer paperid, Integer examid) {
         Studentanswer studentanswer=studentanswerDao.findByPaperidAndExamid(paperid,examid);
         return studentanswer;
+    }
+
+    @Override
+    public List<Studentanswer> getAnswerList(Integer paperid) {
+        return studentanswerDao.findByPaperid(paperid);
     }
 }

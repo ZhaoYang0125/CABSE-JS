@@ -32,7 +32,8 @@ public class PaperAnswerController {
             r[i] = reading[i].charAt(0);
         }
         Answer a = new Answer(writing, l, r, translation);
-        String url = Answer.save(a, "paperAns.ser");
+        String date = CurrentDate.getTestDate();
+        String url = Answer.save(a, "paperAns_"+date+".ser");
         Paperanswer pa = new Paperanswer();
         pa.setUrl(url);
         pa.setPaperid(Integer.parseInt(CurrentDate.getTestDate()));

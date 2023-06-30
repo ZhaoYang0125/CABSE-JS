@@ -86,16 +86,19 @@ public class TestController {
         for (int i=len1+len2; i<len1+len2+len3; i++) {
             reading[i] = choicesOfSectionC[i-len1-len2].charAt(0);
         }
+
+        Integer examid = studentprofileService.examidService(uid);
+
         Answer a = new Answer(writing, listenning, reading, translation);
-        Answer.save(a, "stu_ans.ser");
-        String url = "./tmp/stu_ans.ser";
+        Answer.save(a, "stu_ans_"+examid+".ser");
+        String url = "./tmp/stu_ans_"+examid+".ser";
+
         Studentanswer sa = new Studentanswer();
         sa.setUrl(url);
         sa.setTime(submitTime);
 //        System.out.println(paperid);
         sa.setPaperid(paperid);
 //        System.out.println(studentprofileService.examidService(uid));
-        Integer examid = studentprofileService.examidService(uid);
         sa.setExamid(examid);
         Studentanswer newAnswer = studentanswerService.saveService(sa);
         String paperAnswerUrl = paperanswerService.searchAnswerService(paperid).getUrl();

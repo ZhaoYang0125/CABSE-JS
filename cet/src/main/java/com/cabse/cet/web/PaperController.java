@@ -2,6 +2,7 @@ package com.cabse.cet.web;
 
 import com.cabse.cet.entity.Testpaper;
 import com.cabse.cet.service.TestpaperService;
+import com.cabse.cet.utils.CurrentDate;
 import com.cabse.cet.utils.Paper;
 import com.cabse.cet.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class PaperController {
         Paper p = new Paper(writing, listeningChoices, sectionA, choicesOfSectionA,
                 sectionB, statementsOfSectionB, paragraphsOfSectionB, PassagesOfSectionC,
                 questionsOfSectionC, choicesOfSectionC, translation);
-        String url = Paper.save(p, "test.ser");
+        String url = Paper.save(p, "test_"+CurrentDate.getTestDate()+".ser");
         Testpaper tp = new Testpaper();
         tp.setUrl(url);
         Testpaper newPaper = paperServive.saveService(tp);

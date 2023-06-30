@@ -19,13 +19,10 @@
                             <template slot="prepend">请输入要批改的试卷ID</template>
                         </el-input>
                     </el-form-item>
-                    <el-form-item>
-                        <el-input v-model="findForm.examid" style="width: 480px; margin-top: 15px">
-                            <template slot="prepend">请输入要批改的学生考号</template>
-                        </el-input>
-                    </el-form-item>
+
                 </el-form>
-                <el-button @click="findStudentAnswer('findForm')" icon="el-icon-search" style="margin: 0px auto; margin-top: 15px"  plain>查询</el-button>
+                <el-button @click="findStudentAnswer('findForm')" icon="el-icon-search" style="margin: 20px auto; margin-top: 15px"  plain>查询</el-button>
+                <el-button type="primary" @click="submit" style="margin: 20px; margin-top: 15px"  plain>提交</el-button>
                 <div v-if="displayAnswer">
                     <table id="hor-minimalist-b" summary="Employee Pay Sheet" style="margin: 0px auto">
                         <thead>
@@ -44,7 +41,6 @@
                             <td><el-input
                                     v-model="writing.score"
                                     style="width: 80px"></el-input></td>
-                            <!--                            @blur="updateWritingScore(writing.score)"-->
                         </tr>
                         <tr>
                             <td>翻译</td>
@@ -53,53 +49,24 @@
                             <td><el-input ref="translation"
                                           v-model="translation.score"
                                           style="width: 80px"></el-input></td>
-                            <!--                            @blur="updateTranslationScore('translation')"-->
                         </tr>
                         </tbody>
                     </table>
-                    <!--            <el-button @click="findLastAnswer">上一页</el-button>-->
-                    <!--            <el-button @click="findNextAnswer">下一页</el-button>-->
-                    <el-button type="primary" @click="submit" plain>提交</el-button>
+
                 </div>
+                <el-footer v-if="displayAnswer">
+                    <el-pagination
+                            background
+                            layout="prev, pager, next"
+                            :total="total"
+                            :current-page="page"
+                            :page-size="pageSize"
+                            @current-change="pageChange"
+                    >
+                    </el-pagination>
+
+                </el-footer>
             </el-main>
-
-
-
-            <!--    <div v-if="displayAnswer">-->
-            <!--        <table id="hor-minimalist-b" summary="Employee Pay Sheet" style="margin: 0px auto">-->
-            <!--            <thead>-->
-            <!--            <tr>-->
-            <!--                <th scope="col">题目</th>-->
-            <!--                <th scope="col">学生答案</th>-->
-            <!--                <th scope="col">满分</th>-->
-            <!--                <th scope="col">分数</th>-->
-            <!--            </tr>-->
-            <!--            </thead>-->
-            <!--            <tbody>-->
-            <!--            <tr>-->
-            <!--                <td>写作</td>-->
-            <!--                <td>{{writing.answer}}</td>-->
-            <!--                <td>106.5</td>-->
-            <!--                <td><el-input-->
-            <!--                        v-model="writing.score"-->
-            <!--                        style="width: 80px"></el-input></td>-->
-            <!--                &lt;!&ndash;                            @blur="updateWritingScore(writing.score)"&ndash;&gt;-->
-            <!--            </tr>-->
-            <!--            <tr>-->
-            <!--                <td>翻译</td>-->
-            <!--                <td>{{translation.answer}}</td>-->
-            <!--                <td>106.5</td>-->
-            <!--                <td><el-input ref="translation"-->
-            <!--                              v-model="translation.score"-->
-            <!--                              style="width: 80px"></el-input></td>-->
-            <!--                &lt;!&ndash;                            @blur="updateTranslationScore('translation')"&ndash;&gt;-->
-            <!--            </tr>-->
-            <!--            </tbody>-->
-            <!--        </table>-->
-            <!--        &lt;!&ndash;            <el-button @click="findLastAnswer">上一页</el-button>&ndash;&gt;-->
-            <!--        &lt;!&ndash;            <el-button @click="findNextAnswer">下一页</el-button>&ndash;&gt;-->
-            <!--        <el-button type="primary" @click="submit">提交</el-button>-->
-            <!--    </div>-->
 
         </el-container>
     </el-container>
@@ -125,7 +92,12 @@
                 user: {
                     username: "",
                     jobnumber: null,
-                }
+                },
+
+                tableData: [],
+                page: 1,
+                total: 1,
+                pageSize: 1,
             };
 
         },
@@ -137,81 +109,42 @@
                 this.$router.push('/login');
             },
             findStudentAnswer(formName){
-                this.$refs[formName].validate((valid)=>{
-                    this.loading = true;
-                    if (valid) {
-                        let _this = this;
-                        this.axios({
-                            url: "/api/teacher/grading",               // 请求地址
-                            method: "post",                       // 请求方法
-                            headers: {                            // 请求头
-                                "Content-Type": "application/json",
-                            },
-                            params: {                             // 请求参数
-                                paperid: _this.findForm.paperid,
-                                examid: _this.findForm.examid,
-                            },
-                        }).then((a)=> {
-                            console.log(a);
-                            if(typeof (a.data)=="undefined" || a.data.length==0){
-                                alert("找不到学生"+_this.findForm.examid+"在试卷"+_this.findForm.paperid+"的作答情况");
-                                location.reload();
-                                // this.$router.go(0);
-                            }
-                            else{
-                                console.log(a);
-                                sessionStorage.setItem("answerInfo", JSON.stringify(a.data.data));
-                                _this.writing.answer=a.data.writing;
-                                _this.translation.answer=a.data.translation;
-                            }
-                        })
+                let _this = this;
+                this.axios({
+                    url: "/api/teacher/grading",               // 请求地址
+                    method: "post",                       // 请求方法
+                    headers: {                            // 请求头
+                        "Content-Type": "application/json",
+                    },
+                    params: {                             // 请求参数
+                        paperid: _this.findForm.paperid,
+                    },
+                }).then((res)=> {
+                    _this.tableData = res.data.data;
+                    _this.total = res.data.data.length;
+                    console.log("total=" + _this.total);
+                    // console.log("tableData: "+_this.tableData);
+                    if (_this.total == 0){
+                        alert("未找到学生试卷作答");
+                        location.reload();
+                    }else{
+                        sessionStorage.setItem("answerInfo", JSON.stringify(res.data.data));
+                        _this.writing.answer=_this.tableData[(_this.page-1) % _this.total].writing;
+                        _this.translation.answer=_this.tableData[(_this.page-1) % _this.total].translation;
+                        _this.findForm.examid = _this.tableData[(_this.page-1) % _this.total].examid;
+                        console.log(_this.tableData[(_this.page-1) % _this.total]);
+                        console.log("index=" + (_this.page-1) % _this.total);
                     }
-                    this.loading = false;
+                }).catch(e => {
+                    console.log(e)
                 })
                 this.displayAnswer=true;
             },
-            findLastAnswer(){//上一页
-                this.findForm.examid--;
-                // this.findStudentAnswer('findForm');
-                this.axios({
-                    url: "/api/teacher/grading",               // 请求地址
-                    method: "post",                       // 请求方法
-                    headers: {                            // 请求头
-                        "Content-Type": "application/json",
-                    },
-                    params: {                             // 请求参数
-                        paperid: this.findForm.paperid,
-                        examid: this.findForm.examid,
-                    },
-                }).then((a)=> {
-                    if(typeof (a.data)=="undefined" || a.data.length==0){
-                        alert("找不到学生"+this.findForm.examid+"在试卷"+this.findForm.paperid+"的作答情况");
-                        // this.findForm.examid+=1;
-                    }
-                })
+            pageChange(page) {
+                this.page = page,
+                    this.findStudentAnswer()
             },
-            findNextAnswer(){//下一页
-                this.findForm.examid++;
-                // this.findStudentAnswer('findForm');
-                this.axios({
-                    url: "/api/teacher/grading",               // 请求地址
-                    method: "post",                       // 请求方法
-                    headers: {                            // 请求头
-                        "Content-Type": "application/json",
-                    },
-                    params: {                             // 请求参数
-                        paperid: this.findForm.paperid,
-                        examid: this.findForm.examid,
-                    },
-                }).then((a)=> {
-                    console.log(a);
-                    if(typeof (a.data)=="undefined" || a.data.length==0){
-                        alert("找不到学生"+this.findForm.examid+"在试卷"+this.findForm.paperid+"的作答情况");
-                        // alert("找不到该学生在试卷"+this.findForm.paperid+"的作答情况");
-                        // this.findForm.examid-=1;
-                    }
-                })
-            },
+
             updateWritingScore(s){
                 let _this = this;
                 this.axios({
@@ -228,6 +161,10 @@
                 }).then((a)=>{
                     if(a.data==true){
                         console.log(a)
+                        // this.$message({
+                        //     message: "提交成功!",
+                        //     type: "success",
+                        // });
                     }
                 })
             },
@@ -245,18 +182,17 @@
                     },
                 }).then((a)=>{
                     if(a.data==true){
-                        console.log(a)
+                        // console.log(a)
+                        this.$message({
+                            message: "提交成功!",
+                            type: "success",
+                        });
                     }
                 })
             },
             submit(){
                 this.updateWritingScore(this.writing.score);
                 this.updateTranslationScore(this.translation.score);
-                this.$message({
-                    message: "提交成功!",
-                    type: "success",
-                });
-                location.reload();
             }
         },
         mounted() {
