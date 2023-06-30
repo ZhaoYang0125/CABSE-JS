@@ -1,104 +1,100 @@
 <template>
-    <el-container>
-        <el-aside>Aside
-            <el-row>
-                <el-col>
-                    <router-link to="/questionInput">
-                            <el-button type="danger">试卷录入</el-button>
-                            <br></br>
-                            <el-button type="primary" @click="logout">登 出</el-button>
-                    </router-link>
-                </el-col>
-            </el-row>
-<!--            <el-row>-->
-<!--                <el-col>-->
-<!--&lt;!&ndash;                    <router-link to="/questionInput">&ndash;&gt;-->
-<!--                    <el-button type="info" @click="$message('敬请期待');">教师信息管理</el-button>-->
-<!--&lt;!&ndash;                    </router-link>&ndash;&gt;-->
-<!--                </el-col>-->
-<!--            </el-row>-->
-        </el-aside>
+    <div>
         <el-container>
-            <el-header>
-                <h2>学生信息管理</h2>
-            </el-header>
-            <el-main>
-                <div>
-                    <el-table border :data="tableData" stripe style="width: 100%;margin-bottom: 20px">
-                        <el-table-column prop="uid" label="账号" align="center"></el-table-column>
-                        <el-table-column prop="sname" label="姓名" align="center"></el-table-column>
-                        <el-table-column prop="school" label="学校" align="center"></el-table-column>
-                        <el-table-column prop="majerity" label="专业" align="center"></el-table-column>
-                        <el-table-column prop="enrollmentyear" label="入学年份" align="center"></el-table-column>
-                        <el-table-column prop="degree" label="学历" align="center"></el-table-column>
-                        <el-table-column prop="examid" label="准考证号" align="center"></el-table-column>
-                        <el-table-column prop="gender" label="性别" align="center"></el-table-column>
-                        <el-table-column prop="age" label="年龄" align="center"></el-table-column>
-                        <el-table-column label="操作">
-                            <template slot-scope="scope">
-                                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                                <br></br>
-                                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                <el-row>
-                    <el-button @click="dialogFormVisible = !dialogFormVisible">添加</el-button>
-                </el-row>
-                </div>
-                <el-dialog title="学生信息" :visible.sync="dialogFormVisible">
-                    <el-form :model="form" :rules="rules">
-                        <el-form-item label="账号" :label-width="formLabelWidth">
-                            <el-input v-model="form.uid" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="姓名" :label-width="formLabelWidth">
-                            <el-input v-model="form.sname" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="学校" :label-width="formLabelWidth">
-                            <el-input v-model="form.school" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="专业" :label-width="formLabelWidth">
-                            <el-input v-model="form.majerity" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="入学年份" :label-width="formLabelWidth">
-                            <el-input v-model="form.enrollmentyear" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="学历" :label-width="formLabelWidth">
-                            <el-input v-model="form.degree" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="准考证号" :label-width="formLabelWidth">
-                            <el-input v-model="form.examid" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="性别" :label-width="formLabelWidth">
-                            <el-select v-model="form.gender" placeholder="请选择性别">
-                                <el-option label="男" value="男"></el-option>
-                                <el-option label="女" value="女"></el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label="年龄" :label-width="formLabelWidth">
-                            <el-input v-model="form.age" autocomplete="off"></el-input>
-                        </el-form-item>
-                    </el-form>
-                    <div slot="footer" class="dialog-footer">
-                        <el-button @click="dialogFormVisible = false">取 消</el-button>
-                        <el-button type="primary" @click="submitForm('form')">确 定</el-button>
+            <el-aside>
+                <router-link to="/questionInput">
+                    <el-button  icon="el-icon-edit" plain type="primary">试卷录入</el-button>
+                    <el-button type="info" @click="logout" plain>登 出</el-button>
+                </router-link>
+                <!--            <el-row>-->
+                <!--                <el-col>-->
+                <!--&lt;!&ndash;                    <router-link to="/questionInput">&ndash;&gt;-->
+                <!--                    <el-button type="info" @click="$message('敬请期待');">教师信息管理</el-button>-->
+                <!--&lt;!&ndash;                    </router-link>&ndash;&gt;-->
+                <!--                </el-col>-->
+                <!--            </el-row>-->
+            </el-aside>
+            <el-container>
+                <el-header>
+                    <h2>学生信息管理</h2>
+                </el-header>
+                <el-main>
+                    <div>
+                        <el-table border :data="tableData" stripe style="width: 100%;margin-bottom: 20px"
+                                  :header-cell-style="{ background: '#cbf1f3', fontSize:'16px',color:'black',fontweight:400}" >
+                            <el-table-column prop="uid" label="账号" align="center"></el-table-column>
+                            <el-table-column prop="sname" label="姓名" align="center"></el-table-column>
+                            <el-table-column prop="school" label="学校" align="center"></el-table-column>
+                            <el-table-column prop="majerity" label="专业" align="center"></el-table-column>
+                            <el-table-column prop="enrollmentyear" label="入学年份" align="center"></el-table-column>
+                            <el-table-column prop="degree" label="学历" align="center"></el-table-column>
+                            <el-table-column prop="examid" label="准考证号" align="center"></el-table-column>
+                            <el-table-column prop="gender" label="性别" align="center"></el-table-column>
+                            <el-table-column prop="age" label="年龄" align="center"></el-table-column>
+                            <el-table-column label="操作">
+                                <template slot-scope="scope">
+                                    <el-button size="mini" type="primary" icon="el-icon-edit"  @click="handleEdit(scope.$index, scope.row) "plain>编辑</el-button>
+                                    <br></br>
+                                    <el-button size="mini" type="danger" icon="el-icon-delete"  @click="handleDelete(scope.$index, scope.row)"plain>删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                        <el-button type="success" icon="el-icon-edit" @click="dialogFormVisible = !dialogFormVisible" plain>添加</el-button>
                     </div>
-                </el-dialog>
-            </el-main>
-            <el-footer>
-                <el-pagination
-                        background
-                        layout="prev, pager, next"
-                        :total="total"
-                        :current-page="page"
-                        :page-size="pageSize"
-                        @current-change="pageChange"
-                >
-                </el-pagination>
-            </el-footer>
-        </el-container>
-    </el-container>
+                    <el-dialog title="学生信息" :visible.sync="dialogFormVisible">
+                        <el-form :model="form" :rules="rules">
+                            <el-form-item label="账号" :label-width="formLabelWidth">
+                                <el-input v-model="form.uid" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="姓名" :label-width="formLabelWidth">
+                                <el-input v-model="form.sname" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="学校" :label-width="formLabelWidth">
+                                <el-input v-model="form.school" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="专业" :label-width="formLabelWidth">
+                                <el-input v-model="form.majerity" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="入学年份" :label-width="formLabelWidth">
+                                <el-input v-model="form.enrollmentyear" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="学历" :label-width="formLabelWidth">
+                                <el-input v-model="form.degree" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="准考证号" :label-width="formLabelWidth">
+                                <el-input v-model="form.examid" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="性别" :label-width="formLabelWidth">
+                                <el-select v-model="form.gender" placeholder="请选择性别">
+                                    <el-option label="男" value="男"></el-option>
+                                    <el-option label="女" value="女"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="年龄" :label-width="formLabelWidth">
+                                <el-input v-model="form.age" autocomplete="off"></el-input>
+                            </el-form-item>
+                        </el-form>
+                        <div slot="footer" class="dialog-footer">
+                            <el-button @click="dialogFormVisible = false">取 消</el-button>
+                            <el-button type="primary" @click="submitForm('form')">确 定</el-button>
+                        </div>
+                    </el-dialog>
 
+                </el-main>
+                <el-footer>
+                    <el-pagination
+                            background
+                            layout="prev, pager, next"
+                            :total="total"
+                            :current-page="page"
+                            :page-size="pageSize"
+                            @current-change="pageChange"
+                    >
+                    </el-pagination>
+                </el-footer>
+            </el-container>
+        </el-container>
+    </div>
 </template>
 
 <script>
@@ -213,7 +209,7 @@
             submitForm(formName) {
                 let _this = this;
                 // 使用axios将信息发送到后端
-                if (_this.isEdit == false){
+                if (_this.isEdit == false) {
                     this.axios({
                         url: "/api/studentprofile/profile",               // 请求地址
                         method: "post",                       // 请求方法
@@ -227,9 +223,9 @@
                             gender: _this.form.gender,
                             age: _this.form.age,
                             school: _this.form.school,
-                            majerity : _this.form.majerity,
-                            enrollmentyear : _this.form.enrollmentyear,
-                            degree : _this.form.degree,
+                            majerity: _this.form.majerity,
+                            enrollmentyear: _this.form.enrollmentyear,
+                            degree: _this.form.degree,
                         },
                     }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                         if (res.data.code === "0") {
@@ -249,7 +245,7 @@
                         }
                         console.log(res);
                     });
-                }else{
+                } else {
                     this.axios({
                         url: "/api/studentprofile/modifyprofile",               // 请求地址
                         method: "post",                       // 请求方法
@@ -263,9 +259,9 @@
                             gender: _this.form.gender,
                             age: _this.form.age,
                             school: _this.form.school,
-                            majerity : _this.form.majerity,
-                            enrollmentyear : _this.form.enrollmentyear,
-                            degree : _this.form.degree,
+                            majerity: _this.form.majerity,
+                            enrollmentyear: _this.form.enrollmentyear,
+                            degree: _this.form.degree,
                         },
                     }).then((res) => { // 当收到后端的响应时执行该括号内的代码，res 为响应信息，也就是后端返回的信息
                         if (res.data.code === "0") {
@@ -298,5 +294,26 @@
 </script>
 
 <style scoped>
-
+    .el-aside {
+        background-color: #71c9cd;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+    .el-header, .el-footer {
+        background-color: #e3fdfb;
+        color: #333;
+        text-align: center;
+        line-height: 30px;
+    }
+    .el-main {
+        background-color: #e3fdfb;
+        color: #333;
+        text-align: center;
+        height: calc(100vh - 100px);
+    }
+    .el-container{
+        weight:100%;
+        height:100%;
+    }
 </style>

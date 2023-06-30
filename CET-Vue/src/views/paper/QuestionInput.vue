@@ -1,25 +1,23 @@
 <template>
     <el-container>
-    <el-header>Head: CET6 六级试题录入</el-header>
+        <el-aside width="160px">
+            <el-row>
+                <el-form-item label="PaperID: ">
+                    <el-input></el-input>
+                </el-form-item>
+            </el-row>
+            <el-row>
+                <el-button type="primary" @click="qInputVisible = !qInputVisible, aInputVisible = !aInputVisible" plain>试题录入</el-button>
+            </el-row>
+            <el-row>
+                <el-button type="primary" @click="aInputVisible = !aInputVisible, qInputVisible = !qInputVisible" plain>答案录入</el-button>
+            </el-row>
+        </el-aside>
         <el-container>
-            <el-aside width="160px">
-                <el-row>Aside</el-row>
-                <el-row>
-                    <el-form-item label="PaperID: ">
-                        <el-input></el-input>
-                    </el-form-item>
-                </el-row>
-                <el-row>
-                    <el-button @click="qInputVisible = !qInputVisible, aInputVisible = !aInputVisible">试题录入</el-button>
-                </el-row>
-                <el-row>
-                    <el-button @click="aInputVisible = !aInputVisible, qInputVisible = !qInputVisible">答案录入</el-button>
-                </el-row>
-            </el-aside>
+            <el-header><h2>CET6 六级试题录入</h2></el-header>
             <el-main>
-                Main
                 <el-form ref="form" :model="form" label-width="80px" v-show="qInputVisible">
-                    <h2>题目录入</h2>
+                    <h2>试题录入</h2>
                     <h3>Part I Writing (30 minutes)</h3>
                     <div>
                         <strong>Directions: </strong>
@@ -142,9 +140,9 @@
                     </div>
 
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">录入</el-button>
-                        <el-button type="primary" @click="goBack"> 取消</el-button>
-                        <el-button type="primary" @click="goAdminHome"> 回到管理界面</el-button>
+                        <el-button type="success" @click="onSubmit" plain>录入</el-button>
+                        <el-button type="warning" @click="goBack" plain> 取消</el-button>
+                        <el-button type="info" @click="goAdminHome" plain> 回到管理界面</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -221,9 +219,9 @@
                         </el-row>
                     </div>
 
-                    <el-button type="primary" @click="onSubmitAns">录入答案</el-button>
-                    <el-button type="primary" @click="goBack"> 取消</el-button>
-                    <el-button type="primary" @click="goAdminHome"> 回到管理界面</el-button>
+                    <el-button type="success" @click="onSubmitAns" plain>录入答案</el-button>
+                    <el-button type="warning" @click="goBack" plain> 取消</el-button>
+                    <el-button type="info" @click="goAdminHome" plain> 回到管理界面</el-button>
                 </el-form>
 
             </el-main>
@@ -420,7 +418,27 @@
 </script>
 
 <style scoped>
-    .el-container{
+    .el-aside {
+        background-color: #71c9cd;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+    .el-header, .el-footer {
+        background-color: #ebfffb;
+        color: #333;
+        text-align: center;
+        line-height: 30px;
+    }
+    .el-main {
+        background-color: #ebfffb;
+        color: #333;
         text-align: left;
+        /*line-height: 160px;*/
+        height: calc(100vh - 100px);
+    }
+    .el-container{
+        weight:100%;
+        height: 100%;
     }
 </style>

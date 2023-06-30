@@ -1,59 +1,108 @@
 <template>
-    <div>
-        <div>
-            <h2>欢迎{{ user.username }}！您的 工号 为{{ user.jobnumber }}</h2>
-            <el-button @click="logout"> 登出 </el-button>
-        </div>
-        <h4 style="text-align: center">欢迎来到评卷系统</h4>
-        <el-form ref="findForm" :model="findForm">
-            <el-form-item>
-                <el-input v-model="findForm.paperid" style="width: 480px; margin-top: 15px">
-                    <template slot="prepend">请输入要批改的试卷ID</template>
-                </el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-input v-model="findForm.examid" style="width: 480px; margin-top: 15px">
-                    <template slot="prepend">请输入要批改的学生考号</template>
-                </el-input>
-            </el-form-item>
-        </el-form>
-        <el-button @click="findStudentAnswer('findForm')" style="margin: 0px auto; margin-top: 15px">查询</el-button>
-        <div v-if="displayAnswer">
-            <table id="hor-minimalist-b" summary="Employee Pay Sheet" style="margin: 0px auto">
-                <thead>
-                <tr>
-                    <th scope="col">题目</th>
-                    <th scope="col">学生答案</th>
-                    <th scope="col">满分</th>
-                    <th scope="col">分数</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>写作</td>
-                    <td>{{writing.answer}}</td>
-                    <td>106.5</td>
-                    <td><el-input
-                            v-model="writing.score"
-                            style="width: 80px"></el-input></td>
-                    <!--                            @blur="updateWritingScore(writing.score)"-->
-                </tr>
-                <tr>
-                    <td>翻译</td>
-                    <td>{{translation.answer}}</td>
-                    <td>106.5</td>
-                    <td><el-input ref="translation"
-                                  v-model="translation.score"
-                                  style="width: 80px"></el-input></td>
-                    <!--                            @blur="updateTranslationScore('translation')"-->
-                </tr>
-                </tbody>
-            </table>
-<!--            <el-button @click="findLastAnswer">上一页</el-button>-->
-<!--            <el-button @click="findNextAnswer">下一页</el-button>-->
-            <el-button @click="submit">提交</el-button>
-        </div>
-    </div>
+    <el-container>
+        <el-aside>
+            <el-button type="info" @click="logout" plain> 登出 </el-button>
+        </el-aside>
+        <el-container>
+            <el-header>
+
+                <h2>欢迎{{ user.username }}！您的 工号 为{{ user.jobnumber }}</h2>
+
+
+            </el-header>
+            <el-main>
+
+                <h3 style="text-align: center">欢迎来到评卷系统</h3>
+                <el-form ref="findForm" :model="findForm">
+                    <el-form-item>
+                        <el-input v-model="findForm.paperid" style="width: 480px; margin-top: 15px">
+                            <template slot="prepend">请输入要批改的试卷ID</template>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-input v-model="findForm.examid" style="width: 480px; margin-top: 15px">
+                            <template slot="prepend">请输入要批改的学生考号</template>
+                        </el-input>
+                    </el-form-item>
+                </el-form>
+                <el-button @click="findStudentAnswer('findForm')" icon="el-icon-search" style="margin: 0px auto; margin-top: 15px"  plain>查询</el-button>
+                <div v-if="displayAnswer">
+                    <table id="hor-minimalist-b" summary="Employee Pay Sheet" style="margin: 0px auto">
+                        <thead>
+                        <tr>
+                            <th scope="col">题目</th>
+                            <th scope="col">学生答案</th>
+                            <th scope="col">满分</th>
+                            <th scope="col">分数</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>写作</td>
+                            <td>{{writing.answer}}</td>
+                            <td>106.5</td>
+                            <td><el-input
+                                    v-model="writing.score"
+                                    style="width: 80px"></el-input></td>
+                            <!--                            @blur="updateWritingScore(writing.score)"-->
+                        </tr>
+                        <tr>
+                            <td>翻译</td>
+                            <td>{{translation.answer}}</td>
+                            <td>106.5</td>
+                            <td><el-input ref="translation"
+                                          v-model="translation.score"
+                                          style="width: 80px"></el-input></td>
+                            <!--                            @blur="updateTranslationScore('translation')"-->
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--            <el-button @click="findLastAnswer">上一页</el-button>-->
+                    <!--            <el-button @click="findNextAnswer">下一页</el-button>-->
+                    <el-button type="primary" @click="submit" plain>提交</el-button>
+                </div>
+            </el-main>
+
+
+
+            <!--    <div v-if="displayAnswer">-->
+            <!--        <table id="hor-minimalist-b" summary="Employee Pay Sheet" style="margin: 0px auto">-->
+            <!--            <thead>-->
+            <!--            <tr>-->
+            <!--                <th scope="col">题目</th>-->
+            <!--                <th scope="col">学生答案</th>-->
+            <!--                <th scope="col">满分</th>-->
+            <!--                <th scope="col">分数</th>-->
+            <!--            </tr>-->
+            <!--            </thead>-->
+            <!--            <tbody>-->
+            <!--            <tr>-->
+            <!--                <td>写作</td>-->
+            <!--                <td>{{writing.answer}}</td>-->
+            <!--                <td>106.5</td>-->
+            <!--                <td><el-input-->
+            <!--                        v-model="writing.score"-->
+            <!--                        style="width: 80px"></el-input></td>-->
+            <!--                &lt;!&ndash;                            @blur="updateWritingScore(writing.score)"&ndash;&gt;-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--                <td>翻译</td>-->
+            <!--                <td>{{translation.answer}}</td>-->
+            <!--                <td>106.5</td>-->
+            <!--                <td><el-input ref="translation"-->
+            <!--                              v-model="translation.score"-->
+            <!--                              style="width: 80px"></el-input></td>-->
+            <!--                &lt;!&ndash;                            @blur="updateTranslationScore('translation')"&ndash;&gt;-->
+            <!--            </tr>-->
+            <!--            </tbody>-->
+            <!--        </table>-->
+            <!--        &lt;!&ndash;            <el-button @click="findLastAnswer">上一页</el-button>&ndash;&gt;-->
+            <!--        &lt;!&ndash;            <el-button @click="findNextAnswer">下一页</el-button>&ndash;&gt;-->
+            <!--        <el-button type="primary" @click="submit">提交</el-button>-->
+            <!--    </div>-->
+
+        </el-container>
+    </el-container>
 </template>
 
 <script>
@@ -164,23 +213,23 @@
                 })
             },
             updateWritingScore(s){
-                        let _this = this;
-                        this.axios({
-                            url: "/api/teacher2/writing",               // 请求地址
-                            method: "post",                       // 请求方法
-                            headers: {                            // 请求头
-                                "Content-Type": "application/json",
-                            },
-                            params: {                             // 请求参数
-                                paperid: _this.findForm.paperid,
-                                examid: _this.findForm.examid,
-                                score:_this.writing.score
-                            },
-                        }).then((a)=>{
-                            if(a.data==true){
-                                console.log(a)
-                            }
-                        })
+                let _this = this;
+                this.axios({
+                    url: "/api/teacher2/writing",               // 请求地址
+                    method: "post",                       // 请求方法
+                    headers: {                            // 请求头
+                        "Content-Type": "application/json",
+                    },
+                    params: {                             // 请求参数
+                        paperid: _this.findForm.paperid,
+                        examid: _this.findForm.examid,
+                        score:_this.writing.score
+                    },
+                }).then((a)=>{
+                    if(a.data==true){
+                        console.log(a)
+                    }
+                })
             },
             updateTranslationScore(s){
                 this.axios({
@@ -247,5 +296,28 @@
     #hor-minimalist-b tbody tr:hover td
     {
         color: #009;
+    }
+    .el-aside {
+        background-color: #71c9cd;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+    .el-header, .el-footer {
+        background-color: #e3fdfb;
+        color: #333;
+        text-align: center;
+        line-height: 30px;
+    }
+    .el-main {
+        background-color: #ebfffb;
+        color: #333;
+        text-align: center;
+        /*line-height: 160px;*/
+        height: calc(100vh - 100px);
+    }
+    .el-container{
+        weight:100%;
+        height: 100%;
     }
 </style>
