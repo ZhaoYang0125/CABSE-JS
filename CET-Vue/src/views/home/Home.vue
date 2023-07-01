@@ -2,23 +2,6 @@
     <el-container>
         <el-header>
             <el-row style="background-color: lightblue">
-                <el-col span="6" offset="1">
-                    <p style="text-align: center; font-size: 20px">
-                        欢迎 {{ user.username }}！
-                    </p>
-                </el-col>
-                <el-col span="11" offset="3">
-                    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-                    style="background-color: lightblue">
-                        <el-menu-item index="1">首页</el-menu-item>
-                        <el-menu-item index="2">考试动态</el-menu-item>
-                        <el-menu-item index="3">CET委员会</el-menu-item>
-                        <el-menu-item index="4">考试大纲</el-menu-item>
-                        <el-menu-item index="5">考核内容</el-menu-item>
-                        <el-menu-item index="6">分数解释</el-menu-item>
-                        <el-menu-item index="7">常见问题</el-menu-item>
-                    </el-menu>
-                </el-col>
             </el-row>
             <el-row style="width: 100%; margin: auto">
                 <el-carousel ref="car" indicator-position="none" height="350px" :autoplay="false" arrow="never">
@@ -31,53 +14,34 @@
             </el-row>
         </el-header>
 
-        <el-main style="margin-top: 380px">
-            <el-row style="margin-top: 30px">
+        <el-main style="margin-top: 300px">
+            <el-row >
                 <el-col span="4" offset="2">
-                    <el-card class="box-card">
+                    <el-card class="box-card" style="width: 600px">
                         <div slot="header">
                             <i class="el-icon-edit"></i>
                             <span style="font-size: 30px">项目介绍</span>
                         </div>
                         <div>
-                            <p style="text-align: left; margin: auto 10px 10px">全国大学英语四、六级考试(CET)系教育部主办、教育部教育考试院（原教育部考试中…</p>
-                            <el-button style="float: right; padding: 3px 0" type="text">详细>></el-button>
+                            <p style="text-align: left; margin: auto 10px 10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全国大学英语四、六级考试（CET）是由教育部主办，教育部教育考试院（原教育部考试中心）主持和实施的大规模标准化考试，是全国性的教学考试，其目的是促进我国大学英语教学工作，对大学生的英语能力进行客观、准确的测量，为提高我国大学英语课程的教学质量提供服务。CET始于1987年，已走过了三十多年的历程，对我国大学英语教学的发展和改革产生了积极的影响。
+
+                                　　  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CET笔试的考试时间为每年6月和12月；CET口试的考试时间为每年5月和11月，报考口试的考生必须先报考当次相应级别的笔试。
+
+                                　　  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CET同时设有非英语考试科目，包括：日语四级(CJT4)、日语六级(CJT6)、俄语四级(CRT4)、俄语六级(CRT6)、德语四级(CGT4)、德语六级(CGT6)和法语四级(CFT4)，以上考试科目每年6月开考一次，均为笔试考核，无口试考核。</p>
+<!--                            <el-button style="float: right; padding: 3px 0" type="text">详细>></el-button>-->
                         </div>
                     </el-card>
                 </el-col>
-                <el-col span="4" offset="1">
-                    <el-card class="box-card">
-                        <div slot="header">
-                            <i class="el-icon-check"></i>
-                            <span style="font-size: 30px">CET笔试</span>
-                        </div>
-                        <div>
-                            <p style="text-align: left; margin: auto 10px 10px">CET笔试每年开考两次，分别于6月和12月举行，具体考试时间我中心将会在每年年初…</p>
-                            <el-button style="float: right; padding: 3px 0" type="text">详细>></el-button>
-                        </div>
-                    </el-card>
-                </el-col>
-                <el-col span="4" offset="1">
-                    <el-card class="box-card">
-                        <div slot="header">
-                            <i class="el-icon-bell"></i>
-                            <span style="font-size: 30px">CET口试</span>
-                        </div>
-                        <div>
-                            <p style="text-align: left; margin: auto 10px 10px">CET口试每年开考两次，分别于5月和11月举行，具体考试时间我中心将会在每年年初…</p>
-                            <el-button style="float: right; padding: 3px 0" type="text">详细>></el-button>
-                        </div>
-                    </el-card>
-                </el-col>
-                <el-col span="4" offset="1">
-                    <el-card class="box-card">
+
+                <el-col span="4" offset="10">
+                    <el-card class="box-card" style="width: 300px">
                         <div slot="header">
                             <i class="el-icon-user"></i>
                             <span style="font-size: 30px">考生服务</span>
                         </div>
                         <div>
                             <el-row style="margin-top: 5px;">
-                                <el-col span="2"><el-button @click="enrollDrawer=true">在线报名</el-button></el-col>
+                                <el-col span="2"><el-button @click="toEnroll">在线报名</el-button></el-col>
                                 <el-col span="2" offset="11"><el-button @click="gradeDrawer=true">成绩查询</el-button></el-col>
                             </el-row>
                             <el-row style="margin-top: 10px;">
@@ -162,10 +126,10 @@
         },
         methods: {
             logout(){
+                // 跳转页面到登录页
+                this.$router.push('/index');
                 // 移除本地用户登录信息
                 sessionStorage.removeItem('userInfo');
-                // 跳转页面到登录页
-                this.$router.push('/login');
             },
 
             toProfileSubmit(){

@@ -6,13 +6,6 @@
                     <el-button  icon="el-icon-edit" plain type="primary">试卷录入</el-button>
                     <el-button type="info" @click="logout" plain>登 出</el-button>
                 </router-link>
-                <!--            <el-row>-->
-                <!--                <el-col>-->
-                <!--&lt;!&ndash;                    <router-link to="/questionInput">&ndash;&gt;-->
-                <!--                    <el-button type="info" @click="$message('敬请期待');">教师信息管理</el-button>-->
-                <!--&lt;!&ndash;                    </router-link>&ndash;&gt;-->
-                <!--                </el-col>-->
-                <!--            </el-row>-->
             </el-aside>
             <el-container>
                 <el-header>
@@ -287,7 +280,10 @@
 
 
             logout() {
-                sessionStorage.removeItem("userInfo");
+                // 跳转页面到登录页
+                this.$router.push('/login-admin');
+                // 移除本地用户登录信息
+                sessionStorage.removeItem('userInfo');
             },
         }
     }

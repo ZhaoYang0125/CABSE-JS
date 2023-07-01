@@ -5,10 +5,7 @@
         </el-aside>
         <el-container>
             <el-header>
-
                 <h2>欢迎{{ user.username }}！您的 工号 为{{ user.jobnumber }}</h2>
-
-
             </el-header>
             <el-main>
 
@@ -103,10 +100,10 @@
         },
         methods: {
             logout(){
+                // 跳转页面到登录页
+                this.$router.push('/index');
                 // 移除本地用户登录信息
                 sessionStorage.removeItem('userInfo');
-                // 跳转页面到登录页
-                this.$router.push('/login');
             },
             findStudentAnswer(formName){
                 let _this = this;

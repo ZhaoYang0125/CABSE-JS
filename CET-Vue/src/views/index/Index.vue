@@ -11,9 +11,9 @@
                 <el-tabs v-model="activeName" @tab-click="handleClick" stretch="true" style="background-color: lightgray">
                     <el-tab-pane label="首页" name="1"></el-tab-pane>
                     <el-tab-pane label="考试简介" name="2"></el-tab-pane>
-                    <el-tab-pane label="考生须知" name="3"></el-tab-pane>
-                    <el-tab-pane label="考试时间" name="4"></el-tab-pane>
-                    <el-tab-pane label="报名流程" name="5"></el-tab-pane>
+<!--                    <el-tab-pane label="考生须知" name="3"></el-tab-pane>-->
+<!--                    <el-tab-pane label="考试时间" name="4"></el-tab-pane>-->
+<!--                    <el-tab-pane label="报名流程" name="5"></el-tab-pane>-->
                     <el-tab-pane label="常见问题" name="6"></el-tab-pane>
                     <el-tab-pane label="成绩报告单" name="7"></el-tab-pane>
                     <el-tab-pane label="联系我们" name="8"></el-tab-pane>
@@ -41,9 +41,9 @@
                         <el-step title="报名成功" icon="el-icon-check"></el-step>
                     </el-steps>
                 </el-col>
-                <el-col :span="2">
-                    <el-button style="margin-top: 12px;background-color: white" @click="next">下一步</el-button>
-                </el-col>
+<!--                <el-col :span="2">-->
+<!--                    <el-button style="margin-top: 12px;background-color: white" @click="next">下一步</el-button>-->
+<!--                </el-col>-->
             </el-row>
             <el-row style="margin-top: 40px; margin-left: 100px; margin-right: 100px">
                 <el-col :span="8">

@@ -33,7 +33,7 @@
                     <h3>Part II Listening Comprehension (30 minutes)</h3>
                     <div>
                         <h4>Section A</h4>
-                        <p><strong>Directions: </strong>In this section, you will hear two long conversations. At the end of each conversation, you will hear four questions. Both the conversation and the questions will be spoken only once. After you hear a question, you must choose the best answer from the four choices marked A), B), C) and D). Then mark the corresponding letter on Answer Sheet 1 with a single line through the centre.</p>
+                        <p><strong>Directions: </strong>In this section, you will hear two long conversations. At the end of each conversation, you will hear four questions. Both the conversation and the questions will be spoken only once. After you hear a question, you must choose the best answer from the four choices marked A),  ,   and  . Then mark the corresponding letter on Answer Sheet 1 with a single line through the centre.</p>
                         <strong>Questions 1 to 4 are based on the conversation you have just heard</strong>
                         <div v-for="i in 4">
                             {{i}}
@@ -96,7 +96,7 @@
                     </div>
                     <div>
                         <h3>SectionC</h3>
-                        <p><strong>Directions: </strong>There are 2 passages in this section. Each passage is followed by some questions or unfinished statements. For each of them there are four choices marked A), B), C) and D). You should decide on the best choice and mark the corresponding letter on Answer Sheet 2 with a single line through the centre.</p>
+                        <p><strong>Directions: </strong>There are 2 passages in this section. Each passage is followed by some questions or unfinished statements. For each of them there are four choices marked A),  ,   and  . You should decide on the best choice and mark the corresponding letter on Answer Sheet 2 with a single line through the centre.</p>
                         <h4>Passage One</h4>
                         <strong>Questions 46 to 50 are based on the following passage</strong>
                         <el-row>
@@ -123,8 +123,8 @@
                             </el-row>
                         </div>
 
-                        <h4>Passage Two</h4>
-                        ...
+<!--                        <h4>Passage Two</h4>-->
+<!--                        ...-->
                     </div>
 
                     <h3>Part IV Translation (30 minutes)</h3>
@@ -239,10 +239,10 @@
                 form: {
                     writing: "For this part, you are allowed 30 minutes to write an essay on the importance of having a sense of social responsibility. You should write at least 150 words but no more than 160 words",
                     listeningChoices: [
-                        "A) Magazine reporter", "B) Fashion designer", "C) Website designer", "D) Features editor",
-                        "A) Designing sports clothing", "B) Consulting fashion experts", "C) Answering daily emails", "D) Interviewing job-seekers",
-                        "A) It is challenging", "B) It is fascinating", "C) It is tiresome", "D) It is fashionable",
-                        "A) Her persistence", "B) Her experience", "C) Her competence", "D) Her confidence",
+                        " Magazine reporter", "  Fashion designer", "  Website designer", "  Features editor",
+                        " Designing sports clothing", "  Consulting fashion experts", "  Answering daily emails", "  Interviewing job-seekers",
+                        " It is challenging", "  It is fascinating", "  It is tiresome", "  It is fashionable",
+                        " Her persistence", "  Her experience", "  Her competence", "  Her confidence",
                         "q5a1", "q1a2", "q1a3", "q1a4",
                         "q6a1", "q1a2", "q1a3", "q1a4",
                         "q7a1", "q1a2", "q1a3", "q1a4",
@@ -273,7 +273,7 @@
                         "Body weight was not hugely different between the groups eating a healthy diet and those on high and sugar diets. So this shows negative __33__ of poor dietary intake can occur even when body weight has not changed __34__. Thus, body weight is not always the best indicator of health and a thin person still needs to eat well and exercise __35__.\n" +
                         "\n" ,
                     choicesOfSectionA: [
-                        "A)assessed", "B)assigned ", "C)consequences ", "D)conspicuously ", "E)deficits ", "F)designated ", "G)detrimental ", "H)digestion ", "I)excelling ", "J)indulging ", "K)loopholes ", "L)rapidly ", "M)redundant ", "N)regularly ", "O)similar"
+                        "A)assessed", " assigned ", " consequences ", " conspicuously ", "E)deficits ", "F)designated ", "G)detrimental ", "H)digestion ", "I)excelling ", "J)indulging ", "K)loopholes ", "L)rapidly ", "M)redundant ", "N)regularly ", "O)similar"
                     ], // 15
                     sectionB: "Increased Screen Time and Wellbeing Decline in Youth",
                     statementsOfSectionB: ["A) Have young people never had it so good? Or do they face more challenges than any previous generation? Our current era in the West is one of high wealth. This means minors enjoy material benefits and legal protections that would have been the envy of those living in the past. But There is an increasing suspicion that all is not well for our youth. And one of the most popular explanations, among some experts and the popular media, is that excessive \"screen time\" is to blame. (This refers to all the attention young people devote to their phones, tablets and laptops.) However, this is a contentious theory and such claims have been treated skeptically by some scholars based on their reading of the relevant data",
@@ -315,10 +315,10 @@
                         "48. Under what circumstances do people tend to lie",
                         "49. When are people less likely to lie"], // 10
                     choicesOfSectionC: [
-                        "A) It shows they have the ability to view complex situations from different angles", "B) It indicates they have an ability more remarkable than crawling and walking", "C) It represents their ability to actively interact with people around them", "D) It involves the coordination of both their mental and physical abilities",
-                        "A) It is hard to choose from several options", "B) It is difficult to sound natural or plausible", "C) It requires speedy blood flow into one's brain", "D) It involves lots of sophisticated mental activity",
-                        "A) When they become too emotional", "B) When they face too much peer pressure", "C) When the temptation is too strong", "D) When the consequences are not imminent",
-                        "A) When they are worm out and stressed", "B) When they are under watchful eyes", "C) When they think in a rational way", "D) When they have a clear conscience",
+                        " It shows they have the ability to view complex situations from different angles", "  It indicates they have an ability more remarkable than crawling and walking", "  It represents their ability to actively interact with people around them", "  It involves the coordination of both their mental and physical abilities",
+                        " It is hard to choose from several options", "  It is difficult to sound natural or plausible", "  It requires speedy blood flow into one's brain", "  It involves lots of sophisticated mental activity",
+                        " When they become too emotional", "  When they face too much peer pressure", "  When the temptation is too strong", "  When the consequences are not imminent",
+                        " When they are worm out and stressed", "  When they are under watchful eyes", "  When they think in a rational way", "  When they have a clear conscience",
                     ], // 40
 
                     translation: "牡丹(peony)花色艳丽，形象高雅，象征着和平与繁荣，因而在中国被称为“花中之王”。中国许多地方都培育和种植牡丹。千百年来，创作了许多诗歌和绘画赞美牡丹。唐代时期，牡丹在皇家园林普遍种植并被誉为国花，因而特别风行。十世纪时，洛阳古城成为牡丹栽培中心，而且这一地位一直保持到今天。现在，成千上万的国内外游客蜂拥到洛阳参加一年一度的牡丹节，欣赏洛阳牡丹的独特之美，同时探索九朝古都的历史。",
