@@ -5,7 +5,5 @@ import com.cabse.cet.utils.Paper;
 
 public interface TestpaperService {
     Testpaper saveService(Testpaper tp);
-    Paper testService(Integer row);
-    Integer paperidService(Integer row);
-    Integer countService();
+    Paper testService(Integer paperid);
 }

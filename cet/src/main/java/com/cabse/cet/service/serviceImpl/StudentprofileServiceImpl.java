@@ -31,8 +31,6 @@ public class StudentprofileServiceImpl implements StudentprofileService {
 
     @Override
     public Studentprofile saveStudentprofile(Studentprofile studentprofile){
-//        if (studentprofile.getSname() == null || studentprofile.getExamid() == null) return null;
-
         Studentprofile newprofile;
         Studentprofile sp = studentprofileDao.findByUid(studentprofile.getUid());
         if (sp!=null){
@@ -57,14 +55,16 @@ public class StudentprofileServiceImpl implements StudentprofileService {
 
     @Override
     public Studentprofile modifyStudentprofile(Studentprofile studentprofile) {
-        List<Report> reports = reportDao.findByExamid(studentprofile.getExamid());
+        Studentprofile sp = studentprofileDao.findByUid(studentprofile.getUid());
+        Integer originExamid = sp.getExamid();
+        List<Report> reports = reportDao.findByExamid(originExamid);
         for (int i = 0; i < reports.size(); i++) {
-            reportDao.updateExamid(reports.get(i).getReportid(), reports.get(i).getExamid());
+            reportDao.updateExamid(reports.get(i).getReportid(), studentprofile.getExamid());
         }
 
-        List<Studentanswer> studentanswers = studentanswerDao.findByExamid(studentprofile.getExamid());
+        List<Studentanswer> studentanswers = studentanswerDao.findByExamid(originExamid);
         for (int i = 0; i < studentanswers.size(); i++) {
-            reportDao.updateExamid(studentanswers.get(i).getAnswerid(), studentanswers.get(i).getExamid());
+            studentanswerDao.modifyExamid(studentanswers.get(i).getAnswerid(), studentprofile.getExamid());
         }
 
         studentprofileDao.modifyProfile(studentprofile.getUid(),
@@ -90,7 +90,12 @@ public class StudentprofileServiceImpl implements StudentprofileService {
 
     @Override
     public Integer examidService(Integer uid) {
-        Integer examid = (studentprofileDao.findByUid(uid)).getExamid();
+        Studentprofile studentprofile = studentprofileDao.findByUid(uid);
+        if (studentprofile == null)
+        {
+            return null;
+        }
+        Integer examid = studentprofile.getExamid();
         return examid;
     }
 

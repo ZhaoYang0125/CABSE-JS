@@ -27,7 +27,7 @@ public class TestpaperServiceImpl implements TestpaperService {
 
     @Override
     public Testpaper saveService(Testpaper tp) {
-
+        System.out.println(Integer.parseInt(CurrentDate.getTestDate()));
         Testpaper testpaper = testpaperDao.findByPaperid(Integer.parseInt(CurrentDate.getTestDate()));
         if (testpaper != null){
             return null;
@@ -39,8 +39,7 @@ public class TestpaperServiceImpl implements TestpaperService {
     }
 
     @Override
-    public Paper testService(Integer paperid/*Integer row*/) {
-//        String url = testpaperDao.findByRow(row);
+    public Paper testService(Integer paperid) {
         Testpaper testpaper = testpaperDao.findByPaperid(paperid);
         if (testpaper == null){
             return null;
@@ -52,21 +51,6 @@ public class TestpaperServiceImpl implements TestpaperService {
             return paper;
         }
         return null;
-    }
-
-    @Override
-    public Integer paperidService(Integer row) {
-        Integer paperid = testpaperDao.paperidFindByRow(row);
-        System.out.println(paperid);
-        if (paperid != null) {
-            return paperid;
-        }
-        return null;
-    }
-
-    @Override
-    public Integer countService() {
-        return testpaperDao.paperCount();
     }
 
 }
