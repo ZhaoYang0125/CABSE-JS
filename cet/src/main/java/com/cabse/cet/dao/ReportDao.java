@@ -43,4 +43,9 @@ public interface ReportDao /*extends JpaRepository<Report, Integer>*/ {
     @Modifying(clearAutomatically = true)
     @Delete("delete from reports where examid=#{examid}")
     void deleteByExamid(Integer examid);
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Update("update reports r set r.comprehension =#{comprehension}, r.listening =#{listening}, r.time =#{time}, r.translation =#{translation}, r.writing =#{writing} where r.paperid =#{paperid} and r.examid =#{examid}")    //  ?2: 表示第二个参数, ?1: 表示第一个参数
+    public void updateReport(Integer paperid, Integer examid, Float comprehension, Float listening, LocalDateTime time, Float translation, Float writing);
 }

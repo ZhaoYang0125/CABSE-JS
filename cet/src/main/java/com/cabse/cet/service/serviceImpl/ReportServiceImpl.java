@@ -40,10 +40,21 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public boolean saveService(Report report) {
-        if(reportDao.save(report.getExamid(), report.getPaperid(), report.getListening(), report.getComprehension(), report.getTime())!=0)
+        Report r = reportDao.findByPaperidAndExamid(report.getPaperid(),report.getExamid());
+        if (r != null){
+            reportDao.updateReport(report.getPaperid(), report.getExamid(),
+                                    report.getComprehension(),
+                                    report.getListening(),
+                                    report.getTime(),
+                                    report.getTranslation(),
+                                    report.getWriting());
             return true;
-        else
-            return false;
+        }else{
+            if(reportDao.save(report.getExamid(), report.getPaperid(), report.getListening(), report.getComprehension(), report.getTime())!=0)
+                return true;
+            else
+                return false;
+        }
     }
 
     @Override

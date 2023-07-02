@@ -281,7 +281,7 @@
 
             logout() {
                 // 跳转页面到登录页
-                this.$router.push('/login-admin');
+                this.$router.push('/index');
                 // 移除本地用户登录信息
                 sessionStorage.removeItem('userInfo');
             },

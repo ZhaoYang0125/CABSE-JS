@@ -99,7 +99,7 @@ router.beforeEach((to, from, next) => {
     let isAuthenticated = !!sessionStorage.getItem('userInfo')
     // 如果路由要跳转到除了登录和注册的界面的话就判断是否已经登录，如果没有登录就强制跳到登录界面
     if (to.path !== '/index' && to.path !== '/login' && to.path !== '/login-teacher' && to.path!== '/login-admin' && to.path !== '/register' && !isAuthenticated) {
-        next({ path: '/login' })
+        next({ path: '/index' })
         Message({
             message: '请先登录！',
             type: "warning",
